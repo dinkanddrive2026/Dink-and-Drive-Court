@@ -8,7 +8,7 @@
 
     <meta
         name="description"
-        content="Dink & Drive Court - Pickleball court booking in Brgy. Sto. Niño, Balamban, Cebu."
+        content="Dink & Drive Court - Pickleball court in Brgy. Sto. Niño, Balamban, Cebu."
     >
 
     <style>
@@ -29,13 +29,9 @@
             line-height: 1.6;
         }
 
-        /* =========================
-           COLORS
-        ========================== */
-
         :root {
-            --orange: #D99A5B;       /* Dessert Sand */
-            --green: #176B67;        /* Out to the Seas */
+            --orange: #D99A5B;
+            --green: #176B67;
             --dark-green: #104C49;
             --cream: #FFF8EA;
             --white: #ffffff;
@@ -44,29 +40,27 @@
 
         /* =========================
            NAVIGATION
-        ========================== */
+        ========================= */
 
         nav {
             position: sticky;
             top: 0;
             z-index: 1000;
 
-            background: var(--white);
-
             display: flex;
             justify-content: space-between;
             align-items: center;
 
-            padding: 18px 7%;
+            padding: 18px 8%;
 
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
         .logo {
             text-decoration: none;
             color: var(--green);
-
-            font-size: 1.25rem;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: 1px;
         }
@@ -77,14 +71,15 @@
 
         .nav-links {
             display: flex;
-            gap: 28px;
             list-style: none;
+            gap: 30px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--green);
             font-weight: 600;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
@@ -93,18 +88,18 @@
 
         /* =========================
            HERO
-        ========================== */
+        ========================= */
 
         .hero {
-            min-height: 88vh;
+            min-height: 80vh;
 
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
 
             text-align: center;
 
-            padding: 80px 20px;
+            padding: 60px 20px;
 
             background:
                 linear-gradient(
@@ -114,31 +109,33 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 850px;
         }
 
         .hero-badge {
             display: inline-block;
 
+            margin-bottom: 20px;
+            padding: 8px 18px;
+
+            border-radius: 30px;
+
             background: var(--light-green);
             color: var(--green);
 
-            padding: 8px 18px;
-            border-radius: 30px;
-
-            font-size: 0.9rem;
+            font-size: 14px;
             font-weight: bold;
-
-            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         .hero h1 {
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-size: clamp(48px, 8vw, 90px);
             line-height: 1;
 
             color: var(--green);
 
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
         }
 
         .hero h1 span {
@@ -146,11 +143,11 @@
         }
 
         .hero p {
-            font-size: 1.15rem;
-            max-width: 650px;
+            max-width: 700px;
             margin: 0 auto 30px;
 
-            color: #416a66;
+            font-size: 19px;
+            color: #486c68;
         }
 
         .hero-buttons {
@@ -160,6 +157,10 @@
             flex-wrap: wrap;
         }
 
+        /* =========================
+           BUTTONS
+        ========================= */
+
         .btn {
             display: inline-block;
 
@@ -168,10 +169,9 @@
             border-radius: 8px;
 
             text-decoration: none;
-
             font-weight: bold;
 
-            transition: 0.2s;
+            transition: 0.3s;
         }
 
         .btn-primary {
@@ -180,26 +180,26 @@
         }
 
         .btn-primary:hover {
-            background: #c88749;
+            background: #c88445;
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            border: 2px solid var(--green);
-            color: var(--green);
-        }
-
-        .btn-secondary:hover {
             background: var(--green);
             color: var(--white);
         }
 
+        .btn-secondary:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
         /* =========================
-           GENERAL SECTIONS
-        ========================== */
+           GENERAL SECTION
+        ========================= */
 
         section {
-            padding: 80px 7%;
+            padding: 80px 8%;
         }
 
         .section-title {
@@ -208,25 +208,26 @@
         }
 
         .section-title h2 {
+            font-size: 40px;
             color: var(--green);
-            font-size: 2.2rem;
             margin-bottom: 10px;
         }
 
         .section-title p {
-            color: #607d79;
+            color: #63807c;
         }
 
         /* =========================
            RATES
-        ========================== */
+        ========================= */
 
         .rates {
             background: var(--white);
         }
 
         .rate-container {
-            max-width: 850px;
+            max-width: 900px;
+
             margin: auto;
 
             display: grid;
@@ -235,58 +236,81 @@
         }
 
         .rate-card {
-            background: var(--cream);
-
-            border-radius: 16px;
-
-            padding: 35px;
+            padding: 35px 25px;
 
             text-align: center;
 
-            border: 2px solid #f0dfca;
+            border-radius: 15px;
+
+            background: var(--cream);
+
+            border: 2px solid #f0dfc8;
+
+            transition: 0.3s;
+        }
+
+        .rate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
 
         .rate-card h3 {
             color: var(--green);
-            font-size: 1.4rem;
+            font-size: 25px;
+            margin-bottom: 10px;
         }
 
         .price {
-            color: var(--orange);
-
-            font-size: 3rem;
+            font-size: 45px;
             font-weight: 800;
-
-            margin: 10px 0;
+            color: var(--orange);
+            margin-bottom: 10px;
         }
 
         .rate-card p {
-            color: #607d79;
+            color: #63807c;
+        }
+
+        .court-info {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--green);
+            font-weight: bold;
         }
 
         /* =========================
            ABOUT
-        ========================== */
+        ========================= */
 
         .about {
             background: var(--light-green);
         }
 
         .about-content {
-            max-width: 850px;
+            max-width: 800px;
             margin: auto;
             text-align: center;
         }
 
-        .about-content h3 {
+        .about-content h2 {
             color: var(--green);
-            font-size: 1.8rem;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 span {
+            color: var(--orange);
+        }
+
+        .about-content p {
+            font-size: 18px;
+            color: #52736f;
             margin-bottom: 15px;
         }
 
         /* =========================
            BOOKING CTA
-        ========================== */
+        ========================= */
 
         .booking {
             text-align: center;
@@ -295,18 +319,19 @@
         }
 
         .booking h2 {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
+            font-size: 42px;
+            margin-bottom: 10px;
         }
 
         .booking p {
+            font-size: 18px;
             margin-bottom: 25px;
             opacity: 0.9;
         }
 
         /* =========================
            LOCATION
-        ========================== */
+        ========================= */
 
         .location {
             background: var(--white);
@@ -314,75 +339,97 @@
         }
 
         .location-box {
-            max-width: 700px;
+            max-width: 750px;
             margin: auto;
-
-            background: var(--cream);
 
             padding: 35px;
 
-            border-radius: 16px;
+            background: var(--cream);
+
+            border-radius: 15px;
+
+            border: 2px solid #f0dfc8;
         }
 
         .location-box h3 {
             color: var(--green);
-            margin-bottom: 10px;
+            font-size: 27px;
+            margin-bottom: 15px;
         }
 
         .location-box p {
-            color: #607d79;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: #5d7773;
         }
 
         /* =========================
            CONTACT
-        ========================== */
+        ========================= */
 
         .contact {
-            background: var(--light-green);
+            background: var(--cream);
         }
 
         .contact-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
 
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
+
             gap: 20px;
         }
 
         .contact-card {
             background: var(--white);
 
-            padding: 25px;
+            padding: 25px 15px;
+
+            text-align: center;
 
             border-radius: 12px;
 
-            text-align: center;
+            border: 1px solid #eadfce;
+
+            transition: 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
 
         .contact-card h3 {
             color: var(--green);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 18px;
         }
 
         .contact-card a {
             color: var(--orange);
             text-decoration: none;
             font-weight: bold;
+
+            word-break: break-word;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
         }
 
         /* =========================
            FOOTER
-        ========================== */
+        ========================= */
 
         footer {
-            background: var(--dark-green);
-            color: var(--white);
+            padding: 25px 20px;
 
             text-align: center;
 
-            padding: 25px 20px;
+            background: var(--dark-green);
+            color: var(--white);
+
+            font-size: 14px;
         }
 
         footer strong {
@@ -391,25 +438,24 @@
 
         /* =========================
            MOBILE
-        ========================== */
+        ========================= */
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
             nav {
                 padding: 15px 5%;
             }
 
             .nav-links {
-                display: none;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
             }
 
             .hero {
-                min-height: 80vh;
-                padding: 60px 20px;
-            }
-
-            .hero h1 {
-                font-size: 3.2rem;
+                min-height: 70vh;
             }
 
             section {
@@ -421,11 +467,45 @@
             }
 
             .contact-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
             }
 
             .booking h2 {
-                font-size: 2rem;
+                font-size: 32px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .location-box {
+                padding: 25px 18px;
             }
         }
     </style>
@@ -439,15 +519,26 @@
 
     <nav>
 
-        <a href="#" class="logo">
+        <a href="#home" class="logo">
             DINK & <span>DRIVE</span>
         </a>
 
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#rates">Rates</a></li>
-            <li><a href="#location">Location</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#rates">Rates</a>
+            </li>
+
+            <li>
+                <a href="#location">Location</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
         </ul>
 
     </nav>
@@ -499,7 +590,7 @@
 
         <div class="section-title">
 
-            <h2>Court Rates</h2>
+            <h2>Our Rates</h2>
 
             <p>
                 Simple and affordable pickleball court rates.
@@ -507,18 +598,19 @@
 
         </div>
 
+
         <div class="rate-container">
 
             <div class="rate-card">
 
-                <h3>☀️ Day</h3>
+                <h3>☀️ Day Rate</h3>
 
                 <div class="price">
                     ₱250
                 </div>
 
                 <p>
-                    Court rental
+                    Court rental during daytime.
                 </p>
 
             </div>
@@ -526,18 +618,23 @@
 
             <div class="rate-card">
 
-                <h3>🌙 Night</h3>
+                <h3>🌙 Night Rate</h3>
 
                 <div class="price">
                     ₱300
                 </div>
 
                 <p>
-                    Court rental
+                    Court rental during nighttime.
                 </p>
 
             </div>
 
+        </div>
+
+
+        <div class="court-info">
+            🏓 1 Pickleball Court Available
         </div>
 
     </section>
@@ -551,14 +648,19 @@
 
         <div class="about-content">
 
-            <h3>
-                Play. Dink. Drive.
-            </h3>
+            <h2>
+                Play. <span>Dink.</span> Drive.
+            </h2>
 
             <p>
                 Welcome to Dink & Drive Court!
+                We provide a simple and convenient place
+                for pickleball players in Balamban, Cebu.
+            </p>
+
+            <p>
                 Whether you're practicing your shots,
-                playing with friends, or enjoying a competitive game,
+                playing with friends, or joining a game,
                 our court is ready for you.
             </p>
 
@@ -604,21 +706,23 @@
 
         </div>
 
+
         <div class="location-box">
 
-            <h3>📍 Location</h3>
+            <h3>
+                📍 Dink & Drive Court
+            </h3>
 
             <p>
-                Brgy. Sto. Niño, Balamban, Cebu
-                <br>
+                Brgy. Sto. Niño, Balamban, Cebu<br>
                 Near Trinity Forest
             </p>
 
-            <!-- Replace # with your Google Maps link -->
             <a
-                href="#"
+                href="https://www.google.com/maps/@10.5068133,123.7203574,3a,75y,241.55h,83.03t/data=!3m7!1e1!3m5!1sL39Vjvh8PvllTReXHMYWfg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D6.970634127398725%26panoid%3DL39Vjvh8PvllTReXHMYWfg%26yaw%3D241.55198284213384!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D"
                 class="btn btn-primary"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 OPEN GOOGLE MAPS
             </a>
@@ -639,59 +743,83 @@
             <h2>Contact Us</h2>
 
             <p>
-                Get in touch with us for court reservations.
+                Have questions or want to book the court?
+                Get in touch with us.
             </p>
 
         </div>
 
+
         <div class="contact-container">
 
+
+            <!-- FACEBOOK -->
+
             <div class="contact-card">
 
-                <h3>📘 Facebook</h3>
+                <h3>
+                    📘 Facebook
+                </h3>
 
-                <!-- Replace # with your Facebook Page link -->
-                <a href="#" target="_blank">
-                    Visit our Facebook Page
+                <a
+                    href="https://www.facebook.com/profile.php?id=61592334280863"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Dink and Drive Court
                 </a>
 
             </div>
 
 
+            <!-- MOBILE -->
+
             <div class="contact-card">
 
-                <h3>📱 Mobile</h3>
+                <h3>
+                    📱 Mobile
+                </h3>
 
-                <!-- Replace with your mobile number -->
-                <a href="tel:+639XXXXXXXXX">
-                    09XX XXX XXXX
+                <a href="tel:+639055440712">
+                    0905 544 0712
                 </a>
 
             </div>
 
 
+            <!-- EMAIL -->
+
             <div class="contact-card">
 
-                <h3>✉️ Email</h3>
+                <h3>
+                    ✉️ Email
+                </h3>
 
-                <!-- Replace with your email -->
-                <a href="mailto:your@email.com">
-                    your@email.com
+                <a href="mailto:dinkanddrive2026@gmail.com">
+                    dinkanddrive2026@gmail.com
                 </a>
 
             </div>
 
 
+            <!-- GOOGLE MAPS -->
+
             <div class="contact-card">
 
-                <h3>📍 Google Maps</h3>
+                <h3>
+                    📍 Google Maps
+                </h3>
 
-                <!-- Replace # with your Google Maps link -->
-                <a href="#" target="_blank">
+                <a
+                    href="https://www.google.com/maps/@10.5068133,123.7203574,3a,75y,241.55h,83.03t/data=!3m7!1e1!3m5!1sL39Vjvh8PvllTReXHMYWfg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D6.970634127398725%26panoid%3DL39Vjvh8PvllTReXHMYWfg%26yaw%3D241.55198284213384!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     Get Directions
                 </a>
 
             </div>
+
 
         </div>
 
@@ -704,13 +832,13 @@
 
     <footer>
 
-        <p>
-            © 2026 <strong>Dink & Drive Court</strong>.
-            All Rights Reserved.
-        </p>
+        © 2026
+        <strong>Dink & Drive Court</strong>.
+        All Rights Reserved.
 
     </footer>
 
 
 </body>
 </html>
+```
