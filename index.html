@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dink & Drive Court | Pickleball Court</title>
+
+    <meta
+        name="description"
+        content="Dink & Drive Court - Pickleball court booking in Brgy. Sto. Niño, Balamban, Cebu."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #174f4a;
+            background: #fffaf0;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           COLORS
+        ========================== */
+
+        :root {
+            --orange: #D99A5B;       /* Dessert Sand */
+            --green: #176B67;        /* Out to the Seas */
+            --dark-green: #104C49;
+            --cream: #FFF8EA;
+            --white: #ffffff;
+            --light-green: #eaf5f2;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: var(--white);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 7%;
+
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            text-decoration: none;
+            color: var(--green);
+
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 88vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 80px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(255, 248, 234, 0.88),
+                    rgba(234, 245, 242, 0.92)
+                );
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+
+            background: var(--light-green);
+            color: var(--green);
+
+            padding: 8px 18px;
+            border-radius: 30px;
+
+            font-size: 0.9rem;
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            line-height: 1;
+
+            color: var(--green);
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 30px;
+
+            color: #416a66;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #c88749;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--green);
+            color: var(--green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================== */
+
+        section {
+            padding: 80px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            color: var(--green);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #607d79;
+        }
+
+        /* =========================
+           RATES
+        ========================== */
+
+        .rates {
+            background: var(--white);
+        }
+
+        .rate-container {
+            max-width: 850px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .rate-card {
+            background: var(--cream);
+
+            border-radius: 16px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            border: 2px solid #f0dfca;
+        }
+
+        .rate-card h3 {
+            color: var(--green);
+            font-size: 1.4rem;
+        }
+
+        .price {
+            color: var(--orange);
+
+            font-size: 3rem;
+            font-weight: 800;
+
+            margin: 10px 0;
+        }
+
+        .rate-card p {
+            color: #607d79;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about {
+            background: var(--light-green);
+        }
+
+        .about-content {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-content h3 {
+            color: var(--green);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           BOOKING CTA
+        ========================== */
+
+        .booking {
+            text-align: center;
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .booking h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .booking p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        /* =========================
+           LOCATION
+        ========================== */
+
+        .location {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .location-box {
+            max-width: 700px;
+            margin: auto;
+
+            background: var(--cream);
+
+            padding: 35px;
+
+            border-radius: 16px;
+        }
+
+        .location-box h3 {
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+
+        .location-box p {
+            color: #607d79;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact {
+            background: var(--light-green);
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--white);
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .contact-card a {
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: var(--dark-green);
+            color: var(--white);
+
+            text-align: center;
+
+            padding: 25px 20px;
+        }
+
+        footer strong {
+            color: var(--orange);
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 80vh;
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .rate-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .booking h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+
+        <a href="#" class="logo">
+            DINK & <span>DRIVE</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#rates">Rates</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                🏓 PICKLEBALL COURT
+            </div>
+
+            <h1>
+                DINK & <span>DRIVE</span>
+            </h1>
+
+            <p>
+                Your local pickleball court in Balamban, Cebu.
+                Come play, dink, drive, and enjoy the game!
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#booking" class="btn btn-primary">
+                    BOOK NOW
+                </a>
+
+                <a href="#rates" class="btn btn-secondary">
+                    VIEW RATES
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RATES
+    ========================== -->
+
+    <section class="rates" id="rates">
+
+        <div class="section-title">
+
+            <h2>Court Rates</h2>
+
+            <p>
+                Simple and affordable pickleball court rates.
+            </p>
+
+        </div>
+
+        <div class="rate-container">
+
+            <div class="rate-card">
+
+                <h3>☀️ Day</h3>
+
+                <div class="price">
+                    ₱250
+                </div>
+
+                <p>
+                    Court rental
+                </p>
+
+            </div>
+
+
+            <div class="rate-card">
+
+                <h3>🌙 Night</h3>
+
+                <div class="price">
+                    ₱300
+                </div>
+
+                <p>
+                    Court rental
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="about">
+
+        <div class="about-content">
+
+            <h3>
+                Play. Dink. Drive.
+            </h3>
+
+            <p>
+                Welcome to Dink & Drive Court!
+                Whether you're practicing your shots,
+                playing with friends, or enjoying a competitive game,
+                our court is ready for you.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BOOKING
+    ========================== -->
+
+    <section class="booking" id="booking">
+
+        <h2>
+            Ready to Play?
+        </h2>
+
+        <p>
+            Reserve your court and let's get the game started!
+        </p>
+
+        <a href="#contact" class="btn btn-primary">
+            CONTACT US TO BOOK
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         LOCATION
+    ========================== -->
+
+    <section class="location" id="location">
+
+        <div class="section-title">
+
+            <h2>Find Us</h2>
+
+            <p>
+                Come visit Dink & Drive Court.
+            </p>
+
+        </div>
+
+        <div class="location-box">
+
+            <h3>📍 Location</h3>
+
+            <p>
+                Brgy. Sto. Niño, Balamban, Cebu
+                <br>
+                Near Trinity Forest
+            </p>
+
+            <!-- Replace # with your Google Maps link -->
+            <a
+                href="#"
+                class="btn btn-primary"
+                target="_blank"
+            >
+                OPEN GOOGLE MAPS
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section class="contact" id="contact">
+
+        <div class="section-title">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                Get in touch with us for court reservations.
+            </p>
+
+        </div>
+
+        <div class="contact-container">
+
+            <div class="contact-card">
+
+                <h3>📘 Facebook</h3>
+
+                <!-- Replace # with your Facebook Page link -->
+                <a href="#" target="_blank">
+                    Visit our Facebook Page
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>📱 Mobile</h3>
+
+                <!-- Replace with your mobile number -->
+                <a href="tel:+639XXXXXXXXX">
+                    09XX XXX XXXX
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>✉️ Email</h3>
+
+                <!-- Replace with your email -->
+                <a href="mailto:your@email.com">
+                    your@email.com
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>📍 Google Maps</h3>
+
+                <!-- Replace # with your Google Maps link -->
+                <a href="#" target="_blank">
+                    Get Directions
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 <strong>Dink & Drive Court</strong>.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+</html>
