@@ -1,545 +1,975 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Book Your Court | Dink & Drive Court</title>
+```
+<title>Book Your Court | Dink & Drive Court</title>
 
-    <style>
-        :root {
-            --orange: #D99A5B;
-            --green: #176B67;
-            --dark-green: #104C49;
-            --cream: #FFF8EA;
-            --white: #ffffff;
-            --light-green: #eaf5f2;
-        }
+<style>
+    :root {
+        --purple: #6c2bd9;
+        --purple-dark: #45168f;
+        --pink: #ec4899;
+        --pink-light: #fdf2f8;
+        --purple-light: #f4efff;
+        --green: #16a085;
+        --red: #e53935;
+        --dark: #21182b;
+        --gray: #6b7280;
+        --light-gray: #f8f7fb;
+        --white: #ffffff;
+        --border: #e5e1ec;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: var(--cream);
-            color: #333;
-            line-height: 1.6;
-        }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #faf7ff 0%, #ffffff 55%, #fff7fb 100%);
+        color: var(--dark);
+        line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+        background: linear-gradient(135deg, var(--purple-dark), var(--purple), var(--pink));
+        color: white;
+        padding: 18px 7%;
+        box-shadow: 0 4px 18px rgba(108, 43, 217, 0.18);
+    }
+
+    .nav {
+        max-width: 1100px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+
+    .logo span {
+        color: #ffd7ef;
+    }
+
+    .back-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 9px 15px;
+        border: 1px solid rgba(255,255,255,0.35);
+        border-radius: 30px;
+        transition: 0.2s;
+    }
+
+    .back-link:hover {
+        background: rgba(255,255,255,0.15);
+    }
+
+    /* HERO */
+    .page-title {
+        text-align: center;
+        padding: 55px 20px 35px;
+    }
+
+    .badge {
+        display: inline-block;
+        background: var(--pink-light);
+        color: var(--purple);
+        padding: 7px 15px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .page-title h1 {
+        color: var(--purple-dark);
+        font-size: 42px;
+        line-height: 1.15;
+        margin-bottom: 12px;
+    }
+
+    .page-title p {
+        color: var(--gray);
+        font-size: 16px;
+    }
+
+    /* BOOKING CARD */
+    .booking-container {
+        width: 92%;
+        max-width: 760px;
+        margin: 0 auto 60px;
+        background: var(--white);
+        padding: 38px;
+        border-radius: 24px;
+        box-shadow: 0 15px 45px rgba(69, 22, 143, 0.10);
+        border: 1px solid #eee9f5;
+    }
+
+    .booking-heading {
+        margin-bottom: 28px;
+    }
+
+    .booking-heading h2 {
+        color: var(--purple-dark);
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
+
+    .booking-heading p {
+        color: var(--gray);
+        font-size: 14px;
+    }
+
+    /* PRICE CARDS */
+    .price-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .price-card {
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid var(--border);
+        background: var(--light-gray);
+    }
+
+    .price-card.night {
+        background: var(--pink-light);
+        border-color: #f8c9df;
+    }
+
+    .price-label {
+        font-size: 13px;
+        color: var(--gray);
+        font-weight: 700;
+    }
+
+    .price {
+        font-size: 21px;
+        font-weight: 800;
+        color: var(--purple);
+        margin-top: 2px;
+    }
+
+    /* FORM */
+    .form-group {
+        margin-bottom: 21px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: var(--dark);
+        font-size: 14px;
+    }
+
+    .input-wrap {
+        position: relative;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-size: 16px;
+        color: var(--dark);
+        background: white;
+        transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: var(--purple);
+        box-shadow: 0 0 0 4px rgba(108, 43, 217, 0.09);
+    }
+
+    input::placeholder {
+        color: #aaa4b2;
+    }
+
+    /* AVAILABILITY */
+    .availability-message {
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--green);
+    }
+
+    /* RATE BOX */
+    .rate-box {
+        background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
+        padding: 20px;
+        border-radius: 16px;
+        margin: 28px 0;
+        border: 1px solid #eadff7;
+    }
+
+    .rate-title {
+        color: var(--purple-dark);
+        font-weight: 800;
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .rate-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .selected-rate {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--purple);
+    }
+
+    .court-label {
+        color: var(--gray);
+        font-size: 13px;
+        text-align: right;
+    }
+
+    /* BOOK BUTTON */
+    .booking-button {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, var(--purple), var(--pink));
+        color: white;
+        border: none;
+        border-radius: 13px;
+        font-size: 17px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(108, 43, 217, 0.22);
+        transition: 0.2s;
+    }
+
+    .booking-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 11px 25px rgba(108, 43, 217, 0.28);
+    }
+
+    .booking-button:active {
+        transform: translateY(0);
+    }
+
+    .booking-button:disabled {
+        background: #b8b2c0;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .note {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--gray);
+    }
+
+    /* LOCATION */
+    .location-note {
+        text-align: center;
+        margin-top: 20px;
+        color: var(--gray);
+        font-size: 13px;
+    }
+
+    /* FOOTER */
+    footer {
+        background: var(--dark);
+        color: white;
+        text-align: center;
+        padding: 28px 20px;
+    }
+
+    footer p:first-child {
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    footer p:last-child {
+        color: #c9c3d1;
+        font-size: 13px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
 
         header {
-            background: var(--green);
-            padding: 18px 7%;
-            color: white;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px 5%;
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-size: 18px;
         }
 
         .back-link {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-link:hover {
-            color: var(--orange);
+            font-size: 13px;
+            padding: 8px 11px;
         }
 
         .page-title {
-            text-align: center;
-            padding: 50px 20px 30px;
+            padding: 40px 18px 28px;
         }
 
         .page-title h1 {
-            color: var(--green);
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
-
-        .page-title p {
-            color: #666;
+            font-size: 31px;
         }
 
         .booking-container {
-            width: 90%;
-            max-width: 700px;
-            margin: 0 auto 60px;
-            background: var(--white);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            width: 94%;
+            padding: 25px 20px;
+            border-radius: 19px;
         }
 
-        .booking-container h2 {
-            color: var(--green);
-            margin-bottom: 25px;
-            text-align: center;
+        .price-grid {
+            grid-template-columns: 1fr;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .rate-details {
+            align-items: flex-start;
+            flex-direction: column;
         }
 
-        label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-            color: var(--dark-green);
+        .court-label {
+            text-align: left;
         }
 
         input,
         select {
-            width: 100%;
             padding: 13px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
         }
+    }
+</style>
+```
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--orange);
-        }
-
-        .rate-box {
-            background: var(--light-green);
-            padding: 18px;
-            border-radius: 10px;
-            margin: 25px 0;
-        }
-
-        .rate-box h3 {
-            color: var(--green);
-            margin-bottom: 8px;
-        }
-
-        .rate-box p {
-            margin: 5px 0;
-        }
-
-        .booking-button {
-            width: 100%;
-            padding: 15px;
-            background: var(--orange);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .booking-button:hover {
-            background: #c88749;
-        }
-
-        .booking-button:disabled {
-            background: #aaa;
-            cursor: not-allowed;
-        }
-
-        .note {
-            margin-top: 18px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
-
-        .availability-message {
-            margin-top: 8px;
-            font-size: 14px;
-            color: var(--green);
-            font-weight: bold;
-        }
-
-        footer {
-            background: var(--dark-green);
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-        @media (max-width: 600px) {
-            .booking-container {
-                padding: 25px 20px;
-            }
-
-            .page-title h1 {
-                font-size: 30px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="nav">
-            <div class="logo">DINK & DRIVE</div>
+```
+<!-- HEADER -->
+<header>
+    <div class="nav">
 
-            <a href="index.html" class="back-link">
-                ← Back to Home
-            </a>
+        <div class="logo">
+            DINK <span>&</span> DRIVE
         </div>
-    </header>
+
+        <a href="index.html" class="back-link">
+            ← Home
+        </a>
+
+    </div>
+</header>
 
 
-    <!-- PAGE TITLE -->
-    <section class="page-title">
-        <h1>Book Your Court</h1>
-        <p>Reserve your pickleball court at Dink & Drive Court.</p>
-    </section>
+<!-- PAGE TITLE -->
+<section class="page-title">
+
+    <div class="badge">
+        🏓 PICKLEBALL COURT BOOKING
+    </div>
+
+    <h1>Book Your Court</h1>
+
+    <p>
+        Reserve your playing time at Dink & Drive Court.
+    </p>
+
+</section>
 
 
-    <!-- BOOKING FORM -->
-    <section class="booking-container">
+<!-- BOOKING FORM -->
+<section class="booking-container">
 
+    <div class="booking-heading">
         <h2>Booking Details</h2>
-
-        <form id="bookingForm">
-
-            <!-- DATE -->
-            <div class="form-group">
-
-                <label for="date">
-                    Select Date
-                </label>
-
-                <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    required
-                >
-
-                <div
-                    id="availabilityMessage"
-                    class="availability-message"
-                ></div>
-
-            </div>
+        <p>Please complete the information below to reserve your court.</p>
+    </div>
 
 
-            <!-- TIME -->
-            <div class="form-group">
+    <!-- PRICES -->
+    <div class="price-grid">
 
-                <label for="time">
-                    Select Time
-                </label>
+        <div class="price-card">
+            <div class="price-label">☀️ DAY RATE</div>
+            <div class="price">₱250 / hour</div>
+        </div>
 
-                <select
-                    id="time"
-                    name="time"
-                    required
-                >
+        <div class="price-card night">
+            <div class="price-label">🌙 NIGHT RATE</div>
+            <div class="price">₱300 / hour</div>
+        </div>
 
-                    <option value="">
-                        -- Select Time --
-                    </option>
-
-                    <option>7:00 AM - 8:00 AM</option>
-                    <option>8:00 AM - 9:00 AM</option>
-                    <option>9:00 AM - 10:00 AM</option>
-                    <option>10:00 AM - 11:00 AM</option>
-                    <option>11:00 AM - 12:00 PM</option>
-                    <option>12:00 PM - 1:00 PM</option>
-                    <option>1:00 PM - 2:00 PM</option>
-                    <option>2:00 PM - 3:00 PM</option>
-                    <option>3:00 PM - 4:00 PM</option>
-                    <option>4:00 PM - 5:00 PM</option>
-                    <option>5:00 PM - 6:00 PM</option>
-
-                    <option>6:00 PM - 7:00 PM</option>
-                    <option>7:00 PM - 8:00 PM</option>
-                    <option>8:00 PM - 9:00 PM</option>
-                    <option>9:00 PM - 10:00 PM</option>
-                    <option>10:00 PM - 11:00 PM</option>
-                    <option>11:00 PM - 12:00 AM</option>
-
-                </select>
-
-            </div>
+    </div>
 
 
-            <!-- COURT -->
-            <div class="form-group">
+    <form id="bookingForm">
 
-                <label for="court">
-                    Court
-                </label>
+        <!-- DATE -->
+        <div class="form-group">
 
-                <select
-                    id="court"
-                    name="court"
-                    required
-                >
+            <label for="date">
+                📅 Select Date
+            </label>
 
-                    <option value="Court 1">
-                        Court 1
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- NAME -->
-            <div class="form-group">
-
-                <label for="name">
-                    Customer Name
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your full name"
-                    required
-                >
-
-            </div>
-
-
-            <!-- MOBILE -->
-            <div class="form-group">
-
-                <label for="mobile">
-                    Mobile Number
-                </label>
-
-                <input
-                    type="tel"
-                    id="mobile"
-                    name="mobile"
-                    placeholder="09XXXXXXXXX"
-                    required
-                >
-
-            </div>
-
-
-            <!-- EMAIL -->
-            <div class="form-group">
-
-                <label for="email">
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="your@email.com"
-                    required
-                >
-
-            </div>
-
-
-            <!-- RATE -->
-            <div class="rate-box">
-
-                <h3>💰 Booking Rate</h3>
-
-                <p>
-                    <strong>Selected Rate:</strong>
-
-                    <span id="selectedRate">
-                        Please select a time
-                    </span>
-                </p>
-
-                <p>
-                    <strong>Court:</strong>
-                    1 Pickleball Court
-                </p>
-
-            </div>
-
-
-            <!-- BUTTON -->
-            <button
-                type="submit"
-                class="booking-button"
-                id="bookingButton"
+            <input
+                type="date"
+                id="date"
+                name="date"
+                required
             >
-                CONFIRM BOOKING
-            </button>
 
-            <p class="note">
-                Available times are automatically updated based on existing bookings.
-            </p>
+            <div
+                id="availabilityMessage"
+                class="availability-message"
+            ></div>
 
-        </form>
-
-    </section>
+        </div>
 
 
-    <!-- FOOTER -->
-    <footer>
+        <!-- TIME -->
+        <div class="form-group">
 
-        <p>
-            © 2026 Dink & Drive Court
+            <label for="time">
+                🕐 Select Time
+            </label>
+
+            <select
+                id="time"
+                name="time"
+                required
+            >
+
+                <option value="">
+                    -- Select Time --
+                </option>
+
+                <option>7:00 AM - 8:00 AM</option>
+                <option>8:00 AM - 9:00 AM</option>
+                <option>9:00 AM - 10:00 AM</option>
+                <option>10:00 AM - 11:00 AM</option>
+                <option>11:00 AM - 12:00 PM</option>
+                <option>12:00 PM - 1:00 PM</option>
+                <option>1:00 PM - 2:00 PM</option>
+                <option>2:00 PM - 3:00 PM</option>
+                <option>3:00 PM - 4:00 PM</option>
+                <option>4:00 PM - 5:00 PM</option>
+                <option>5:00 PM - 6:00 PM</option>
+                <option>6:00 PM - 7:00 PM</option>
+                <option>7:00 PM - 8:00 PM</option>
+                <option>8:00 PM - 9:00 PM</option>
+                <option>9:00 PM - 10:00 PM</option>
+                <option>10:00 PM - 11:00 PM</option>
+                <option>11:00 PM - 12:00 AM</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- COURT -->
+        <div class="form-group">
+
+            <label for="court">
+                🏓 Court
+            </label>
+
+            <select
+                id="court"
+                name="court"
+                required
+            >
+
+                <option value="Court 1">
+                    Court 1
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- NAME -->
+        <div class="form-group">
+
+            <label for="name">
+                👤 Customer Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                required
+            >
+
+        </div>
+
+
+        <!-- MOBILE -->
+        <div class="form-group">
+
+            <label for="mobile">
+                📱 Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                name="mobile"
+                placeholder="09XXXXXXXXX"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+        <div class="form-group">
+
+            <label for="email">
+                ✉️ Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+            >
+
+        </div>
+
+
+        <!-- RATE -->
+        <div class="rate-box">
+
+            <div class="rate-title">
+                💰 Booking Summary
+            </div>
+
+            <div class="rate-details">
+
+                <div>
+                    <div class="selected-rate" id="selectedRate">
+                        Please select a time
+                    </div>
+                </div>
+
+                <div class="court-label">
+                    Court 1<br>
+                    1 Pickleball Court
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTON -->
+        <button
+            type="submit"
+            class="booking-button"
+            id="bookingButton"
+        >
+            BOOK NOW
+        </button>
+
+        <p class="note">
+            ✓ Booked time slots are automatically disabled.
         </p>
 
-        <p>
-            Brgy. Sto. Niño, Balamban, Cebu
-        </p>
+        <div class="location-note">
+            📍 Brgy. Sto. Niño, Balamban, Cebu – Near Trinity Forest
+        </div>
 
-    </footer>
+    </form>
 
-
-    <!-- JAVASCRIPT -->
-    <script>
-
-        const bookingForm =
-            document.getElementById("bookingForm");
-
-        const dateInput =
-            document.getElementById("date");
-
-        const timeSelect =
-            document.getElementById("time");
-
-        const courtSelect =
-            document.getElementById("court");
-
-        const selectedRate =
-            document.getElementById("selectedRate");
-
-        const bookingButton =
-            document.getElementById("bookingButton");
-
-        const availabilityMessage =
-            document.getElementById("availabilityMessage");
+</section>
 
 
-        // GOOGLE APPS SCRIPT URL
-        const scriptURL =
-            "https://script.google.com/macros/s/AKfycbzUKTLoXGyfyQVSeykhp92vQCB595o0jTY3DoFBPugJX9nKPQS9JEgJo9NSjYkNziND/exec";
+<!-- FOOTER -->
+<footer>
+
+    <p>© 2026 Dink & Drive Court</p>
+
+    <p>
+        Brgy. Sto. Niño, Balamban, Cebu
+    </p>
+
+</footer>
 
 
-        // PREVENT BOOKING FOR PAST DATES
-        function getLocalDate() {
+<!-- JAVASCRIPT -->
+<script>
 
-            const now = new Date();
+    const bookingForm =
+        document.getElementById("bookingForm");
 
-            const year =
-                now.getFullYear();
+    const dateInput =
+        document.getElementById("date");
 
-            const month =
-                String(now.getMonth() + 1)
-                .padStart(2, "0");
+    const timeSelect =
+        document.getElementById("time");
 
-            const day =
-                String(now.getDate())
-                .padStart(2, "0");
+    const courtSelect =
+        document.getElementById("court");
 
-            return year + "-" + month + "-" + day;
+    const selectedRate =
+        document.getElementById("selectedRate");
+
+    const bookingButton =
+        document.getElementById("bookingButton");
+
+    const availabilityMessage =
+        document.getElementById("availabilityMessage");
+
+
+    // GOOGLE APPS SCRIPT URL
+    const scriptURL =
+        "https://script.google.com/macros/s/AKfycbzUKTLoXGyfyQVSeykhp92vQCB595o0jTY3DoFBPugJX9nKPQS9JEgJo9NSjYkNziND/exec";
+
+
+    // PREVENT BOOKING FOR PAST DATES
+    function getLocalDate() {
+
+        const now = new Date();
+
+        const year =
+            now.getFullYear();
+
+        const month =
+            String(now.getMonth() + 1)
+            .padStart(2, "0");
+
+        const day =
+            String(now.getDate())
+            .padStart(2, "0");
+
+        return year + "-" + month + "-" + day;
+    }
+
+    dateInput.min = getLocalDate();
+
+
+    // NIGHT TIME
+    const nightTimes = [
+
+        "6:00 PM - 7:00 PM",
+        "7:00 PM - 8:00 PM",
+        "8:00 PM - 9:00 PM",
+        "9:00 PM - 10:00 PM",
+        "10:00 PM - 11:00 PM",
+        "11:00 PM - 12:00 AM"
+
+    ];
+
+
+    // UPDATE RATE
+    timeSelect.addEventListener(
+        "change",
+        function () {
+
+            const selectedTime =
+                this.value;
+
+            if (selectedTime === "") {
+
+                selectedRate.textContent =
+                    "Please select a time";
+
+                return;
+            }
+
+            if (
+                nightTimes.includes(selectedTime)
+            ) {
+
+                selectedRate.textContent =
+                    "₱300 / hour · Night";
+
+            } else {
+
+                selectedRate.textContent =
+                    "₱250 / hour · Day";
+
+            }
+
+        }
+    );
+
+
+    // LOAD AVAILABILITY
+    function loadAvailability() {
+
+        const date =
+            dateInput.value;
+
+        const court =
+            courtSelect.value;
+
+
+        if (!date) {
+
+            availabilityMessage.textContent =
+                "";
+
+            return;
         }
 
-        dateInput.min = getLocalDate();
+
+        availabilityMessage.textContent =
+            "Checking availability...";
+
+        timeSelect.disabled = true;
 
 
-        // NIGHT TIME
-        const nightTimes = [
-
-            "6:00 PM - 7:00 PM",
-            "7:00 PM - 8:00 PM",
-            "8:00 PM - 9:00 PM",
-            "9:00 PM - 10:00 PM",
-            "10:00 PM - 11:00 PM",
-            "11:00 PM - 12:00 AM"
-
-        ];
+        const url =
+            scriptURL +
+            "?date=" +
+            encodeURIComponent(date) +
+            "&court=" +
+            encodeURIComponent(court);
 
 
-        // UPDATE RATE
-        timeSelect.addEventListener(
-            "change",
-            function () {
+        fetch(url)
 
-                const selectedTime =
-                    this.value;
+        .then(
+            response =>
+                response.json()
+        )
 
-                if (selectedTime === "") {
+        .then(
+            result => {
 
-                    selectedRate.textContent =
-                        "Please select a time";
+                if (!result.success) {
 
-                    return;
+                    throw new Error(
+                        result.message ||
+                        "Unable to check availability."
+                    );
+
                 }
 
-                if (
-                    nightTimes.includes(selectedTime)
-                ) {
 
-                    selectedRate.textContent =
-                        "₱300 / hour (Night)";
+                const bookedSlots =
+                    result.bookedSlots || [];
+
+
+                Array.from(
+                    timeSelect.options
+                ).forEach(
+                    option => {
+
+                        if (option.value === "") {
+
+                            option.disabled = false;
+
+                            option.textContent =
+                                "-- Select Time --";
+
+                            return;
+                        }
+
+
+                        const originalTime =
+                            option.value;
+
+
+                        if (
+                            bookedSlots.includes(
+                                originalTime
+                            )
+                        ) {
+
+                            option.disabled = true;
+
+                            option.textContent =
+                                originalTime +
+                                " — BOOKED";
+
+                        } else {
+
+                            option.disabled = false;
+
+                            option.textContent =
+                                originalTime;
+
+                        }
+
+                    }
+                );
+
+
+                timeSelect.value = "";
+
+                selectedRate.textContent =
+                    "Please select a time";
+
+                timeSelect.disabled = false;
+
+
+                if (bookedSlots.length === 0) {
+
+                    availabilityMessage.textContent =
+                        "✓ All time slots are currently available.";
 
                 } else {
 
-                    selectedRate.textContent =
-                        "₱250 / hour (Day)";
+                    availabilityMessage.textContent =
+                        "✓ Availability updated. Booked slots are disabled.";
 
                 }
 
             }
-        );
+        )
 
+        .catch(
+            error => {
 
-        // LOAD AVAILABILITY
-        function loadAvailability() {
-
-            const date =
-                dateInput.value;
-
-            const court =
-                courtSelect.value;
-
-
-            // No date selected
-            if (!date) {
+                console.error(
+                    "Availability error:",
+                    error
+                );
 
                 availabilityMessage.textContent =
-                    "";
+                    "Unable to check availability. Please refresh and try again.";
+
+                timeSelect.disabled = false;
+
+            }
+        );
+
+    }
+
+
+    // CHECK WHEN DATE CHANGES
+    dateInput.addEventListener(
+        "change",
+        loadAvailability
+    );
+
+
+    // CHECK WHEN COURT CHANGES
+    courtSelect.addEventListener(
+        "change",
+        loadAvailability
+    );
+
+
+    // SUBMIT BOOKING
+    bookingForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const date =
+                document.getElementById("date").value;
+
+            const time =
+                document.getElementById("time").value;
+
+            const court =
+                document.getElementById("court").value;
+
+            const name =
+                document.getElementById("name").value.trim();
+
+            const mobile =
+                document.getElementById("mobile").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+
+            if (
+                !date ||
+                !time ||
+                !court ||
+                !name ||
+                !mobile ||
+                !email
+            ) {
+
+                alert(
+                    "Please complete all booking details."
+                );
 
                 return;
             }
 
 
-            availabilityMessage.textContent =
-                "Checking availability...";
+            let rate;
+
+            if (
+                nightTimes.includes(time)
+            ) {
+
+                rate =
+                    "₱300 / hour (Night)";
+
+            } else {
+
+                rate =
+                    "₱250 / hour (Day)";
+
+            }
 
 
-            // Disable time selection while checking
-            timeSelect.disabled = true;
+            const bookingData = {
+
+                date: date,
+                time: time,
+                court: court,
+                name: name,
+                mobile: mobile,
+                email: email,
+                rate: rate
+
+            };
 
 
-            const url =
-                scriptURL +
-                "?date=" +
-                encodeURIComponent(date) +
-                "&court=" +
-                encodeURIComponent(court);
+            bookingButton.disabled = true;
+
+            bookingButton.textContent =
+                "CHECKING AVAILABILITY...";
 
 
-            fetch(url)
+            fetch(
+                scriptURL,
+                {
+                    method: "POST",
+                    body:
+                        JSON.stringify(bookingData)
+                }
+            )
 
             .then(
                 response =>
@@ -549,86 +979,49 @@
             .then(
                 result => {
 
-                    if (!result.success) {
+                    if (result.success) {
 
-                        throw new Error(
-                            result.message ||
-                            "Unable to check availability."
+                        alert(
+                            "Booking request submitted successfully!\n\n" +
+
+                            "Customer: " +
+                            name + "\n" +
+
+                            "Date: " +
+                            date + "\n" +
+
+                            "Time: " +
+                            time + "\n" +
+
+                            "Court: " +
+                            court + "\n" +
+
+                            "Rate: " +
+                            rate + "\n\n" +
+
+                            "Your booking has been recorded successfully."
                         );
 
-                    }
 
+                        bookingForm.reset();
 
-                    const bookedSlots =
-                        result.bookedSlots || [];
-
-
-                    // Reset all time options
-                    Array.from(
-                        timeSelect.options
-                    ).forEach(
-                        option => {
-
-                            if (option.value === "") {
-
-                                option.disabled = false;
-
-                                option.textContent =
-                                    "-- Select Time --";
-
-                                return;
-                            }
-
-
-                            const originalTime =
-                                option.value;
-
-
-                            if (
-                                bookedSlots.includes(
-                                    originalTime
-                                )
-                            ) {
-
-                                option.disabled = true;
-
-                                option.textContent =
-                                    originalTime +
-                                    " — BOOKED";
-
-                            } else {
-
-                                option.disabled = false;
-
-                                option.textContent =
-                                    originalTime;
-
-                            }
-
-                        }
-                    );
-
-
-                    // Clear selected time
-                    timeSelect.value = "";
-
-
-                    selectedRate.textContent =
-                        "Please select a time";
-
-
-                    timeSelect.disabled = false;
-
-
-                    if (bookedSlots.length === 0) {
+                        selectedRate.textContent =
+                            "Please select a time";
 
                         availabilityMessage.textContent =
-                            "✓ All time slots are currently available.";
+                            "";
 
                     } else {
 
-                        availabilityMessage.textContent =
-                            "✓ Availability updated. Booked slots are disabled.";
+                        alert(
+                            "⚠️ " +
+                            (
+                                result.message ||
+                                "This time slot is no longer available."
+                            )
+                        );
+
+                        loadAvailability();
 
                     }
 
@@ -639,227 +1032,34 @@
                 error => {
 
                     console.error(
-                        "Availability error:",
+                        "Error:",
                         error
                     );
 
+                    alert(
+                        "Unable to submit the booking. Please try again."
+                    );
 
-                    availabilityMessage.textContent =
-                        "Unable to check availability. Please refresh and try again.";
+                }
+            )
 
-                    timeSelect.disabled = false;
+            .finally(
+                () => {
+
+                    bookingButton.disabled =
+                        false;
+
+                    bookingButton.textContent =
+                        "BOOK NOW";
 
                 }
             );
 
         }
+    );
 
-
-        // CHECK WHEN DATE CHANGES
-        dateInput.addEventListener(
-            "change",
-            loadAvailability
-        );
-
-
-        // CHECK WHEN COURT CHANGES
-        courtSelect.addEventListener(
-            "change",
-            loadAvailability
-        );
-
-
-        // SUBMIT BOOKING
-        bookingForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const date =
-                    document.getElementById("date").value;
-
-                const time =
-                    document.getElementById("time").value;
-
-                const court =
-                    document.getElementById("court").value;
-
-                const name =
-                    document.getElementById("name").value;
-
-                const mobile =
-                    document.getElementById("mobile").value;
-
-                const email =
-                    document.getElementById("email").value;
-
-
-                // CHECK REQUIRED INFORMATION
-                if (
-                    !date ||
-                    !time ||
-                    !court ||
-                    !name ||
-                    !mobile ||
-                    !email
-                ) {
-
-                    alert(
-                        "Please complete all booking details."
-                    );
-
-                    return;
-                }
-
-
-                // DETERMINE RATE
-                let rate;
-
-                if (
-                    nightTimes.includes(time)
-                ) {
-
-                    rate =
-                        "₱300 / hour (Night)";
-
-                } else {
-
-                    rate =
-                        "₱250 / hour (Day)";
-
-                }
-
-
-                // BOOKING DATA
-                const bookingData = {
-
-                    date: date,
-
-                    time: time,
-
-                    court: court,
-
-                    name: name,
-
-                    mobile: mobile,
-
-                    email: email,
-
-                    rate: rate
-
-                };
-
-
-                // DISABLE BUTTON
-                bookingButton.disabled = true;
-
-                bookingButton.textContent =
-                    "CHECKING AVAILABILITY...";
-
-
-                // SEND TO GOOGLE SHEETS
-                fetch(
-                    scriptURL,
-                    {
-                        method: "POST",
-
-                        body:
-                            JSON.stringify(bookingData)
-                    }
-                )
-
-                .then(
-                    response =>
-                        response.json()
-                )
-
-                .then(
-                    result => {
-
-                        if (result.success) {
-
-                            alert(
-                                "Booking request submitted successfully!\n\n" +
-
-                                "Customer: " +
-                                name + "\n" +
-
-                                "Date: " +
-                                date + "\n" +
-
-                                "Time: " +
-                                time + "\n" +
-
-                                "Court: " +
-                                court + "\n" +
-
-                                "Rate: " +
-                                rate + "\n\n" +
-
-                                "Your booking has been recorded successfully."
-                            );
-
-
-                            bookingForm.reset();
-
-
-                            selectedRate.textContent =
-                                "Please select a time";
-
-
-                            availabilityMessage.textContent =
-                                "";
-
-                        } else {
-
-                            alert(
-                                "⚠️ " +
-                                (result.message ||
-                                "This time slot is no longer available.")
-                            );
-
-
-                            // Refresh availability
-                            loadAvailability();
-
-                        }
-
-                    }
-                )
-
-                .catch(
-                    error => {
-
-                        console.error(
-                            "Error:",
-                            error
-                        );
-
-                        alert(
-                            "Unable to submit the booking. Please try again."
-                        );
-
-                    }
-                )
-
-                .finally(
-                    () => {
-
-                        bookingButton.disabled =
-                            false;
-
-                        bookingButton.textContent =
-                            "CONFIRM BOOKING";
-
-                    }
-                );
-
-            }
-        );
-
-    </script>
+</script>
+```
 
 </body>
 </html>
