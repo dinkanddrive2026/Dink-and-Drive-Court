@@ -1693,39 +1693,32 @@ transition: 0.2s;
        BOOK BUTTON STATE
     ========================================== */
 
-    function updateBookButton() {
+  function updateBookButton() {
 
-      const button =
-        document.getElementById(
-          "bookBtn"
-        );
+  const name = document.getElementById("customerName").value.trim();
+  const mobile = document.getElementById("customerMobile").value.trim();
+  const email = document.getElementById("customerEmail").value.trim();
+  const paymentReference = document.getElementById("paymentReference").value.trim();
 
+  const bookBtn = document.getElementById("bookBtn");
+  const paymentAmount = document.getElementById("paymentAmount");
 
-      const name =
-        document.getElementById(
-          "customerName"
-        ).value.trim();
+  // Update payment amount
+  if (selectedSlot) {
+    paymentAmount.textContent = "₱" + selectedSlot.rate;
+  } else {
+    paymentAmount.textContent = "₱0";
+  }
 
-
-      const mobile =
-        document.getElementById(
-          "customerMobile"
-        ).value.trim();
-
-
-      const email =
-        document.getElementById(
-          "customerEmail"
-        ).value.trim();
-
-
-      button.disabled =
-        !selectedSlot ||
-        !name ||
-        !mobile ||
-        !email;
-
-    }
+  // Enable BOOK NOW only when all information is complete
+  bookBtn.disabled = !(
+    selectedSlot &&
+    name &&
+    mobile &&
+    email &&
+    paymentReference
+  );
+}
 
 
     /* ==========================================
@@ -1754,6 +1747,7 @@ transition: 0.2s;
         "input",
         updateBookButton
       );
+    document.getElementById("paymentReference").addEventListener("input", updateBookButton);
 
 
     /* ==========================================
