@@ -1041,6 +1041,10 @@ transition: 0.2s;
 
 <div class="confirmation-details">
 
+ <div class="confirmation-row">
+  <span class="confirmation-label">Booking ID</span>
+  <span class="confirmation-value" id="confirmBookingId">-</span>
+</div>
   <div class="confirmation-row">
     <span class="confirmation-label">Customer</span>
     <span class="confirmation-value" id="confirmName">-</span>
@@ -1854,6 +1858,11 @@ transition: 0.2s;
         "block";
 
 
+      document.getElementById(
+  "confirmBookingId"
+).textContent =
+  booking.bookingId;
+      
       document.getElementById(
         "confirmName"
       ).textContent =
