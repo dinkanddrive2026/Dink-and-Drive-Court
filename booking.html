@@ -1002,116 +1002,77 @@
        CONFIRMATION
   ========================= -->
 
-  <section class="container" id="confirmation">
+ <section class="container" id="confirmation">
 
-    <div class="confirmation-card">
+<div class="confirmation-card">
 
-      <div class="success-icon">
-        ✓
-      </div>
+<div class="success-icon">
+  ✓
+</div>
 
-      <h2>
-        Booking Submitted!
-      </h2>
+<h2>Booking Submitted!</h2>
 
-      <p class="confirmation-subtitle">
-        Thank you for booking with Dink & Drive Court.
-      </p>
+<p class="confirmation-subtitle">
+  Thank you for booking with Dink &amp; Drive Court.
+</p>
 
-      <div class="pending-badge">
-        ⏳ PENDING CONFIRMATION
-      </div>
+<div class="pending-badge">
+  ⏳ PENDING CONFIRMATION
+</div>
 
+<div class="confirmation-details">
 
-      <div class="confirmation-details">
+  <div class="confirmation-row">
+    <span class="confirmation-label">Customer</span>
+    <span class="confirmation-value" id="confirmName">-</span>
+  </div>
 
-        <div class="confirmation-row">
+  <div class="confirmation-row">
+    <span class="confirmation-label">Date</span>
+    <span class="confirmation-value" id="confirmDate">-</span>
+  </div>
 
-          <span class="confirmation-label">
-            Customer
-          </span>
+  <div class="confirmation-row">
+    <span class="confirmation-label">Time</span>
+    <span class="confirmation-value" id="confirmTime">-</span>
+  </div>
 
-          <span class="confirmation-value" id="confirmName">
-            -
-          </span>
+  <div class="confirmation-row">
+    <span class="confirmation-label">Court</span>
+    <span class="confirmation-value">Court 1</span>
+  </div>
 
-        </div>
+  <div class="confirmation-row">
+    <span class="confirmation-label">Rate</span>
+    <span class="confirmation-value" id="confirmRate">-</span>
+  </div>
 
+</div>
 
-        <div class="confirmation-row">
+<div class="confirmation-note">
+  <strong>Booking received successfully!</strong><br><br>
+  Your selected time slot has been reserved temporarily.
+  Please wait for confirmation from Dink &amp; Drive Court.
+</div>
 
-          <span class="confirmation-label">
-            Date
-          </span>
+<button
+  class="another-button"
+  onclick="bookAnother()"
+>
+  BOOK ANOTHER SLOT
+</button>
 
-          <span class="confirmation-value" id="confirmDate">
-            -
-          </span>
+<a
+  href="index.html"
+  class="home-button"
+>
+  BACK TO HOME
+</a>
 
-        </div>
+</div>
 
-
-        <div class="confirmation-row">
-
-          <span class="confirmation-label">
-            Time
-          </span>
-
-          <span class="confirmation-value" id="confirmTime">
-            -
-          </span>
-
-        </div>
-
-
-        <div class="confirmation-row">
-
-          <span class="confirmation-label">
-            Court
-          </span>
-
-          <span class="confirmation-value">
-            Court 1
-          </span>
-
-        </div>
-
-
-        <div class="confirmation-row">
-
-          <span class="confirmation-label">
-            Rate
-          </span>
-
-          <span class="confirmation-value" id="confirmRate">
-            -
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <div class="confirmation-note">
-
-        Your booking has been successfully submitted.
-        Please wait for confirmation from Dink & Drive Court.
-
-      </div>
-
-
-      <button
-        class="another-button"
-        onclick="bookAnother()"
-      >
-        BOOK ANOTHER COURT
-      </button>
-
-    </div>
-
-  </section>
-
-
+</section>
+  
   <script>
 
     /* ==========================================
