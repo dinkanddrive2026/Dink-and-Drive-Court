@@ -1817,32 +1817,19 @@ transition: 0.2s;
         "SUBMITTING...";
 
 
-      const bookingData = {
+     const paymentReference =
+  document.getElementById("paymentReference").value.trim();
 
-        date:
-          selectedSlot.date,
-
-        time:
-          selectedSlot.time,
-
-        court:
-          COURT,
-
-        name:
-          name,
-
-        mobile:
-          mobile,
-
-        email:
-          email,
-
-        rate:
-          "₱" +
-          selectedSlot.rate
-
-      };
-
+const bookingData = {
+  date: selectedSlot.date,
+  time: selectedSlot.time,
+  court: COURT,
+  name: name,
+  mobile: mobile,
+  email: email,
+  rate: "₱" + selectedSlot.rate,
+  paymentReference: paymentReference
+};
 
       try {
 
