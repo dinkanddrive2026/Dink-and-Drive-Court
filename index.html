@@ -88,7 +88,10 @@
             font-weight: 600;
             transition: 0.3s;
         }
-
+            .rules-link {
+            color: var(--orange) !important;
+            font-weight: 800 !important;
+        }
         .nav-links a:hover {
             color: var(--orange);
         }
@@ -514,7 +517,23 @@
             }
         }
 
-        @media (max-width: 550px) {
+        @media (max-width: 550px) {            
+            .rule-card {
+                padding: 16px 18px;
+            }
+
+            .rule-card h3 {
+                font-size: 17px;
+            }
+
+            .rule-card p {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+            .rules-list {
+                gap: 12px;
+            }
 
             nav {
                 flex-direction: column;
@@ -605,7 +624,7 @@
             </li>
 
             <li>
-                <a href="#rules">Rules</a>
+                <a href="#rules" class="rules-link">Rules</a>
             </li>
 
             <li>
