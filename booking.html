@@ -408,7 +408,7 @@
 
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 12px;
     }
 
@@ -955,30 +955,7 @@ transition: 0.2s;
 
 </div>
 
-          <div class="summary-item">
-            <span class="summary-label">Date</span>
-            <span class="summary-value" id="summaryDate">-</span>
-          </div>
-
-          <div class="summary-item">
-            <span class="summary-label">Time</span>
-            <span class="summary-value" id="summaryTime">-</span>
-          </div>
-
-          <div class="summary-item">
-            <span class="summary-label">Court</span>
-            <span class="summary-value">Court 1</span>
-          </div>
-
-          <div class="summary-item">
-            <span class="summary-label">Rate</span>
-            <span class="summary-value summary-rate" id="summaryRate">
-              ₱0
-            </span>
-          </div>
-
-        </div>
-
+          
 
         <!-- CUSTOMER FORM -->
 
@@ -1635,81 +1612,220 @@ transition: 0.2s;
        SELECT SLOT
     ========================================== */
 
-    function selectSlot(
-      date,
-      time,
-      cell
-    ) {
+   function selectSlot(date, time, cell) {
 
-      /* Do not allow booked */
+  // Do not allow booked slots
+  if (cell.classList.contains("booked")) {
+    return;
+  }
 
-      if (
-        cell.classList.contains("booked")
-      ) {
+  const slotIndex = times.indexOf(time);
 
-        return;
+  if (slotIndex === -1) {
+    return;
+  }
 
-      }
+  // If customer selects another date,
+  // start a new booking on that date.
+  if (
+    selectedSlots.length > 0 &&
+    selectedSlots[0].date !== date
+  ) {
+    clearSelection();
+  }
 
+  // First selection
+  if (selectedSlots.length === 0) {
 
-      /* Remove previous selection */
+    selectedSlots = [{
+      date: date,
+      time: time,
+      rate: getRate(time),
+      index: slotIndex
+    }];
 
-      document
-        .querySelectorAll(".slot-cell.selected")
-        .forEach(previous => {
+  } else {
 
-          previous.classList.remove(
-            "selected"
-          );
-
-          const checkbox =
-            previous.querySelector(
-              ".slot-check"
-            );
-
-          if (checkbox) {
-
-            checkbox.checked = false;
-
-          }
-
-        });
-
-
-      /* Select current */
-
-      cell.classList.add(
-        "selected"
+    const existingIndex =
+      selectedSlots.findIndex(
+        slot => slot.index === slotIndex
       );
 
+    // Clicking an already-selected slot
+    if (existingIndex !== -1) {
 
-      const checkbox =
-        cell.querySelector(
-          ".slot-check"
+      // Don't allow a gap in the middle
+      if (
+        selectedSlots.length > 1 &&
+        existingIndex !== 0 &&
+        existingIndex !== selectedSlots.length - 1
+      ) {
+
+        alert(
+          "Please remove the first or last selected hour to keep the booking consecutive."
         );
 
-      if (checkbox) {
-
-        checkbox.checked = true;
-
+        return;
       }
 
+      selectedSlots.splice(existingIndex, 1);
 
-      selectedSlot = {
+    } else {
 
-        date: date,
+      // Find the complete range
+      const indexes = selectedSlots.map(
+        slot => slot.index
+      );
 
-        time: time,
+      const minIndex =
+        Math.min(slotIndex, ...indexes);
 
-        rate: getRate(time)
+      const maxIndex =
+        Math.max(slotIndex, ...indexes);
 
-      };
+      // Make sure every hour in the range is available
+      for (
+        let i = minIndex;
+        i <= maxIndex;
+        i++
+      ) {
+
+        const candidateTime = times[i];
+
+        const candidateCell =
+          document.querySelector(
+            `.slot-cell[data-date="${date}"][data-time="${candidateTime}"]`
+          );
+
+        if (
+          !candidateCell ||
+          candidateCell.classList.contains("booked")
+        ) {
+
+          alert(
+            "You can only select consecutive available time slots."
+          );
+
+          return;
+        }
+      }
+
+      // Select the complete consecutive range
+      selectedSlots = [];
+
+      for (
+        let i = minIndex;
+        i <= maxIndex;
+        i++
+      ) {
+
+        selectedSlots.push({
+          date: date,
+          time: times[i],
+          rate: getRate(times[i]),
+          index: i
+        });
+
+      }
+    }
+  }
+
+  renderSelectedSlots();
+  updateSummary();
+}
+function clearSelection() {
+
+  document
+    .querySelectorAll(".slot-cell.selected")
+    .forEach(cell => {
+
+      cell.classList.remove("selected");
+
+      const checkbox =
+        cell.querySelector(".slot-check");
+
+      if (checkbox) {
+        checkbox.checked = false;
+      }
+
+    });
+
+  selectedSlots = [];
+}
 
 
-      updateSummary();
+function renderSelectedSlots() {
 
+  document
+    .querySelectorAll(".slot-cell.selected")
+    .forEach(cell => {
+
+      cell.classList.remove("selected");
+
+      const checkbox =
+        cell.querySelector(".slot-check");
+
+      if (checkbox) {
+        checkbox.checked = false;
+      }
+
+    });
+
+  selectedSlots.forEach(slot => {
+
+    const cell =
+      document.querySelector(
+        `.slot-cell[data-date="${slot.date}"][data-time="${slot.time}"]`
+      );
+
+    if (!cell) {
+      return;
     }
 
+    cell.classList.add("selected");
+
+    const checkbox =
+      cell.querySelector(".slot-check");
+
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+
+  });
+}
+
+
+function getSelectedTotal() {
+
+  return selectedSlots.reduce(
+    (total, slot) => total + slot.rate,
+    0
+  );
+
+}
+
+
+function getSelectedTimeRange() {
+
+  if (selectedSlots.length === 0) {
+    return "";
+  }
+
+  const sortedSlots =
+    [...selectedSlots].sort(
+      (a, b) => a.index - b.index
+    );
+
+  const firstTime =
+    sortedSlots[0].time.split(" - ")[0];
+
+  const lastTime =
+    sortedSlots[
+      sortedSlots.length - 1
+    ].time.split(" - ")[1];
+
+  return firstTime + " - " + lastTime;
+}
 
     /* ==========================================
        UPDATE SUMMARY
@@ -1717,75 +1833,105 @@ transition: 0.2s;
 
     function updateSummary() {
 
-      const summary =
-        document.getElementById(
-          "summary"
-        );
+  const summary =
+    document.getElementById("summary");
 
-      if (!selectedSlot) {
+  if (selectedSlots.length === 0) {
 
-        summary.classList.remove(
-          "show"
-        );
+    summary.classList.remove("show");
 
-        return;
+    updateBookButton();
 
-      }
+    return;
+  }
 
+  summary.classList.add("show");
 
-      summary.classList.add(
-        "show"
-      );
+  const sortedSlots =
+    [...selectedSlots].sort(
+      (a, b) => a.index - b.index
+    );
 
+  const total =
+    getSelectedTotal();
 
-      document.getElementById(
-        "summaryDate"
-      ).textContent =
-        selectedSlot.date;
+  const timeRange =
+    getSelectedTimeRange();
 
+  document.getElementById(
+    "summaryDate"
+  ).textContent =
+    sortedSlots[0].date;
 
-      document.getElementById(
-        "summaryTime"
-      ).textContent =
-        selectedSlot.time;
+  document.getElementById(
+    "summaryTime"
+  ).textContent =
+    timeRange;
 
+  document.getElementById(
+    "summaryDuration"
+  ).textContent =
+    selectedSlots.length +
+    (
+      selectedSlots.length === 1
+        ? " hour"
+        : " hours"
+    );
 
-      document.getElementById(
-        "summaryRate"
-      ).textContent =
-        "₱" +
-        selectedSlot.rate;
+  document.getElementById(
+    "summaryTotal"
+  ).textContent =
+    "₱" +
+    total.toLocaleString();
 
-
-      updateBookButton();
-
-    }
+  updateBookButton();
+}
 
 
     /* ==========================================
        BOOK BUTTON STATE
     ========================================== */
 
-  function updateBookButton() {
+ function updateBookButton() {
 
-  const name = document.getElementById("customerName").value.trim();
-  const mobile = document.getElementById("customerMobile").value.trim();
-  const email = document.getElementById("customerEmail").value.trim();
-  const paymentReference = document.getElementById("paymentReference").value.trim();
+  const name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
 
-  const bookBtn = document.getElementById("bookBtn");
-  const paymentAmount = document.getElementById("paymentAmount");
+  const mobile =
+    document
+      .getElementById("customerMobile")
+      .value
+      .trim();
 
-  // Update payment amount
-  if (selectedSlot) {
-    paymentAmount.textContent = "₱" + selectedSlot.rate;
-  } else {
-    paymentAmount.textContent = "₱0";
-  }
+  const email =
+    document
+      .getElementById("customerEmail")
+      .value
+      .trim();
 
-  // Enable BOOK NOW only when all information is complete
+  const paymentReference =
+    document
+      .getElementById("paymentReference")
+      .value
+      .trim();
+
+  const bookBtn =
+    document.getElementById("bookBtn");
+
+  const paymentAmount =
+    document.getElementById("paymentAmount");
+
+  const total =
+    getSelectedTotal();
+
+  paymentAmount.textContent =
+    "₱" + total.toLocaleString();
+
   bookBtn.disabled = !(
-    selectedSlot &&
+    selectedSlots.length > 0 &&
     name &&
     mobile &&
     email &&
@@ -1829,147 +1975,168 @@ transition: 0.2s;
 
     async function submitBooking() {
 
-      if (!selectedSlot) {
+  if (selectedSlots.length === 0) {
 
-        alert(
-          "Please select an available time slot."
-        );
+    alert(
+      "Please select at least one available time slot."
+    );
 
-        return;
+    return;
+  }
 
-      }
+  const name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
 
+  const mobile =
+    document
+      .getElementById("customerMobile")
+      .value
+      .trim();
 
-      const name =
-        document
-          .getElementById(
-            "customerName"
-          )
-          .value
-          .trim();
+  const email =
+    document
+      .getElementById("customerEmail")
+      .value
+      .trim();
 
+  const paymentReference =
+    document
+      .getElementById("paymentReference")
+      .value
+      .trim();
 
-      const mobile =
-        document
-          .getElementById(
-            "customerMobile"
-          )
-          .value
-          .trim();
+  if (!name || !mobile || !email) {
 
+    alert(
+      "Please complete all customer information."
+    );
 
-      const email =
-        document
-          .getElementById(
-            "customerEmail"
-          )
-          .value
-          .trim();
+    return;
+  }
 
+  if (!paymentReference) {
 
-      if (!name || !mobile || !email) {
+    alert(
+      "Please enter your payment reference number."
+    );
 
-        alert(
-          "Please complete all customer information."
-        );
+    return;
+  }
 
-        return;
+  const button =
+    document.getElementById("bookBtn");
 
-      }
+  button.disabled = true;
+  button.textContent =
+    "SUBMITTING...";
 
+  const sortedSlots =
+    [...selectedSlots].sort(
+      (a, b) => a.index - b.index
+    );
 
-      const button =
-        document.getElementById(
-          "bookBtn"
-        );
+  const totalAmount =
+    getSelectedTotal();
 
+  const timeRange =
+    getSelectedTimeRange();
 
-      button.disabled = true;
+  const bookingData = {
 
-      button.textContent =
-        "SUBMITTING...";
+    date:
+      sortedSlots[0].date,
 
+    time:
+      timeRange,
 
-     const paymentReference =
-  document.getElementById("paymentReference").value.trim();
+    timeSlots:
+      sortedSlots.map(
+        slot => slot.time
+      ),
 
-const bookingData = {
-  date: selectedSlot.date,
-  time: selectedSlot.time,
-  court: COURT,
-  name: name,
-  mobile: mobile,
-  email: email,
-  rate: "₱" + selectedSlot.rate,
-  paymentReference: paymentReference
-};
+    duration:
+      sortedSlots.length,
 
-      try {
+    court:
+      COURT,
 
-        const response =
-          await fetch(
-            SCRIPT_URL,
-            {
+    name:
+      name,
 
-              method: "POST",
+    mobile:
+      mobile,
 
-              headers: {
-                "Content-Type":
-                  "text/plain;charset=utf-8"
-              },
+    email:
+      email,
 
-              body:
-                JSON.stringify(
-                  bookingData
-                )
+    rate:
+      "₱" + totalAmount.toLocaleString(),
 
-            }
-          );
+    totalAmount:
+      totalAmount,
 
+    paymentReference:
+      paymentReference
+  };
 
-        const result =
-          await response.json();
+  try {
 
-
-        if (!result.success) {
-
-          alert(
-            result.message ||
-            "Unable to process booking."
-          );
-
-          button.disabled = false;
-
-          button.textContent =
-            "BOOK NOW";
-
-          return;
-
+    const response =
+      await fetch(
+        SCRIPT_URL,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+          body:
+            JSON.stringify(
+              bookingData
+            )
         }
+      );
 
-        bookingData.bookingId = result.bookingId;
-        
-        showConfirmation(
-          bookingData
-        );
+    const result =
+      await response.json();
 
+    if (!result.success) {
 
-      } catch (error) {
+      alert(
+        result.message ||
+        "Unable to process booking."
+      );
 
-        console.error(error);
+      button.disabled = false;
+      button.textContent =
+        "BOOK NOW";
 
-        alert(
-          "Unable to connect to the booking system. Please try again."
-        );
-
-        button.disabled = false;
-
-        button.textContent =
-          "BOOK NOW";
-
-      }
-
+      return;
     }
+
+    bookingData.bookingId =
+      result.bookingId;
+
+    showConfirmation(
+      bookingData
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Unable to connect to the booking system. Please try again."
+    );
+
+    button.disabled = false;
+    button.textContent =
+      "BOOK NOW";
+  }
+}
 
 
     /* ==========================================
