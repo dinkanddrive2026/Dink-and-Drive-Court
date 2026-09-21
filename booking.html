@@ -1195,15 +1195,20 @@ transition: 0.2s;
   </div>
 
   <div class="confirmation-row">
-    <span class="confirmation-label">Rate</span>
-    <span class="confirmation-value" id="confirmRate">-</span>
-  </div>
+  <span class="confirmation-label">Duration</span>
+  <span class="confirmation-value" id="confirmDuration">-</span>
+</div>
+
+<div class="confirmation-row">
+  <span class="confirmation-label">Total</span>
+  <span class="confirmation-value" id="confirmTotal">-</span>
+</div>
 
 </div>
 
 <div class="confirmation-note">
   <strong>Booking received successfully!</strong><br><br>
-  Your selected time slot has been reserved temporarily.
+  Your selected time slots have been reserved temporarily.
   Please wait for confirmation from Dink &amp; Drive Court.
 </div>
 
@@ -2183,9 +2188,19 @@ function getSelectedTimeRange() {
 
 
       document.getElementById(
-        "confirmRate"
-      ).textContent =
-        booking.rate;
+  "confirmDuration"
+).textContent =
+  booking.duration +
+  (
+    booking.duration === 1
+      ? " hour"
+      : " hours"
+  );
+
+document.getElementById(
+  "confirmTotal"
+).textContent =
+  booking.rate;
 
 
       window.scrollTo({
