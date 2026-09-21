@@ -29,11 +29,22 @@
             line-height: 1.6;
         }
         .site-logo {
-  width: 500px;
-  height: 220px;
-  object-fit: contain;
-  display: block;
-  margin: 10px auto;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 10px auto;
+}
+
+/* Mobile phone */
+@media (max-width: 600px) {
+    .site-logo {
+        width: 94%;
+        max-width: 380px;
+        height: auto;
+        margin: 5px auto;
+    }
 }
 
         :root {
