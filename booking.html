@@ -867,9 +867,9 @@ transition: 0.2s;
         📅 Court Schedule
       </h2>
 
-      <p class="section-subtitle">
-        Select one available time slot. Booked slots cannot be selected.
-      </p>
+     <p class="section-subtitle">
+  Select one or more consecutive time slots. Booked slots cannot be selected.
+</p>
 
 
       <!-- LEGEND -->
@@ -925,6 +925,35 @@ transition: 0.2s;
         </div>
 
         <div class="summary-grid">
+
+  <div class="summary-item">
+    <span class="summary-label">Date</span>
+    <span class="summary-value" id="summaryDate">-</span>
+  </div>
+
+  <div class="summary-item">
+    <span class="summary-label">Time</span>
+    <span class="summary-value" id="summaryTime">-</span>
+  </div>
+
+  <div class="summary-item">
+    <span class="summary-label">Duration</span>
+    <span class="summary-value" id="summaryDuration">-</span>
+  </div>
+
+  <div class="summary-item">
+    <span class="summary-label">Court</span>
+    <span class="summary-value">Court 1</span>
+  </div>
+
+  <div class="summary-item">
+    <span class="summary-label">Total</span>
+    <span class="summary-value summary-rate" id="summaryTotal">
+      ₱0
+    </span>
+  </div>
+
+</div>
 
           <div class="summary-item">
             <span class="summary-label">Date</span>
