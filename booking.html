@@ -899,22 +899,19 @@ transition: 0.2s;
 
       <div class="schedule-wrapper">
 
-        <table class="schedule">
+  <table class="schedule">
 
-          <thead>
-            <tr id="scheduleHeader">
-              <th>
-                DATE
-              </th>
-            </tr>
-          </thead>
+    <thead>
+      <tr id="scheduleHeader">
+      </tr>
+    </thead>
 
-          <tbody id="scheduleBody">
-          </tbody>
+    <tbody id="scheduleBody">
+    </tbody>
 
-        </table>
+  </table>
 
-      </div>
+</div>
 
 
       <!-- SELECTED SUMMARY -->
@@ -1239,28 +1236,27 @@ transition: 0.2s;
     ========================================== */
 
     const times = [
+  "6:00 AM - 7:00 AM",
+  "7:00 AM - 8:00 AM",
+  "8:00 AM - 9:00 AM",
+  "9:00 AM - 10:00 AM",
+  "10:00 AM - 11:00 AM",
+  "11:00 AM - 12:00 PM",
+  "12:00 PM - 1:00 PM",
+  "1:00 PM - 2:00 PM",
+  "2:00 PM - 3:00 PM",
+  "3:00 PM - 4:00 PM",
+  "4:00 PM - 5:00 PM",
+  "5:00 PM - 6:00 PM",
+  "6:00 PM - 7:00 PM",
+  "7:00 PM - 8:00 PM",
+  "8:00 PM - 9:00 PM",
+  "9:00 PM - 10:00 PM",
+  "10:00 PM - 11:00 PM",
+  "11:00 PM - 12:00 AM"
+];
 
-      "7:00 AM - 8:00 AM",
-      "8:00 AM - 9:00 AM",
-      "9:00 AM - 10:00 AM",
-      "10:00 AM - 11:00 AM",
-      "11:00 AM - 12:00 PM",
-      "12:00 PM - 1:00 PM",
-      "1:00 PM - 2:00 PM",
-      "2:00 PM - 3:00 PM",
-      "3:00 PM - 4:00 PM",
-      "4:00 PM - 5:00 PM",
-      "5:00 PM - 6:00 PM",
-      "6:00 PM - 7:00 PM",
-      "7:00 PM - 8:00 PM",
-      "8:00 PM - 9:00 PM",
-      "9:00 PM - 10:00 PM",
-      "10:00 PM - 11:00 PM",
-      "11:00 PM - 12:00 AM"
-
-    ];
-
-
+      
     /* ==========================================
        NIGHT RATE
     ========================================== */
@@ -1353,162 +1349,244 @@ transition: 0.2s;
        LOAD SCHEDULE
     ========================================== */
 
-    async function loadSchedule() {
+   async function loadSchedule() {
 
-      const header =
-        document.getElementById("scheduleHeader");
+  const header =
+    document.getElementById("scheduleHeader");
 
-      const body =
-        document.getElementById("scheduleBody");
+  const body =
+    document.getElementById("scheduleBody");
 
-      header.innerHTML = "<th>DATE</th>";
-      body.innerHTML = "";
+  header.innerHTML = "";
+  body.innerHTML = "";
 
-      bookedByDate = {};
+  bookedByDate = {};
 
-      const dates = [];
-
-
-      /* Create next 7 days */
-
-      for (let i = 0; i < 7; i++) {
-
-        const date = new Date();
-
-        date.setHours(0, 0, 0, 0);
-
-        date.setDate(
-          date.getDate() + i
-        );
-
-        dates.push(date);
-
-      }
+  const dates = [];
 
 
-      /* Create time headers */
+  /* ==============================
+     CREATE 7 DAYS
+     TODAY + NEXT 6 DAYS
+  ============================== */
 
-      times.forEach(time => {
+  for (let i = 0; i < 7; i++) {
 
-        const th =
-          document.createElement("th");
+    const date = new Date();
 
-        th.textContent = time;
+    date.setHours(0, 0, 0, 0);
 
-        header.appendChild(th);
+    date.setDate(
+      date.getDate() + i
+    );
 
-      });
+    dates.push(date);
 
-
-      /* Create rows */
-
-      dates.forEach(date => {
-
-        const dateString =
-          formatDate(date);
-
-        const tr =
-          document.createElement("tr");
-
-        const dateCell =
-          document.createElement("td");
-
-        dateCell.className =
-          "date-cell";
-
-        dateCell.innerHTML = `
-
-          <div class="date-day">
-            ${displayDay(date)}
-          </div>
-
-          <div>
-            ${displayDate(date)}
-          </div>
-
-        `;
-
-        tr.appendChild(dateCell);
+  }
 
 
-        times.forEach(time => {
+  /* ==============================
+     FIRST HEADER
+     HOUR & RATE
+  ============================== */
 
-          const td =
-            document.createElement("td");
+  const hourHeader =
+    document.createElement("th");
 
-          td.className =
-            "slot-cell available";
+  hourHeader.innerHTML = `
+    <div style="
+      font-size:14px;
+      font-weight:900;
+    ">
+      HOUR &amp; RATE
+    </div>
+  `;
 
-          td.dataset.date =
-            dateString;
-
-          td.dataset.time =
-            time;
+  header.appendChild(hourHeader);
 
 
-          const checkbox =
-            document.createElement("input");
+  /* ==============================
+     DATE HEADERS
+  ============================== */
 
-          checkbox.type =
-            "checkbox";
+  dates.forEach((date, index) => {
 
-          checkbox.className =
-            "slot-check";
+    const th =
+      document.createElement("th");
 
-          checkbox.addEventListener(
-            "click",
-            function(event) {
+    const dayLabel =
+      index === 0
+        ? "TODAY"
+        : date
+            .toLocaleDateString(
+              "en-US",
+              { weekday: "short" }
+            )
+            .toUpperCase();
 
-              event.stopPropagation();
+    const dateLabel =
+      date
+        .toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric"
+          }
+        )
+        .toUpperCase();
 
-              selectSlot(
-                dateString,
-                time,
-                td
-              );
+    th.innerHTML = `
 
-            }
+      <div style="
+        font-size:15px;
+        font-weight:900;
+      ">
+        ${dayLabel}
+      </div>
+
+      <div style="
+        font-size:13px;
+        margin-top:4px;
+      ">
+        ${dateLabel}
+      </div>
+
+      <div style="
+        font-size:11px;
+        margin-top:4px;
+        opacity:0.9;
+      ">
+        18 SLOTS
+      </div>
+
+    `;
+
+    header.appendChild(th);
+
+  });
+
+
+  /* ==============================
+     CREATE 18 HOURLY ROWS
+  ============================== */
+
+  times.forEach(time => {
+
+    const tr =
+      document.createElement("tr");
+
+
+    /* HOUR & RATE */
+
+    const hourCell =
+      document.createElement("td");
+
+    hourCell.className =
+      "date-cell";
+
+    const rate =
+      getRate(time);
+
+    hourCell.innerHTML = `
+
+      <div style="
+        font-size:13px;
+        font-weight:900;
+      ">
+        ${time}
+      </div>
+
+      <div style="
+        font-size:11px;
+        font-weight:700;
+        color:var(--gray);
+        margin-top:4px;
+      ">
+        (PHP${rate})
+      </div>
+
+    `;
+
+    tr.appendChild(hourCell);
+
+
+    /* ==============================
+       CREATE 7 DATE CELLS
+    ============================== */
+
+    dates.forEach(date => {
+
+      const dateString =
+        formatDate(date);
+
+      const td =
+        document.createElement("td");
+
+      td.className =
+        "slot-cell available";
+
+      td.dataset.date =
+        dateString;
+
+      td.dataset.time =
+        time;
+
+
+      /* OPEN LABEL */
+
+      td.innerHTML = `
+
+        <div style="
+          font-size:13px;
+          font-weight:900;
+          letter-spacing:0.5px;
+        ">
+          OPEN
+        </div>
+
+      `;
+
+
+      /* CLICK CELL TO SELECT */
+
+      td.addEventListener(
+        "click",
+        function() {
+
+          selectSlot(
+            dateString,
+            time,
+            td
           );
 
-
-          td.appendChild(checkbox);
-
-          td.addEventListener(
-            "click",
-            function() {
-
-              selectSlot(
-                dateString,
-                time,
-                td
-              );
-
-            }
-          );
+        }
+      );
 
 
-          tr.appendChild(td);
+      tr.appendChild(td);
 
-        });
-
-
-        body.appendChild(tr);
-
-      });
+    });
 
 
-      /* Load availability for each date */
+    body.appendChild(tr);
 
-      for (const date of dates) {
+  });
 
-        await loadAvailability(
-          formatDate(date)
-        );
 
-      }
+  /* ==============================
+     LOAD BOOKED SLOTS
+     FOR ALL 7 DAYS
+  ============================== */
 
-    }
+  for (const date of dates) {
 
+    await loadAvailability(
+      formatDate(date)
+    );
+
+  }
+
+}
 
     /* ==========================================
        LOAD AVAILABILITY
