@@ -817,19 +817,23 @@ transition: 0.2s;
       }
 
       .schedule {
-        min-width: 1350px;
-      }
+  min-width: 0;
+  width: 100%;
+  table-layout: fixed;
+}
 
-      .schedule th:first-child,
-      .schedule td:first-child {
-        width: 145px;
-        min-width: 145px;
-      }
+.schedule th:first-child,
+.schedule td:first-child {
+  width: 25%;
+  min-width: 25%;
+}
 
-      .schedule th:not(:first-child),
-      .slot-cell {
-        min-width: 170px;
-      }
+.schedule th:not(:first-child),
+.schedule td:not(:first-child),
+.slot-cell {
+  width: 25%;
+  min-width: 25%;
+}
 
       .schedule th {
         height: 78px;
