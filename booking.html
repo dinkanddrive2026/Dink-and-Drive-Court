@@ -810,8 +810,36 @@ transition: 0.2s;
 .view-qr-btn:hover {
   background: #5a189a;
 }
+      .schedule-wrapper {
+        margin-left: -5px;
+        margin-right: -5px;
+        border-radius: 12px;
+      }
 
-}
+      .schedule {
+        min-width: 1350px;
+      }
+
+      .schedule th:first-child,
+      .schedule td:first-child {
+        width: 145px;
+        min-width: 145px;
+      }
+
+      .schedule th:not(:first-child),
+      .slot-cell {
+        min-width: 170px;
+      }
+
+      .schedule th {
+        height: 78px;
+        padding: 6px;
+      }
+
+      .slot-cell {
+        height: 58px;
+      }
+    }
     
   </style>
 </head>
@@ -819,6 +847,8 @@ transition: 0.2s;
 <body>
 
  <img src="logo.png" alt="Dink & Drive Court Logo" class="site-logo"> 
+
+  
   
   <!-- =========================
        HEADER
