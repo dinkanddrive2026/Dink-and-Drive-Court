@@ -360,7 +360,13 @@
   background: #f0fdf4;
   transition: 0.2s;
 }
-
+    
+.slot-cell.checking {
+  background: #f8fafc;
+  color: var(--gray);
+  cursor: wait;
+}
+    
 /* Available */
 .slot-cell.available {
   cursor: pointer;
@@ -1344,8 +1350,8 @@ transition: 0.2s;
     ========================================== */
 
     let selectedSlots = [];
-
     let bookedByDate = {};
+    let availabilityReady = false;
 
 
     /* ==========================================
@@ -1415,7 +1421,7 @@ transition: 0.2s;
        LOAD SCHEDULE
     ========================================== */
 
-   async function loadSchedule() {
+  async function loadSchedule() {
 
   const header =
     document.getElementById("scheduleHeader");
@@ -1427,6 +1433,9 @@ transition: 0.2s;
   body.innerHTML = "";
 
   bookedByDate = {};
+
+  // Availability is not ready yet
+  availabilityReady = false;
 
   const dates = [];
 
@@ -1517,14 +1526,18 @@ transition: 0.2s;
         ${dateLabel}
       </div>
 
-      
-<div
-  class="available-count"
-  data-date="${formatDate(date)}"
-  style="font-size:11px; margin-top:4px; opacity:0.9;"
->
-  18 AVAILABLE
-</div>
+      <div
+        class="available-count"
+        data-date="${formatDate(date)}"
+        style="
+          font-size:11px;
+          margin-top:4px;
+          opacity:0.9;
+        "
+      >
+        CHECKING...
+      </div>
+
     `;
 
     header.appendChild(th);
@@ -1578,6 +1591,7 @@ transition: 0.2s;
 
     /* ==============================
        CREATE 7 DATE CELLS
+       START AS CHECKING
     ============================== */
 
     dates.forEach(date => {
@@ -1589,7 +1603,7 @@ transition: 0.2s;
         document.createElement("td");
 
       td.className =
-        "slot-cell available";
+        "slot-cell checking";
 
       td.dataset.date =
         dateString;
@@ -1598,16 +1612,16 @@ transition: 0.2s;
         time;
 
 
-      /* OPEN LABEL */
+      /* CHECKING LABEL */
 
       td.innerHTML = `
 
         <div style="
-          font-size:13px;
+          font-size:11px;
           font-weight:900;
           letter-spacing:0.5px;
         ">
-          OPEN
+          CHECKING...
         </div>
 
       `;
@@ -1641,16 +1655,25 @@ transition: 0.2s;
 
   /* ==============================
      LOAD BOOKED SLOTS
-     FOR ALL 7 DAYS
+     FOR ALL 7 DAYS AT THE SAME TIME
   ============================== */
 
-  for (const date of dates) {
+  await Promise.all(
 
-    await loadAvailability(
-      formatDate(date)
-    );
+    dates.map(date =>
+      loadAvailability(
+        formatDate(date)
+      )
+    )
 
-  }
+  );
+
+
+  /* ==============================
+     AVAILABILITY IS NOW READY
+  ============================== */
+
+  availabilityReady = true;
 
 }
 
@@ -1660,46 +1683,110 @@ transition: 0.2s;
 
     async function loadAvailability(date) {
 
-      try {
+  try {
 
-        const url =
-          SCRIPT_URL +
-          "?date=" +
-          encodeURIComponent(date) +
-          "&court=" +
-          encodeURIComponent(COURT);
-
-
-        const response =
-          await fetch(url);
+    const url =
+      SCRIPT_URL +
+      "?date=" +
+      encodeURIComponent(date) +
+      "&court=" +
+      encodeURIComponent(COURT) +
+      "&_=" +
+      Date.now();
 
 
-        const data =
-          await response.json();
-
-
-        if (
-          data.success &&
-          Array.isArray(data.bookedSlots)
-        ) {
-
-          bookedByDate[date] =
-            data.bookedSlots;
-
-          updateBookedSlots(date);
-
+    const response =
+      await fetch(
+        url,
+        {
+          cache: "no-store"
         }
+      );
 
-      } catch (error) {
 
-        console.error(
-          "Availability error:",
-          error
-        );
+    if (!response.ok) {
+      throw new Error(
+        "HTTP error: " + response.status
+      );
+    }
 
-      }
+
+    const data =
+      await response.json();
+
+
+    if (
+      data.success &&
+      Array.isArray(data.bookedSlots)
+    ) {
+
+      bookedByDate[date] =
+        data.bookedSlots;
+
+      updateBookedSlots(date);
+
+    } else {
+
+      throw new Error(
+        "Invalid availability response"
+      );
 
     }
+
+  } catch (error) {
+
+    console.error(
+      "Availability error:",
+      date,
+      error
+    );
+
+    // Keep the cells in CHECKING state
+    // instead of incorrectly showing them as OPEN.
+    const cells =
+      document.querySelectorAll(
+        `.slot-cell[data-date="${date}"]`
+      );
+
+    cells.forEach(cell => {
+
+      cell.classList.remove(
+        "available",
+        "booked"
+      );
+
+      cell.classList.add(
+        "checking"
+      );
+
+      cell.innerHTML = `
+        <div style="
+          font-size:11px;
+          font-weight:900;
+          letter-spacing:0.5px;
+        ">
+          CHECK AGAIN
+        </div>
+      `;
+
+    });
+
+
+    const countLabel =
+      document.querySelector(
+        `.available-count[data-date="${date}"]`
+      );
+
+    if (countLabel) {
+
+      countLabel.textContent =
+        "CHECK AGAIN";
+
+    }
+
+  }
+
+}
 
    /* ==========================================
    UPDATE BOOKED SLOTS
@@ -1723,10 +1810,13 @@ function updateBookedSlots(date) {
       cell.dataset.time;
 
 
+    // BOOKED
     if (bookedSlots.includes(time)) {
 
       cell.classList.remove(
-        "available"
+        "available",
+        "checking",
+        "selected"
       );
 
       cell.classList.add(
@@ -1743,10 +1833,36 @@ function updateBookedSlots(date) {
 
     }
 
+    // AVAILABLE
+    else {
+
+      cell.classList.remove(
+        "booked",
+        "checking"
+      );
+
+      cell.classList.add(
+        "available"
+      );
+
+      cell.innerHTML = `
+        <div style="
+          font-size:13px;
+          font-weight:900;
+          letter-spacing:0.5px;
+        ">
+          OPEN
+        </div>
+      `;
+
+    }
+
   });
 
 
-  /* UPDATE AVAILABLE SLOT COUNT */
+  /* ==============================
+     UPDATE AVAILABLE SLOT COUNT
+  ============================== */
 
   const availableCount =
     times.length - bookedSlots.length;
