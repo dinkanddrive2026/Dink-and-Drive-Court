@@ -1774,6 +1774,12 @@ function updateBookedSlots(date) {
 
    function selectSlot(date, time, cell) {
 
+  // Do not allow booking while availability is still being checked
+  if (!availabilityReady) {
+    alert("Please wait while we check the latest court availability.");
+    return;
+  }
+
   // Do not allow booked slots
   if (cell.classList.contains("booked")) {
     return;
@@ -1893,6 +1899,8 @@ function updateBookedSlots(date) {
   renderSelectedSlots();
   updateSummary();
 }
+
+
 function clearSelection() {
 
   document
