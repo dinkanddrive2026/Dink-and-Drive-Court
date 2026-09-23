@@ -1517,14 +1517,14 @@ transition: 0.2s;
         ${dateLabel}
       </div>
 
-      <div style="
-        font-size:11px;
-        margin-top:4px;
-        opacity:0.9;
-      ">
-        18 SLOTS
-      </div>
-
+      
+<div
+  class="available-count"
+  data-date="${formatDate(date)}"
+  style="font-size:11px; margin-top:4px; opacity:0.9;"
+>
+  18 AVAILABLE
+</div>
     `;
 
     header.appendChild(th);
@@ -1701,52 +1701,71 @@ transition: 0.2s;
 
     }
 
+   /* ==========================================
+   UPDATE BOOKED SLOTS
+========================================== */
 
-    /* ==========================================
-       UPDATE BOOKED SLOTS
-    ========================================== */
+function updateBookedSlots(date) {
 
-    function updateBookedSlots(date) {
-
-      const bookedSlots =
-        bookedByDate[date] || [];
-
-
-      const cells =
-        document.querySelectorAll(
-          `.slot-cell[data-date="${date}"]`
-        );
+  const bookedSlots =
+    bookedByDate[date] || [];
 
 
-      cells.forEach(cell => {
+  const cells =
+    document.querySelectorAll(
+      `.slot-cell[data-date="${date}"]`
+    );
 
-        const time =
-          cell.dataset.time;
+
+  cells.forEach(cell => {
+
+    const time =
+      cell.dataset.time;
 
 
-        if (bookedSlots.includes(time)) {
+    if (bookedSlots.includes(time)) {
 
-          cell.classList.remove(
-            "available"
-          );
+      cell.classList.remove(
+        "available"
+      );
 
-          cell.classList.add(
-            "booked"
-          );
+      cell.classList.add(
+        "booked"
+      );
 
-          cell.innerHTML = `
-            <div class="booked-label">
-              BOOKED
-            </div>
-          `;
+      cell.innerHTML = `
+        <div class="booked-label">
+          BOOKED
+        </div>
+      `;
 
-          cell.onclick = null;
-
-        }
-
-      });
+      cell.onclick = null;
 
     }
+
+  });
+
+
+  /* UPDATE AVAILABLE SLOT COUNT */
+
+  const availableCount =
+    times.length - bookedSlots.length;
+
+
+  const countLabel =
+    document.querySelector(
+      `.available-count[data-date="${date}"]`
+    );
+
+
+  if (countLabel) {
+
+    countLabel.textContent =
+      `${availableCount} AVAILABLE`;
+
+  }
+
+}
 
 
     /* ==========================================
