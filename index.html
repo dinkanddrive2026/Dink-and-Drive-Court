@@ -146,10 +146,6 @@
 
             background-size: cover;
 
-            /*
-               Keeps the same wide view style.
-               Adjust only if your actual photo needs it.
-            */
             background-position: center center;
 
             background-repeat: no-repeat;
@@ -482,11 +478,41 @@
             color: var(--dark-green);
 
             border: 1px solid #edf0ef;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            transition: 0.2s;
+
+            appearance: none;
+
+            -webkit-appearance: none;
+
+            width: 100%;
         }
 
-        .date-card.today {
+        .date-card:hover {
+            border-color: var(--green);
+            transform: translateY(-1px);
+        }
+
+        .date-card.selected {
             background: var(--green);
             color: white;
+            border-color: var(--green);
+
+            box-shadow:
+                0 5px 14px rgba(23,107,103,0.20);
+        }
+
+        .date-card.is-today:not(.selected) {
+            border: 2px solid var(--green);
+            color: var(--green);
+        }
+
+        .date-card.is-today:not(.selected) .date-day {
+            color: var(--green);
         }
 
         .date-day {
@@ -537,6 +563,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+            flex-direction: column;
 
             padding: 9px 5px;
 
@@ -2079,7 +2107,6 @@
     </footer>
 
 
-
     <!-- =========================
          LIVE AVAILABILITY SCRIPT
     ========================== -->
@@ -2128,8 +2155,31 @@
 
 
         /* =========================
+           SELECTED DATE
+        ========================= */
+
+        let selectedDate = null;
+
+
+        /* =========================
            DATE HELPERS
         ========================= */
+
+        function getToday() {
+
+            const today = new Date();
+
+            today.setHours(
+                0,
+                0,
+                0,
+                0
+            );
+
+            return today;
+
+        }
+
 
         function formatDate(date) {
 
@@ -2137,14 +2187,17 @@
                 date.getFullYear();
 
             const month =
-                String(date.getMonth() + 1)
-                    .padStart(2, "0");
+                String(
+                    date.getMonth() + 1
+                ).padStart(2, "0");
 
             const day =
-                String(date.getDate())
-                    .padStart(2, "0");
+                String(
+                    date.getDate()
+                ).padStart(2, "0");
 
             return `${year}-${month}-${day}`;
+
         }
 
 
@@ -2174,23 +2227,21 @@
 
 
         /* =========================
-           CREATE DATE CARDS
+           CREATE 7 DATE CARDS
         ========================= */
 
         function createDateCards() {
 
             const dateRow =
-                document.getElementById("dateRow");
+                document.getElementById(
+                    "dateRow"
+                );
 
             dateRow.innerHTML = "";
 
 
             const today =
-                new Date();
-
-            today.setHours(
-                0, 0, 0, 0
-            );
+                getToday();
 
 
             for (
@@ -2207,17 +2258,35 @@
                 );
 
 
+                const dateString =
+                    formatDate(date);
+
+
                 const card =
-                    document.createElement("div");
+                    document.createElement(
+                        "button"
+                    );
+
+
+                card.type = "button";
 
                 card.className =
                     "date-card";
 
 
+                card.dataset.date =
+                    dateString;
+
+
+                /*
+                   Mark today's date separately.
+                   This does NOT mean it is selected.
+                */
+
                 if (i === 0) {
 
                     card.classList.add(
-                        "today"
+                        "is-today"
                     );
 
                 }
@@ -2239,7 +2308,21 @@
                 `;
 
 
-                dateRow.appendChild(card);
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        selectDate(
+                            dateString
+                        );
+
+                    }
+                );
+
+
+                dateRow.appendChild(
+                    card
+                );
 
             }
 
@@ -2247,7 +2330,7 @@
 
 
         /* =========================
-           CREATE SLOT GRID
+           CREATE ONLY 18 SLOTS
         ========================= */
 
         function createScheduleGrid() {
@@ -2260,66 +2343,145 @@
             grid.innerHTML = "";
 
 
-            for (
-                let day = 0;
-                day < 7;
-                day++
-            ) {
+            timeSlots.forEach(
+                time => {
 
-                const date =
-                    new Date();
-
-                date.setHours(
-                    0, 0, 0, 0
-                );
-
-                date.setDate(
-                    date.getDate() + day
-                );
-
-
-                const dateString =
-                    formatDate(date);
-
-
-                timeSlots.forEach(
-                    time => {
-
-                        const cell =
-                            document.createElement(
-                                "div"
-                            );
-
-                        cell.className =
-                            "slot-cell checking";
-
-
-                        cell.dataset.date =
-                            dateString;
-
-                        cell.dataset.time =
-                            time;
-
-
-                        cell.innerHTML = `
-                            Checking...
-                        `;
-
-
-                        grid.appendChild(
-                            cell
+                    const cell =
+                        document.createElement(
+                            "div"
                         );
 
-                    }
+
+                    cell.className =
+                        "slot-cell checking";
+
+
+                    cell.dataset.time =
+                        time;
+
+
+                    cell.innerHTML = `
+                        Checking...
+                    `;
+
+
+                    grid.appendChild(
+                        cell
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           SELECT DATE
+        ========================= */
+
+        function selectDate(date) {
+
+            selectedDate =
+                date;
+
+
+            /*
+               Remove selected state
+               from all dates.
+            */
+
+            const dateCards =
+                document.querySelectorAll(
+                    ".date-card"
+                );
+
+
+            dateCards.forEach(
+                card => {
+
+                    card.classList.remove(
+                        "selected"
+                    );
+
+                }
+            );
+
+
+            /*
+               Add selected state
+               to clicked date.
+            */
+
+            const selectedCard =
+                document.querySelector(
+                    `.date-card[data-date="${date}"]`
+                );
+
+
+            if (selectedCard) {
+
+                selectedCard.classList.add(
+                    "selected"
                 );
 
             }
+
+
+            /*
+               Show checking state
+               while loading.
+            */
+
+            showCheckingState();
+
+
+            /*
+               Load only the selected date.
+            */
+
+            loadAvailability(
+                date
+            );
+
+        }
+
+
+        /* =========================
+           CHECKING STATE
+        ========================= */
+
+        function showCheckingState() {
+
+            const cells =
+                document.querySelectorAll(
+                    ".slot-cell"
+                );
+
+
+            cells.forEach(
+                cell => {
+
+                    cell.classList.remove(
+                        "available",
+                        "booked"
+                    );
+
+                    cell.classList.add(
+                        "checking"
+                    );
+
+                    cell.innerHTML =
+                        "Checking...";
+
+                }
+            );
 
         }
 
 
         /* =========================
            LOAD AVAILABILITY
+           ONLY FOR SELECTED DATE
         ========================= */
 
         async function loadAvailability(
@@ -2342,9 +2504,11 @@
 
 
                 if (!response.ok) {
+
                     throw new Error(
                         "Network response failed"
                     );
+
                 }
 
 
@@ -2356,8 +2520,21 @@
                     data.bookedSlots || [];
 
 
-                updateDateSlots(
-                    date,
+                /*
+                   Prevent an older request from
+                   changing the newly selected date.
+                */
+
+                if (
+                    date !== selectedDate
+                ) {
+
+                    return;
+
+                }
+
+
+                updateScheduleSlots(
                     bookedSlots
                 );
 
@@ -2370,9 +2547,23 @@
                 );
 
 
+                /*
+                   Only show error if this is
+                   still the selected date.
+                */
+
+                if (
+                    date !== selectedDate
+                ) {
+
+                    return;
+
+                }
+
+
                 const cells =
                     document.querySelectorAll(
-                        `.slot-cell[data-date="${date}"]`
+                        ".slot-cell"
                     );
 
 
@@ -2380,7 +2571,8 @@
                     cell => {
 
                         cell.classList.remove(
-                            "checking"
+                            "available",
+                            "booked"
                         );
 
                         cell.classList.add(
@@ -2399,17 +2591,16 @@
 
 
         /* =========================
-           UPDATE DATE SLOTS
+           UPDATE 18 SLOTS
         ========================= */
 
-        function updateDateSlots(
-            date,
+        function updateScheduleSlots(
             bookedSlots
         ) {
 
             const cells =
                 document.querySelectorAll(
-                    `.slot-cell[data-date="${date}"]`
+                    ".slot-cell"
                 );
 
 
@@ -2470,55 +2661,44 @@
 
 
         /* =========================
-           LOAD ALL 7 DAYS
+           LOAD HOMEPAGE SCHEDULE
         ========================= */
 
-        async function loadSchedule() {
+        function loadSchedule() {
+
+            /*
+               Create the 7 dates.
+            */
 
             createDateCards();
+
+
+            /*
+               Create only 18 time slots.
+            */
 
             createScheduleGrid();
 
 
+            /*
+               Automatically select TODAY.
+            */
+
             const today =
-                new Date();
-
-            today.setHours(
-                0, 0, 0, 0
-            );
+                getToday();
 
 
-            const dates = [];
+            selectedDate =
+                formatDate(today);
 
 
-            for (
-                let i = 0;
-                i < 7;
-                i++
-            ) {
+            /*
+               Apply selected state
+               and load today's availability.
+            */
 
-                const date =
-                    new Date(today);
-
-                date.setDate(
-                    today.getDate() + i
-                );
-
-
-                dates.push(
-                    formatDate(date)
-                );
-
-            }
-
-
-            await Promise.all(
-                dates.map(
-                    date =>
-                        loadAvailability(
-                            date
-                        )
-                )
+            selectDate(
+                selectedDate
             );
 
         }
