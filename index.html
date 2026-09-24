@@ -8,7 +8,7 @@
 
     <meta
         name="description"
-        content="Dink & Drive Court - Pickleball court in Brgy. Sto. Niño, Balamban, Cebu."
+        content="Dink & Drive Court - Pickleball court in Brgy. Sta. Cruz Breeding, Balamban, Cebu."
     >
 
     <style>
@@ -97,18 +97,23 @@
             font-weight: 700;
             font-size: 16px;
             transition: 0.3s;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: var(--orange);
         }
 
-        .nav-book {
-            color: var(--orange) !important;
-            position: relative;
+        /*
+           ACTIVE PAGE
+           Only the current page/section is orange.
+        */
+
+        .nav-links a.active {
+            color: var(--orange);
         }
 
-        .nav-book::after {
+        .nav-links a.active::after {
             content: "";
             position: absolute;
             left: 0;
@@ -1089,7 +1094,7 @@
                 font-size: 13px;
             }
 
-            .nav-book::after {
+            .nav-links a.active::after {
                 bottom: -5px;
             }
 
@@ -1283,11 +1288,13 @@
         <ul class="nav-links">
 
             <li>
-                <a href="#home">Home</a>
+                <a href="#home" class="active">
+                    Home
+                </a>
             </li>
 
             <li>
-                <a href="booking.html" class="nav-book">
+                <a href="booking.html">
                     Book a Court
                 </a>
             </li>
@@ -1484,12 +1491,12 @@
                 <div class="schedule-side">
 
                     <h3>
-                        🏓 Select a date and time
+                        🏓 Check a date and time
                     </h3>
 
                     <p>
-                        Check the live schedule, then continue
-                        to the booking page to reserve your slot.
+                        Choose a date above to view its live availability.
+                        Continue to the booking page to reserve your slot.
                     </p>
 
                     <ul class="why-list">
