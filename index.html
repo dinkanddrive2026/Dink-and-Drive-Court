@@ -8,32 +8,14 @@
 
     <meta
         name="description"
-        content="Dink & Drive Court - Pickleball court in Brgy. Sta. Cruz Breeding, Balamban, Cebu."
+        content="Dink & Drive Court - Pickleball court in Brgy. Sto. Niño, Balamban, Cebu."
     >
 
     <style>
-        :root {
-            --green: #075b4f;
-            --green-dark: #06483f;
-            --green-deep: #043d36;
-            --green-light: #e8f8ef;
-            --green-soft: #f1fbf5;
 
-            --orange: #f97316;
-            --orange-dark: #ea580c;
-            --orange-light: #fff0e4;
-
-            --red: #ef4444;
-            --red-light: #fee2e2;
-
-            --cream: #fffaf0;
-            --white: #ffffff;
-
-            --text: #174f4a;
-            --muted: #66817c;
-
-            --shadow: 0 15px 40px rgba(0, 70, 55, 0.12);
-        }
+        /* =========================
+           RESET
+        ========================= */
 
         * {
             margin: 0;
@@ -47,95 +29,100 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            color: var(--text);
-            background: var(--cream);
+            color: #174f4a;
+            background: #fffaf0;
             line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
+        :root {
+            --orange: #f97316;
+            --orange-dark: #ea580c;
+            --green: #176b67;
+            --dark-green: #104c49;
+            --deep-green: #075e4d;
+            --cream: #fff8ea;
+            --white: #ffffff;
+            --light-green: #eaf5f2;
+            --available: #16a34a;
+            --available-light: #dcfce7;
+            --booked: #dc2626;
+            --booked-light: #fee2e2;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
         }
 
 
-        /* =====================================================
-           HEADER
-        ===================================================== */
+        /* =========================
+           NAVIGATION
+        ========================= */
 
-        header {
+        nav {
             position: sticky;
             top: 0;
             z-index: 1000;
 
-            min-height: 100px;
-
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
 
-            padding: 10px 6%;
+            padding: 12px 5%;
 
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.96);
 
             box-shadow:
-                0 3px 18px rgba(0, 0, 0, 0.08);
+                0 3px 18px rgba(0, 0, 0, 0.10);
+
+            backdrop-filter: blur(10px);
         }
 
-        .header-logo {
-            width: 350px;
-            max-width: 42vw;
-            height: 80px;
-
+        .nav-logo {
+            display: block;
+            width: 360px;
+            max-width: 45vw;
+            height: 70px;
             object-fit: contain;
             object-position: left center;
-
-            display: block;
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 36px;
-
+            gap: 30px;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--green);
+            text-decoration: none;
+            color: var(--dark-green);
+            font-weight: 700;
             font-size: 16px;
-            font-weight: 800;
-
-            position: relative;
-
-            transition: 0.25s ease;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
             color: var(--orange);
         }
 
-        .nav-links .book-link {
-            color: var(--orange);
+        .nav-book {
+            color: var(--orange) !important;
+            position: relative;
         }
 
-        .nav-links .book-link::after {
+        .nav-book::after {
             content: "";
-
             position: absolute;
-
             left: 0;
             right: 0;
-            bottom: -12px;
-
+            bottom: -8px;
             height: 3px;
-
             background: var(--orange);
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
 
-        /* =====================================================
+        /* =========================
            HERO
-        ===================================================== */
+        ========================= */
 
         .hero {
             position: relative;
@@ -145,403 +132,361 @@
             display: flex;
             align-items: center;
 
-            padding: 70px 6% 145px;
-
-            overflow: hidden;
+            padding: 80px 5% 150px;
 
             background-image:
                 linear-gradient(
                     90deg,
-                    rgba(2, 48, 40, 0.84) 0%,
-                    rgba(2, 48, 40, 0.67) 28%,
-                    rgba(2, 48, 40, 0.30) 52%,
-                    rgba(2, 48, 40, 0.03) 82%
+                    rgba(0, 35, 28, 0.82) 0%,
+                    rgba(0, 35, 28, 0.63) 32%,
+                    rgba(0, 35, 28, 0.20) 65%,
+                    rgba(0, 35, 28, 0.08) 100%
                 ),
                 url("court-bg.jpg");
 
             background-size: cover;
 
             /*
-                This keeps the court view natural and avoids
-                excessive zooming.
+               Keeps the same wide view style.
+               Adjust only if your actual photo needs it.
             */
             background-position: center center;
 
             background-repeat: no-repeat;
+
+            color: white;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
 
+        .hero-left {
             max-width: 620px;
-
-            color: var(--white);
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-
-            padding: 8px 18px;
+            gap: 9px;
 
             margin-bottom: 20px;
+
+            padding: 9px 20px;
 
             border-radius: 30px;
 
             background: var(--orange);
+            color: white;
 
-            color: var(--white);
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.4px;
 
-            font-size: 16px;
-            font-weight: 900;
+            box-shadow:
+                0 7px 20px rgba(249, 115, 22, 0.30);
         }
 
         .hero h1 {
-            font-size: clamp(60px, 7vw, 94px);
+            font-size: clamp(58px, 8vw, 100px);
+            line-height: 0.88;
 
-            line-height: 0.9;
+            color: white;
 
-            font-weight: 900;
+            margin-bottom: 28px;
 
             letter-spacing: -2px;
 
-            margin-bottom: 25px;
+            font-weight: 900;
         }
 
-        .hero h1 span {
+        .hero h1 .script {
             display: block;
 
-            color: #a8f3cf;
+            color: #b8f7df;
 
-            font-family:
-                "Brush Script MT",
-                "Segoe Script",
-                cursive;
+            font-size: 0.95em;
 
-            font-size: 1.15em;
+            font-style: italic;
 
-            font-weight: 700;
+            margin-top: 5px;
 
-            letter-spacing: 0;
+            letter-spacing: -3px;
         }
 
-        .hero-subtitle {
-            font-size: 27px;
+        .orange-brush {
+            width: 230px;
+            height: 11px;
 
+            margin-top: -12px;
+            margin-bottom: 22px;
+
+            background: var(--orange);
+
+            border-radius: 50%;
+
+            transform: rotate(-3deg);
+        }
+
+        .hero-tagline {
+            font-size: 26px;
             font-weight: 800;
-
             margin-bottom: 5px;
         }
 
         .hero-description {
-            max-width: 520px;
-
             font-size: 18px;
-
-            line-height: 1.6;
+            line-height: 1.55;
+            max-width: 500px;
+            color: rgba(255,255,255,0.94);
 
             margin-bottom: 25px;
         }
 
 
-        /* =====================================================
+        /* =========================
+           RATE MINI CARDS
+        ========================= */
+
+        .hero-rates {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .hero-rate {
+            min-width: 225px;
+
+            padding: 16px 22px;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            background: rgba(255,255,255,0.97);
+
+            color: var(--dark-green);
+
+            border-radius: 17px;
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,0.16);
+        }
+
+        .rate-icon {
+            font-size: 38px;
+            line-height: 1;
+        }
+
+        .hero-rate h3 {
+            color: var(--orange);
+            font-size: 17px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-rate-price {
+            font-size: 29px;
+            font-weight: 900;
+            color: var(--green);
+        }
+
+        .hero-rate-price span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        /* =========================
            BUTTONS
-        ===================================================== */
+        ========================= */
 
         .btn {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             gap: 8px;
 
-            padding: 15px 25px;
+            padding: 15px 28px;
 
-            border-radius: 14px;
+            border-radius: 12px;
 
-            font-weight: 900;
+            text-decoration: none;
+
+            font-weight: 800;
+
+            transition: 0.3s;
 
             border: none;
 
             cursor: pointer;
-
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease,
-                box-shadow 0.25s ease;
         }
 
-        .btn-orange {
+        .btn-primary {
             background: var(--orange);
-
-            color: var(--white);
+            color: white;
 
             box-shadow:
                 0 8px 20px rgba(249, 115, 22, 0.30);
         }
 
-        .btn-orange:hover {
+        .btn-primary:hover {
             background: var(--orange-dark);
-
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 12px 25px rgba(234, 88, 12, 0.35);
+            transform: translateY(-2px);
         }
 
-        .btn-white {
-            background: var(--white);
-
-            color: var(--green);
+        .btn-secondary {
+            background: var(--green);
+            color: white;
         }
 
-        .btn-white:hover {
-            background: var(--green-light);
-
-            transform: translateY(-3px);
+        .btn-secondary:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
         }
 
-
-        /* =====================================================
-           RATE CARDS
-        ===================================================== */
-
-        .rate-wrapper {
-            position: relative;
-
-            z-index: 20;
-
-            display: flex;
-
-            gap: 18px;
-
-            margin: -75px 6% 0;
-
-            max-width: 600px;
+        .book-now-home {
+            animation: bookNowPulse 2s infinite;
         }
 
-        .rate-card {
-            flex: 1;
+        @keyframes bookNowPulse {
 
-            min-width: 220px;
+            0%, 100% {
+                box-shadow:
+                    0 8px 20px rgba(249, 115, 22, 0.30);
+            }
 
-            padding: 20px 22px;
-
-            background: var(--white);
-
-            border-radius: 18px;
-
-            box-shadow: var(--shadow);
-
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-
-        .rate-title {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            color: var(--orange);
-
-            font-size: 18px;
-
-            font-weight: 900;
-
-            margin-bottom: 3px;
-        }
-
-        .rate-icon {
-            font-size: 29px;
-        }
-
-        .rate-price {
-            color: var(--green);
-
-            font-size: 32px;
-
-            font-weight: 900;
-        }
-
-        .rate-price span {
-            color: var(--text);
-
-            font-size: 15px;
-
-            font-weight: 600;
+            50% {
+                box-shadow:
+                    0 8px 30px rgba(249, 115, 22, 0.62);
+            }
         }
 
 
-        /* =====================================================
-           SCHEDULE SECTION
-        ===================================================== */
+        /* =========================
+           LIVE SCHEDULE
+        ========================= */
 
         .schedule-section {
-            padding: 55px 5% 70px;
+            position: relative;
 
-            background:
-                radial-gradient(
-                    circle at 5% 50%,
-                    rgba(220, 248, 232, 0.65),
-                    transparent 30%
-                ),
-                var(--cream);
+            margin-top: -90px;
+
+            z-index: 10;
+
+            padding: 0 5% 70px;
         }
 
         .schedule-card {
             max-width: 1200px;
+            margin: auto;
 
-            margin: 0 auto;
-
-            display: grid;
-
-            grid-template-columns: minmax(0, 1fr) 275px;
-
-            gap: 25px;
-
-            padding: 28px;
-
-            background: var(--white);
+            background: rgba(255,255,255,0.98);
 
             border-radius: 25px;
 
-            box-shadow: var(--shadow);
+            padding: 32px;
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.13);
         }
 
-        .schedule-main {
-            min-width: 0;
-        }
-
-        .schedule-header {
+        .schedule-top {
             display: flex;
-
-            align-items: center;
-
             justify-content: space-between;
-
-            gap: 20px;
-
-            margin-bottom: 18px;
-        }
-
-        .schedule-title-row {
-            display: flex;
-
             align-items: center;
 
-            gap: 12px;
+            gap: 25px;
+
+            margin-bottom: 22px;
+        }
+
+        .schedule-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
         .schedule-title-icon {
-            font-size: 34px;
+            font-size: 37px;
         }
 
-        .schedule-header h2 {
-            color: var(--green);
-
-            font-size: 29px;
-
-            line-height: 1.2;
+        .schedule-title h2 {
+            color: var(--dark-green);
+            font-size: 30px;
+            margin-bottom: 2px;
         }
 
-        .schedule-header p {
-            color: var(--muted);
-
+        .schedule-title p {
+            color: #71847f;
             font-size: 14px;
         }
 
-        .legend {
+        .schedule-legend {
             display: flex;
-
             align-items: center;
-
+            gap: 18px;
             flex-wrap: wrap;
-
-            justify-content: flex-end;
-
-            gap: 12px;
-
-            font-size: 13px;
-
-            color: var(--text);
         }
 
         .legend-item {
             display: flex;
-
             align-items: center;
+            gap: 7px;
 
-            gap: 5px;
+            font-size: 14px;
+            color: #526c67;
         }
 
         .legend-dot {
             width: 11px;
             height: 11px;
-
             border-radius: 50%;
-
-            display: inline-block;
         }
 
         .legend-available {
-            background: #16a34a;
-        }
-
-        .legend-selected {
-            background: var(--orange);
+            background: var(--available);
         }
 
         .legend-booked {
-            background: var(--red);
+            background: var(--booked);
         }
 
 
-        /* =====================================================
-           DATE BUTTONS
-        ===================================================== */
+        /* =========================
+           DATE DISPLAY
+        ========================= */
 
-        .date-list {
+        .date-row {
             display: grid;
 
             grid-template-columns:
                 repeat(7, minmax(0, 1fr));
 
-            gap: 6px;
+            gap: 8px;
 
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
-        .date-btn {
-            border: none;
+        .date-card {
+            padding: 12px 7px;
 
-            background: #f7f8f8;
+            text-align: center;
 
-            color: var(--text);
+            border-radius: 12px;
 
-            border-radius: 11px;
+            background: #f5f7f6;
 
-            padding: 10px 4px;
+            color: var(--dark-green);
 
-            cursor: pointer;
-
-            transition: 0.2s ease;
+            border: 1px solid #edf0ef;
         }
 
-        .date-btn:hover {
-            background: var(--green-light);
-        }
-
-        .date-btn.active {
+        .date-card.today {
             background: var(--green);
-
-            color: var(--white);
-
-            box-shadow:
-                0 5px 12px rgba(7, 91, 79, 0.20);
+            color: white;
         }
 
         .date-day {
@@ -552,519 +497,407 @@
             font-weight: 800;
 
             text-transform: uppercase;
+
+            opacity: 0.85;
         }
 
         .date-number {
             display: block;
 
-            font-size: 15px;
+            font-size: 17px;
 
-            margin-top: 2px;
-        }
-
-        .date-today {
-            font-size: 10px;
-
-            font-weight: 900;
-
-            text-transform: uppercase;
-
-            color: var(--orange);
-        }
-
-        .date-btn.active .date-today {
-            color: #b9f5d4;
+            font-weight: 800;
         }
 
 
-        /* =====================================================
-           SLOT GRID
-        ===================================================== */
+        /* =========================
+           SCHEDULE BODY
+        ========================= */
 
-        .slot-grid {
+        .schedule-layout {
+            display: grid;
+
+            grid-template-columns: 1fr 285px;
+
+            gap: 24px;
+        }
+
+        .schedule-grid {
             display: grid;
 
             grid-template-columns:
                 repeat(4, minmax(0, 1fr));
 
-            gap: 8px;
+            gap: 9px;
         }
 
         .slot-cell {
-            min-height: 44px;
+            min-height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             padding: 9px 5px;
 
-            border: none;
-
-            border-radius: 10px;
-
-            background: var(--green-light);
-
-            color: var(--green);
+            border-radius: 11px;
 
             font-size: 12px;
 
             font-weight: 700;
 
-            cursor: pointer;
+            text-align: center;
 
-            transition: 0.18s ease;
-        }
-
-        .slot-cell:hover {
-            transform: translateY(-1px);
-
-            box-shadow:
-                0 4px 10px rgba(0, 70, 55, 0.08);
+            transition: 0.2s;
         }
 
         .slot-cell.available {
-            background: #e2f8ea;
-
-            color: #075b4f;
-        }
-
-        .slot-cell.selected {
-            background: var(--orange);
-
-            color: var(--white);
-
-            box-shadow:
-                0 5px 13px rgba(249, 115, 22, 0.28);
+            background: var(--available-light);
+            color: #065f46;
         }
 
         .slot-cell.booked {
-            background: var(--red-light);
-
-            color: var(--red);
-
-            cursor: not-allowed;
-
-            text-decoration: line-through;
+            background: var(--booked-light);
+            color: #991b1b;
         }
 
         .slot-cell.checking {
-            background: #f1f3f3;
-
-            color: #9aa8a5;
-
-            cursor: wait;
+            background: #f3f4f6;
+            color: #9ca3af;
         }
 
-        .slot-cell.error {
-            background: #fff3e8;
-
-            color: var(--orange-dark);
-
-            cursor: pointer;
-        }
-
-        .schedule-status {
-            min-height: 25px;
-
-            margin-top: 12px;
-
-            color: var(--muted);
-
-            font-size: 13px;
-
-            text-align: center;
-        }
-
-
-        /* =====================================================
-           RIGHT SIDE BOOKING PANEL
-        ===================================================== */
-
-        .booking-panel {
-            padding: 20px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #edfff3,
-                    #ffffff
-                );
-
-            border-radius: 18px;
-
-            border: 1px solid #e1f2e7;
-        }
-
-        .booking-panel-top {
-            padding: 18px;
-
-            background: #e5f9eb;
-
-            border-radius: 16px;
-
-            margin-bottom: 18px;
-        }
-
-        .booking-panel-top h3 {
-            color: var(--green);
-
-            font-size: 17px;
-
-            margin-bottom: 8px;
-        }
-
-        .booking-panel-top p {
-            color: #52736f;
-
-            font-size: 13px;
-        }
-
-        .selected-info {
-            display: none;
-
-            margin-top: 12px;
-
-            padding: 10px;
-
-            border-radius: 10px;
-
-            background: var(--white);
-
-            color: var(--green);
-
-            font-size: 12px;
-
+        .slot-status {
+            display: block;
+            font-size: 10px;
+            margin-top: 2px;
             font-weight: 800;
         }
 
-        .selected-info.show {
-            display: block;
+
+        /* =========================
+           SCHEDULE SIDE INFO
+        ========================= */
+
+        .schedule-side {
+            background: linear-gradient(
+                145deg,
+                #f0fdf4,
+                #ffffff
+            );
+
+            border-radius: 18px;
+
+            padding: 23px;
+
+            border: 1px solid #e1f0e8;
         }
 
-        .why-book {
-            padding-top: 5px;
-        }
-
-        .why-book h3 {
-            color: var(--green);
-
-            font-size: 19px;
-
+        .schedule-side h3 {
+            color: var(--dark-green);
+            font-size: 18px;
             margin-bottom: 12px;
         }
 
-        .benefit {
-            display: flex;
+        .schedule-side p {
+            font-size: 14px;
+            color: #526c67;
+            margin-bottom: 15px;
+        }
 
-            align-items: center;
+        .why-list {
+            list-style: none;
+            margin-bottom: 22px;
+        }
 
-            gap: 9px;
+        .why-list li {
+            margin-bottom: 9px;
 
-            margin-bottom: 10px;
-
-            color: #365f59;
+            color: #45635e;
 
             font-size: 13px;
         }
 
-        .benefit-check {
+        .why-list li::before {
+            content: "✓";
+
             display: inline-flex;
 
             align-items: center;
-
             justify-content: center;
 
             width: 18px;
             height: 18px;
 
+            margin-right: 7px;
+
             border-radius: 50%;
 
             background: var(--green);
-
-            color: var(--white);
+            color: white;
 
             font-size: 11px;
-
-            flex-shrink: 0;
+            font-weight: 900;
         }
 
-        .panel-divider {
-            height: 1px;
-
-            background: #dcebe2;
-
-            margin: 15px 0;
-        }
-
-        .book-panel-btn {
+        .schedule-side .btn {
             width: 100%;
+        }
 
-            margin-top: 13px;
+        .schedule-note {
+            margin-top: 15px;
 
-            font-size: 15px;
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #80908d;
         }
 
 
-        /* =====================================================
+        /* =========================
            LOCATION BANNER
-        ===================================================== */
-
-        .location-section {
-            padding: 0 5% 60px;
-
-            background: var(--cream);
-        }
+        ========================= */
 
         .location-banner {
-            max-width: 1150px;
+            padding: 0 5% 65px;
+        }
 
-            margin: 0 auto;
+        .location-banner-inner {
+            max-width: 1200px;
+            margin: auto;
 
-            padding: 22px 30px;
+            min-height: 105px;
 
-            display: flex;
+            padding: 20px 40px;
 
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 25px;
-
-            border-radius: 20px;
-
-            color: var(--white);
+            border-radius: 22px;
 
             background:
                 linear-gradient(
                     110deg,
-                    #075b4f,
-                    #158b4f
+                    #075e4d,
+                    #159447
                 );
 
-            overflow: hidden;
-        }
+            color: white;
 
-        .location-info {
             display: flex;
-
             align-items: center;
+            gap: 20px;
 
-            gap: 18px;
+            box-shadow:
+                0 12px 30px rgba(7,94,77,0.18);
         }
 
         .location-icon {
-            width: 55px;
-            height: 55px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background: rgba(255, 255, 255, 0.15);
-
-            font-size: 30px;
+            font-size: 43px;
         }
 
-        .location-info h2 {
-            font-size: 22px;
-
+        .location-banner h3 {
+            font-size: 21px;
             margin-bottom: 2px;
         }
 
-        .location-info p {
-            font-size: 14px;
-
-            opacity: 0.95;
+        .location-banner p {
+            font-size: 15px;
+            opacity: 0.93;
         }
 
 
-        /* =====================================================
-           FEATURES
-        ===================================================== */
+        /* =========================
+           BENEFITS
+        ========================= */
 
-        .features-section {
-            padding: 35px 5% 60px;
-
-            background: var(--white);
-        }
-
-        .features-grid {
-            max-width: 1050px;
+        .benefits {
+            max-width: 1200px;
 
             margin: auto;
+
+            padding: 10px 5% 75px;
 
             display: grid;
 
             grid-template-columns:
                 repeat(4, 1fr);
+
+            gap: 0;
         }
 
-        .feature {
+        .benefit {
             text-align: center;
 
-            padding: 10px 25px;
+            padding: 15px 25px;
 
-            border-right: 1px solid #dce6e2;
+            border-right: 1px solid #d9dfdc;
         }
 
-        .feature:last-child {
+        .benefit:last-child {
             border-right: none;
         }
 
-        .feature-icon {
+        .benefit-icon {
             font-size: 34px;
-
-            margin-bottom: 5px;
+            margin-bottom: 7px;
         }
 
-        .feature h3 {
-            color: var(--green);
-
+        .benefit h3 {
+            color: var(--dark-green);
             font-size: 17px;
+            margin-bottom: 2px;
         }
 
-        .feature p {
-            color: var(--muted);
-
+        .benefit p {
+            color: #67817b;
             font-size: 13px;
         }
 
 
-        /* =====================================================
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        section.standard-section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #63807c;
+        }
+
+
+        /* =========================
            ABOUT
-        ===================================================== */
+        ========================= */
 
-        .about-section {
-            padding: 70px 7%;
+        .about {
+            background: var(--light-green);
+        }
 
-            background: var(--green-soft);
-
+        .about-content {
+            max-width: 850px;
+            margin: auto;
             text-align: center;
         }
 
-        .about-inner {
-            max-width: 800px;
-
-            margin: auto;
-        }
-
-        .about-inner h2 {
+        .about-content h2 {
             color: var(--green);
-
-            font-size: 38px;
-
-            margin-bottom: 15px;
+            font-size: 40px;
+            margin-bottom: 20px;
         }
 
-        .about-inner h2 span {
+        .about-content h2 span {
             color: var(--orange);
         }
 
-        .about-inner p {
+        .about-content p {
+            font-size: 18px;
             color: #52736f;
-
-            font-size: 17px;
-
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
 
-        /* =====================================================
-           RULES
-        ===================================================== */
+        /* =========================
+           COURT RULES
+        ========================= */
 
-        .rules-section {
-            padding: 70px 6%;
-
-            background: var(--cream);
-        }
-
-        .section-heading {
-            text-align: center;
-
-            margin-bottom: 35px;
-        }
-
-        .section-heading h2 {
-            color: var(--green);
-
-            font-size: 38px;
-
-            margin-bottom: 7px;
-        }
-
-        .section-heading p {
-            color: var(--muted);
+        .rules {
+            background: white;
         }
 
         .rules-container {
             max-width: 1000px;
-
             margin: auto;
         }
 
-        .rules-grid {
+        .rules-list {
             display: grid;
 
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap: 14px;
+            gap: 15px;
         }
 
         .rule-card {
-            padding: 17px 20px;
+            padding: 20px 22px;
 
-            background: var(--white);
+            background: var(--cream);
+
+            border: 1px solid #f0dfc8;
 
             border-radius: 13px;
-
-            border-left: 4px solid var(--orange);
-
-            box-shadow:
-                0 5px 15px rgba(0, 70, 55, 0.05);
         }
 
         .rule-card h3 {
             color: var(--green);
-
-            font-size: 16px;
-
-            margin-bottom: 4px;
+            font-size: 17px;
+            margin-bottom: 6px;
         }
 
         .rule-card p {
             color: #52736f;
-
             font-size: 14px;
-
-            line-height: 1.5;
         }
 
-        .rules-thanks {
-            margin-top: 25px;
 
+        /* =========================
+           LOCATION
+        ========================= */
+
+        .location {
+            background: var(--light-green);
             text-align: center;
+        }
 
-            color: var(--muted);
+        .location-box {
+            max-width: 750px;
+            margin: auto;
 
-            font-size: 14px;
+            padding: 35px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            border: 1px solid #dcece7;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .location-box h3 {
+            color: var(--green);
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .location-box p {
+            margin-bottom: 25px;
+            color: #5d7773;
         }
 
 
-        /* =====================================================
+        /* =========================
            CONTACT
-        ===================================================== */
+        ========================= */
 
-        .contact-section {
-            padding: 70px 6%;
-
-            background: var(--white);
+        .contact {
+            background: var(--cream);
         }
 
-        .contact-grid {
+        .contact-container {
             max-width: 1050px;
-
             margin: auto;
 
             display: grid;
@@ -1076,50 +909,59 @@
         }
 
         .contact-card {
-            padding: 22px 15px;
+            background: white;
+
+            padding: 25px 15px;
 
             text-align: center;
 
-            background: var(--cream);
-
-            border-radius: 15px;
+            border-radius: 14px;
 
             border: 1px solid #eadfce;
+
+            transition: 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.08);
         }
 
         .contact-card h3 {
             color: var(--green);
-
-            font-size: 17px;
-
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 18px;
         }
 
         .contact-card a {
             color: var(--orange);
-
-            font-size: 14px;
-
-            font-weight: 800;
-
+            text-decoration: none;
+            font-weight: bold;
             word-break: break-word;
+            font-size: 14px;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
         }
 
 
-        /* =====================================================
+        /* =========================
            FOOTER
-        ===================================================== */
+        ========================= */
 
         footer {
-            padding: 24px 20px;
+            padding: 25px 20px;
 
             text-align: center;
 
-            background: var(--green-deep);
+            background: var(--dark-green);
 
-            color: var(--white);
+            color: white;
 
-            font-size: 13px;
+            font-size: 14px;
         }
 
         footer strong {
@@ -1127,238 +969,193 @@
         }
 
 
-        /* =====================================================
-           TABLET
-        ===================================================== */
+        /* =========================
+           MOBILE
+        ========================= */
 
-        @media (max-width: 950px) {
+        @media (max-width: 900px) {
 
-            header {
+            nav {
                 padding: 10px 4%;
             }
 
-            .header-logo {
+            .nav-logo {
                 width: 280px;
+                height: 62px;
             }
 
             .nav-links {
-                gap: 20px;
+                gap: 17px;
             }
 
             .nav-links a {
                 font-size: 14px;
             }
 
-            .schedule-card {
+            .hero {
+                min-height: 700px;
+
+                padding:
+                    70px 5%
+                    150px;
+
+                background-position: center center;
+            }
+
+            .schedule-layout {
                 grid-template-columns: 1fr;
             }
 
-            .booking-panel {
-                display: grid;
+            .schedule-side {
+                display: none;
+            }
 
-                grid-template-columns: 1fr 1fr;
+            .schedule-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .contact-container {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .benefits {
+                grid-template-columns:
+                    repeat(2, 1fr);
 
                 gap: 20px;
             }
 
-            .booking-panel-top {
-                margin-bottom: 0;
+            .benefit {
+                border-right: none;
             }
 
-            .book-panel-btn {
-                grid-column: 1 / -1;
-            }
-
-            .contact-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
+            .rules-list {
+                grid-template-columns: 1fr;
             }
         }
 
 
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
         @media (max-width: 650px) {
 
-            header {
-                position: relative;
-
+            nav {
                 flex-direction: column;
-
-                gap: 7px;
-
-                padding: 8px 10px 12px;
+                gap: 4px;
             }
 
-            .header-logo {
-                width: 310px;
-
-                max-width: 92vw;
-
-                height: auto;
-
+            .nav-logo {
+                width: 300px;
+                max-width: 90%;
+                height: 62px;
                 object-position: center;
             }
 
             .nav-links {
-                gap: 15px;
-
-                flex-wrap: wrap;
-
+                gap: 13px;
                 justify-content: center;
+                flex-wrap: wrap;
             }
 
             .nav-links a {
                 font-size: 13px;
             }
 
-            .nav-links .book-link::after {
+            .nav-book::after {
                 bottom: -5px;
             }
 
-
-            /* HERO */
-
             .hero {
-                min-height: 630px;
+                min-height: 720px;
 
                 padding:
-                    55px 22px
-                    120px;
+                    60px 20px
+                    145px;
 
-                align-items: center;
-
-                /*
-                    Mobile keeps the court visible.
-                    The position can be adjusted later
-                    without changing the HTML.
-                */
-                background-position: 58% center;
-
-                background-image:
-                    linear-gradient(
-                        90deg,
-                        rgba(2, 48, 40, 0.78),
-                        rgba(2, 48, 40, 0.28)
-                    ),
-                    url("court-bg.jpg");
+                background-position:
+                    60% center;
             }
 
-            .hero-content {
+            .hero-left {
                 max-width: 100%;
             }
 
             .hero-badge {
                 font-size: 12px;
-
-                padding: 8px 13px;
+                padding: 8px 14px;
             }
 
             .hero h1 {
-                font-size: 58px;
+                font-size: 59px;
             }
 
-            .hero-subtitle {
+            .hero-tagline {
                 font-size: 22px;
             }
 
             .hero-description {
-                font-size: 15px;
+                font-size: 16px;
             }
 
-
-            /* RATES */
-
-            .rate-wrapper {
-                margin:
-                    -55px 14px 0;
-
+            .hero-rates {
                 gap: 10px;
             }
 
-            .rate-card {
+            .hero-rate {
                 min-width: 0;
-
-                padding: 14px 10px;
+                width: 100%;
+                padding: 13px 17px;
             }
 
-            .rate-title {
-                font-size: 13px;
+            .hero-rate-price {
+                font-size: 25px;
             }
-
-            .rate-icon {
-                font-size: 21px;
-            }
-
-            .rate-price {
-                font-size: 24px;
-            }
-
-            .rate-price span {
-                font-size: 11px;
-            }
-
-
-            /* SCHEDULE */
 
             .schedule-section {
-                padding:
-                    45px 12px
-                    55px;
+                margin-top: -85px;
+                padding: 0 4% 50px;
             }
 
             .schedule-card {
-                padding: 17px 12px;
-
+                padding: 20px 13px;
                 border-radius: 20px;
             }
 
-            .schedule-header {
+            .schedule-top {
                 flex-direction: column;
-
                 align-items: flex-start;
+                gap: 12px;
             }
 
-            .legend {
-                justify-content: flex-start;
-
-                font-size: 12px;
+            .schedule-title h2 {
+                font-size: 25px;
             }
 
-            .schedule-title-row {
-                align-items: flex-start;
+            .schedule-legend {
+                gap: 12px;
             }
 
-            .schedule-title-icon {
-                font-size: 28px;
-            }
-
-            .schedule-header h2 {
-                font-size: 24px;
-            }
-
-            .date-list {
+            .date-row {
                 grid-template-columns:
-                    repeat(4, 1fr);
+                    repeat(7, 1fr);
 
-                gap: 5px;
+                gap: 4px;
             }
 
-            .date-btn {
-                padding: 8px 2px;
+            .date-card {
+                padding: 9px 2px;
+                border-radius: 8px;
             }
 
             .date-day {
-                font-size: 10px;
+                font-size: 8px;
             }
 
             .date-number {
-                font-size: 13px;
+                font-size: 12px;
             }
 
-            .slot-grid {
+            .schedule-grid {
                 grid-template-columns:
                     repeat(2, 1fr);
 
@@ -1366,199 +1163,74 @@
             }
 
             .slot-cell {
-                font-size: 11px;
-
-                min-height: 42px;
-
-                padding: 8px 3px;
-            }
-
-            .booking-panel {
-                display: block;
-
-                padding: 15px;
-            }
-
-            .booking-panel-top {
-                margin-bottom: 15px;
-            }
-
-
-            /* LOCATION */
-
-            .location-section {
-                padding:
-                    0 12px
-                    45px;
+                min-height: 50px;
+                font-size: 10px;
+                padding: 7px 3px;
             }
 
             .location-banner {
-                flex-direction: column;
+                padding: 0 4% 45px;
+            }
 
-                text-align: center;
-
-                padding: 22px 15px;
-
+            .location-banner-inner {
+                padding: 18px 20px;
                 border-radius: 18px;
             }
 
-            .location-info {
-                flex-direction: column;
-
-                gap: 8px;
+            .location-icon {
+                font-size: 35px;
             }
 
-            .location-info h2 {
-                font-size: 20px;
+            .location-banner h3 {
+                font-size: 17px;
             }
 
-            .location-info p {
-                font-size: 13px;
-            }
-
-
-            /* FEATURES */
-
-            .features-section {
-                padding:
-                    25px 12px
-                    45px;
-            }
-
-            .features-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-                gap: 0;
-            }
-
-            .feature {
-                padding: 18px 10px;
-
-                border-right: 1px solid #dce6e2;
-            }
-
-            .feature:nth-child(2) {
-                border-right: none;
-            }
-
-            .feature:nth-child(-n+2) {
-                border-bottom: 1px solid #dce6e2;
-            }
-
-            .feature-icon {
-                font-size: 29px;
-            }
-
-            .feature h3 {
-                font-size: 15px;
-            }
-
-            .feature p {
+            .location-banner p {
                 font-size: 12px;
             }
 
-
-            /* ABOUT */
-
-            .about-section {
-                padding: 55px 20px;
-            }
-
-            .about-inner h2 {
-                font-size: 31px;
-            }
-
-            .about-inner p {
-                font-size: 15px;
-            }
-
-
-            /* RULES */
-
-            .rules-section {
-                padding:
-                    55px 15px;
-            }
-
-            .section-heading h2 {
-                font-size: 31px;
-            }
-
-            .rules-grid {
-                grid-template-columns: 1fr;
-
-                gap: 11px;
-            }
-
-            .rule-card {
-                padding: 15px 16px;
-            }
-
-            .rule-card h3 {
-                font-size: 15px;
-            }
-
-            .rule-card p {
-                font-size: 13px;
-            }
-
-
-            /* CONTACT */
-
-            .contact-section {
-                padding:
-                    55px 15px;
-            }
-
-            .contact-grid {
+            .benefits {
                 grid-template-columns:
                     repeat(2, 1fr);
 
-                gap: 10px;
+                padding:
+                    0 4%
+                    50px;
             }
 
-            .contact-card {
-                padding: 18px 8px;
+            .benefit {
+                padding: 12px 8px;
             }
 
-            .contact-card h3 {
-                font-size: 14px;
+            .benefit-icon {
+                font-size: 28px;
             }
 
-            .contact-card a {
-                font-size: 12px;
-            }
-        }
-
-
-        @media (max-width: 390px) {
-
-            .hero h1 {
-                font-size: 51px;
+            .benefit h3 {
+                font-size: 15px;
             }
 
-            .hero {
-                min-height: 610px;
-            }
-
-            .rate-wrapper {
-                margin-left: 8px;
-                margin-right: 8px;
-            }
-
-            .rate-title {
+            .benefit p {
                 font-size: 11px;
             }
 
-            .rate-price {
-                font-size: 21px;
+            section.standard-section {
+                padding: 60px 5%;
             }
 
-            .slot-cell {
-                font-size: 10px;
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .location-box {
+                padding: 25px 18px;
             }
         }
+
     </style>
 </head>
 
@@ -1566,34 +1238,28 @@
 <body>
 
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header>
-
-    <a href="#home">
-        <img
-            src="logo.png"
-            alt="Dink & Drive Court Logo"
-            class="header-logo"
-        >
-    </a>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
 
     <nav>
+
+        <a href="#home">
+            <img
+                src="logo.png"
+                alt="Dink & Drive Court Logo"
+                class="nav-logo"
+            >
+        </a>
+
         <ul class="nav-links">
 
             <li>
-                <a href="#home">
-                    Home
-                </a>
+                <a href="#home">Home</a>
             </li>
 
             <li>
-                <a
-                    href="booking.html"
-                    class="book-link"
-                >
+                <a href="booking.html" class="nav-book">
                     Book a Court
                 </a>
             </li>
@@ -1611,290 +1277,242 @@
             </li>
 
         </ul>
+
     </nav>
 
-</header>
 
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+    <!-- =========================
+         HERO
+    ========================== -->
 
-<section
-    class="hero"
-    id="home"
->
+    <section class="hero" id="home">
 
-    <div class="hero-content">
+        <div class="hero-content">
 
-        <div class="hero-badge">
-            🏓 PICKLEBALL COURT BOOKING
+            <div class="hero-left">
+
+                <div class="hero-badge">
+                    🏓 PICKLEBALL COURT BOOKING
+                </div>
+
+                <h1>
+                    Book Your
+                    <span class="script">Court</span>
+                </h1>
+
+                <div class="orange-brush"></div>
+
+                <h2 class="hero-tagline">
+                    Play. Connect. Enjoy.
+                </h2>
+
+                <p class="hero-description">
+                    Reserve your time and get on the court
+                    at Dink & Drive Court.
+                </p>
+
+
+                <!-- RATE CARDS -->
+
+                <div class="hero-rates">
+
+                    <div class="hero-rate">
+
+                        <div class="rate-icon">
+                            ☀️
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Day Rate
+                            </h3>
+
+                            <div class="hero-rate-price">
+                                ₱250
+                                <span>/ hour</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-rate">
+
+                        <div class="rate-icon">
+                            🌙
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Night Rate
+                            </h3>
+
+                            <div class="hero-rate-price">
+                                ₱300
+                                <span>/ hour</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <h1>
-            Book Your
-            <span>Court</span>
-        </h1>
-
-        <div class="hero-subtitle">
-            Play. Connect. Enjoy.
-        </div>
-
-        <p class="hero-description">
-            Reserve your time and get on the court
-            at Dink & Drive Court.
-        </p>
-
-        <a
-            href="booking.html"
-            class="btn btn-orange"
-        >
-            📅 BOOK NOW →
-        </a>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     RATE CARDS
-========================================================= -->
 
-<div
-    class="rate-wrapper"
-    id="rates"
->
+    <!-- =========================
+         LIVE SCHEDULE
+    ========================== -->
 
-    <div class="rate-card">
+    <section class="schedule-section">
 
-        <div class="rate-title">
-            <span class="rate-icon">☀️</span>
-            DAY RATE
-        </div>
+        <div class="schedule-card">
 
-        <div class="rate-price">
-            ₱250
-            <span>/ hour</span>
-        </div>
+            <div class="schedule-top">
 
-    </div>
-
-
-    <div class="rate-card">
-
-        <div class="rate-title">
-            <span class="rate-icon">🌙</span>
-            NIGHT RATE
-        </div>
-
-        <div class="rate-price">
-            ₱300
-            <span>/ hour</span>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     LIVE COURT SCHEDULE
-========================================================= -->
-
-<section
-    class="schedule-section"
-    id="schedule"
->
-
-    <div class="schedule-card">
-
-
-        <!-- LEFT SIDE -->
-
-        <div class="schedule-main">
-
-            <div class="schedule-header">
-
-                <div class="schedule-title-row">
+                <div class="schedule-title">
 
                     <div class="schedule-title-icon">
                         📅
                     </div>
 
                     <div>
+
                         <h2>
                             Court Schedule
                         </h2>
 
                         <p>
-                            Select your preferred date and time below.
+                            View live availability below.
+                            Select your date and time on the booking page.
                         </p>
+
                     </div>
 
                 </div>
 
 
-                <div class="legend">
+                <div class="schedule-legend">
 
-                    <span class="legend-item">
-                        <i class="legend-dot legend-available"></i>
+                    <div class="legend-item">
+
+                        <span class="legend-dot legend-available"></span>
+
                         Available
-                    </span>
 
-                    <span class="legend-item">
-                        <i class="legend-dot legend-selected"></i>
-                        Selected
-                    </span>
+                    </div>
 
-                    <span class="legend-item">
-                        <i class="legend-dot legend-booked"></i>
+                    <div class="legend-item">
+
+                        <span class="legend-dot legend-booked"></span>
+
                         Booked
-                    </span>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- DATE BUTTONS -->
+
+            <!-- DATES -->
 
             <div
-                class="date-list"
-                id="dateList"
+                class="date-row"
+                id="dateRow"
             >
-                <!-- JavaScript fills dates -->
+                <!-- JavaScript inserts dates -->
             </div>
 
 
-            <!-- TIME SLOTS -->
 
-            <div
-                class="slot-grid"
-                id="slotGrid"
-            >
-                <!-- JavaScript fills slots -->
-            </div>
+            <div class="schedule-layout">
 
 
-            <div
-                class="schedule-status"
-                id="scheduleStatus"
-            >
-                Loading court availability...
+                <!-- TIME SLOTS -->
+
+                <div
+                    class="schedule-grid"
+                    id="scheduleGrid"
+                >
+                    <!-- JavaScript inserts slots -->
+                </div>
+
+
+
+                <!-- SIDE INFORMATION -->
+
+                <div class="schedule-side">
+
+                    <h3>
+                        🏓 Select a date and time
+                    </h3>
+
+                    <p>
+                        Check the live schedule, then continue
+                        to the booking page to reserve your slot.
+                    </p>
+
+                    <ul class="why-list">
+
+                        <li>
+                            Clean & well-maintained court
+                        </li>
+
+                        <li>
+                            Safe and secure environment
+                        </li>
+
+                        <li>
+                            Easy online booking
+                        </li>
+
+                        <li>
+                            Flexible time slots
+                        </li>
+
+                    </ul>
+
+                    <a
+                        href="booking.html"
+                        class="btn btn-primary book-now-home"
+                    >
+                        📅 BOOK NOW →
+                    </a>
+
+                    <div class="schedule-note">
+                        Booking confirmation is subject
+                        to availability.
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-
-        <!-- RIGHT SIDE -->
-
-        <aside class="booking-panel">
+    </section>
 
 
-            <div class="booking-panel-top">
 
-                <h3>
-                    🏓 Select a date and time
-                </h3>
+    <!-- =========================
+         LOCATION BANNER
+    ========================== -->
 
-                <p>
-                    Choose an available slot, then continue
-                    to the booking page to complete your request.
-                </p>
+    <section class="location-banner">
 
-
-                <div
-                    class="selected-info"
-                    id="selectedInfo"
-                >
-                    Selected:
-                    <span id="selectedText"></span>
-                </div>
-
-            </div>
-
-
-            <div class="why-book">
-
-                <h3>
-                    Why Book With Us?
-                </h3>
-
-
-                <div class="benefit">
-
-                    <span class="benefit-check">
-                        ✓
-                    </span>
-
-                    Clean & well-maintained court
-
-                </div>
-
-
-                <div class="benefit">
-
-                    <span class="benefit-check">
-                        ✓
-                    </span>
-
-                    Safe and secure environment
-
-                </div>
-
-
-                <div class="benefit">
-
-                    <span class="benefit-check">
-                        ✓
-                    </span>
-
-                    Easy online booking
-
-                </div>
-
-
-                <div class="benefit">
-
-                    <span class="benefit-check">
-                        ✓
-                    </span>
-
-                    Flexible time slots
-
-                </div>
-
-            </div>
-
-
-            <div class="panel-divider"></div>
-
-
-            <a
-                href="booking.html"
-                class="btn btn-orange book-panel-btn"
-            >
-                📅 BOOK NOW →
-            </a>
-
-        </aside>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     LOCATION
-========================================================= -->
-
-<section class="location-section">
-
-    <div class="location-banner">
-
-
-        <div class="location-info">
+        <div class="location-banner-inner">
 
             <div class="location-icon">
                 📍
@@ -1902,46 +1520,32 @@
 
             <div>
 
-                <h2>
+                <h3>
                     Dink & Drive Court
-                </h2>
+                </h3>
 
                 <p>
-                    Brgy. Sta. Cruz Breeding,
-                    Balamban, Cebu – Near Trinity Forest
+                    Brgy. Sta. Cruz Breeding, Balamban, Cebu
+                    – Near Trinity Forest
                 </p>
 
             </div>
 
         </div>
 
-
-        <a
-            href="https://www.google.com/maps/place/Dink+and+Drive+Pickleball+Court/@10.5065037,123.7198349,153m/data=!3m1!1e3!4m6!3m5!1s0x33a909000cd091b9:0x990601734fed1b0f!8m2!3d10.506758!4d123.720268!16s%2Fg%2F11nw59d3hf"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-white"
-        >
-            OPEN GOOGLE MAPS →
-        </a>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     FEATURES
-========================================================= -->
 
-<section class="features-section">
+    <!-- =========================
+         BENEFITS
+    ========================== -->
 
-    <div class="features-grid">
+    <section class="benefits">
 
+        <div class="benefit">
 
-        <div class="feature">
-
-            <div class="feature-icon">
+            <div class="benefit-icon">
                 🏓
             </div>
 
@@ -1956,9 +1560,9 @@
         </div>
 
 
-        <div class="feature">
+        <div class="benefit">
 
-            <div class="feature-icon">
+            <div class="benefit-icon">
                 👥
             </div>
 
@@ -1973,10 +1577,10 @@
         </div>
 
 
-        <div class="feature">
+        <div class="benefit">
 
-            <div class="feature-icon">
-                🏃
+            <div class="benefit-icon">
+                🟢
             </div>
 
             <h3>
@@ -1990,10 +1594,10 @@
         </div>
 
 
-        <div class="feature">
+        <div class="benefit">
 
-            <div class="feature-icon">
-                💚
+            <div class="benefit-icon">
+                ❤️
             </div>
 
             <h3>
@@ -2006,1251 +1610,802 @@
 
         </div>
 
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     ABOUT
-========================================================= -->
 
-<section
-    class="about-section"
-    id="about"
->
+    <!-- =========================
+         ABOUT
+    ========================== -->
 
-    <div class="about-inner">
+    <section
+        class="about standard-section"
+        id="about"
+    >
 
-        <h2>
-            Play.
-            <span>Dink.</span>
-            Drive.
-        </h2>
+        <div class="about-content">
 
-        <p>
-            Welcome to Dink & Drive Court!
-            We provide a simple and convenient place
-            for pickleball players in Balamban, Cebu.
-        </p>
+            <div class="section-title">
 
-        <p>
-            Whether you're practicing your shots,
-            playing with friends, or joining a game,
-            our court is ready for you.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     COURT RULES
-========================================================= -->
-
-<section
-    class="rules-section"
-    id="rules"
->
-
-    <div class="section-heading">
-
-        <h2>
-            Court Rules
-        </h2>
-
-        <p>
-            Please follow these rules to keep Dink & Drive Court
-            safe, clean, and enjoyable for everyone.
-        </p>
-
-    </div>
-
-
-    <div class="rules-container">
-
-        <div class="rules-grid">
-
-
-            <div class="rule-card">
-
-                <h3>
-                    1. Personal Belongings
-                </h3>
+                <h2>
+                    Play. <span>Dink.</span> Drive.
+                </h2>
 
                 <p>
-                    Please keep your personal belongings secure.
-                    Dink & Drive Court is not responsible for lost
-                    or damaged items.
+                    Welcome to Dink & Drive Court!
                 </p>
 
             </div>
 
+            <p>
+                We provide a simple and convenient place
+                for pickleball players in Balamban, Cebu.
+            </p>
 
-            <div class="rule-card">
+            <p>
+                Whether you're practicing your shots,
+                playing with friends, or joining a game,
+                our court is ready for you.
+            </p>
 
-                <h3>
-                    2. Food & Drinks
-                </h3>
+        </div>
 
-                <p>
-                    Food and drinks are not allowed inside the playing area.
-                    Water is allowed, but please clean up any spills immediately.
-                </p>
+    </section>
 
-            </div>
 
 
-            <div class="rule-card">
+    <!-- =========================
+         COURT RULES
+    ========================== -->
 
-                <h3>
-                    3. Clean As You Go
-                </h3>
+    <section
+        class="rules standard-section"
+        id="rules"
+    >
 
-                <p>
-                    Keep the court and surrounding areas clean.
-                    Dispose of trash properly and leave the area clean
-                    after your session.
-                </p>
+        <div class="section-title">
 
-            </div>
+            <h2>
+                Court Rules
+            </h2>
 
-
-            <div class="rule-card">
-
-                <h3>
-                    4. Proper Court Shoes
-                </h3>
-
-                <p>
-                    Only proper non-marking court shoes or suitable
-                    sports shoes are allowed. Shoes that may damage
-                    or mark the court are not permitted.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    5. Events & Gatherings
-                </h3>
-
-                <p>
-                    Events, tournaments, parties, or large gatherings
-                    require prior approval from management.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    6. Noise
-                </h3>
-
-                <p>
-                    Please keep noise at a reasonable level and respect
-                    other players and nearby residents.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    7. Respect & Sportsmanship
-                </h3>
-
-                <p>
-                    Treat players, staff, and guests with respect.
-                    Aggressive, abusive, or disrespectful behavior
-                    is not tolerated.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    8. Court Time
-                </h3>
-
-                <p>
-                    Use the court only during your reserved time
-                    and leave promptly when your booking ends.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    9. Equipment & Facilities
-                </h3>
-
-                <p>
-                    Please take care of the court, net, lights,
-                    benches, and other facilities. Damage caused
-                    by misuse may be charged.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    10. No Cancellation / No Refund
-                </h3>
-
-                <p>
-                    Confirmed bookings are non-cancellable and non-refundable.
-                    If unsafe weather prevents play, the booking may be
-                    rescheduled to another available date and time,
-                    subject to availability and management approval.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    11. Booking Confirmation
-                </h3>
-
-                <p>
-                    A booking request is not considered confirmed until
-                    availability has been checked and confirmation has
-                    been provided.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    12. Guests & Spectators
-                </h3>
-
-                <p>
-                    Guests and spectators are welcome but must follow
-                    the court rules and must not interfere with players.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    13. Safety
-                </h3>
-
-                <p>
-                    Follow all safety instructions and report any unsafe
-                    conditions to management immediately.
-                </p>
-
-            </div>
-
-
-            <div class="rule-card">
-
-                <h3>
-                    14. Management Rights
-                </h3>
-
-                <p>
-                    Management may stop or refuse a session if necessary
-                    for safety, proper conduct, or normal court operations.
-                </p>
-
-            </div>
-
+            <p>
+                Please follow these rules to keep Dink & Drive Court
+                safe, clean, and enjoyable for everyone.
+            </p>
 
         </div>
 
 
-        <p class="rules-thanks">
-            <strong>Thank you</strong> for helping us maintain
-            a clean, safe, and enjoyable environment for everyone. 🏓
-        </p>
+        <div class="rules-container">
 
-    </div>
-
-</section>
+            <div class="rules-list">
 
 
-<!-- =========================================================
-     CONTACT
-========================================================= -->
+                <div class="rule-card">
 
-<section
-    class="contact-section"
-    id="contact"
->
+                    <h3>
+                        1. Personal Belongings
+                    </h3>
 
-    <div class="section-heading">
+                    <p>
+                        Please keep your personal belongings secure.
+                        Dink & Drive Court is not responsible for
+                        lost or damaged items.
+                    </p>
 
-        <h2>
-            Contact Us
-        </h2>
-
-        <p>
-            Have questions or want to book the court?
-            Get in touch with us.
-        </p>
-
-    </div>
+                </div>
 
 
-    <div class="contact-grid">
+                <div class="rule-card">
+
+                    <h3>
+                        2. Food & Drinks
+                    </h3>
+
+                    <p>
+                        Food and drinks are not allowed inside the
+                        playing area. Water is allowed, but please
+                        clean up any spills immediately.
+                    </p>
+
+                </div>
 
 
-        <!-- FACEBOOK -->
+                <div class="rule-card">
 
-        <div class="contact-card">
+                    <h3>
+                        3. Clean As You Go
+                    </h3>
+
+                    <p>
+                        Keep the court and surrounding areas clean.
+                        Dispose of trash properly and leave the area
+                        clean after your session.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        4. Proper Court Shoes
+                    </h3>
+
+                    <p>
+                        Only proper non-marking court shoes or suitable
+                        sports shoes are allowed. Shoes that may damage
+                        or mark the court are not permitted.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        5. Events & Gatherings
+                    </h3>
+
+                    <p>
+                        Events, tournaments, parties, or large gatherings
+                        require prior approval from management.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        6. Noise
+                    </h3>
+
+                    <p>
+                        Please keep noise at a reasonable level and
+                        respect other players and nearby residents.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        7. Respect & Sportsmanship
+                    </h3>
+
+                    <p>
+                        Treat players, staff, and guests with respect.
+                        Aggressive, abusive, or disrespectful behavior
+                        is not tolerated.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        8. Court Time
+                    </h3>
+
+                    <p>
+                        Use the court only during your reserved time
+                        and leave promptly when your booking ends.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        9. Equipment & Facilities
+                    </h3>
+
+                    <p>
+                        Please take care of the court, net, lights,
+                        benches, and other facilities. Damage caused
+                        by misuse may be charged.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        10. No Cancellation / No Refund
+                    </h3>
+
+                    <p>
+                        Confirmed bookings are non-cancellable and
+                        non-refundable. However, if the court cannot
+                        be safely used due to unsafe weather conditions,
+                        the booking may be rescheduled to another
+                        available date and time, subject to availability
+                        and management approval.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        11. Booking Confirmation
+                    </h3>
+
+                    <p>
+                        A booking request is not considered confirmed
+                        until availability has been checked and
+                        confirmation has been provided.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        12. Guests & Spectators
+                    </h3>
+
+                    <p>
+                        Guests and spectators are welcome but must
+                        follow the court rules and must not interfere
+                        with players.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        13. Safety
+                    </h3>
+
+                    <p>
+                        Follow all safety instructions and report any
+                        unsafe conditions to management immediately.
+                    </p>
+
+                </div>
+
+
+                <div class="rule-card">
+
+                    <h3>
+                        14. Management Rights
+                    </h3>
+
+                    <p>
+                        Management may stop or refuse a session if
+                        necessary for safety, proper conduct, or normal
+                        court operations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <p style="
+                text-align:center;
+                margin-top:25px;
+                color:#52736f;
+            ">
+
+                <strong>
+                    Thank you
+                </strong>
+
+                for helping us maintain a clean, safe,
+                and enjoyable environment for everyone. 🏓
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         LOCATION
+    ========================== -->
+
+    <section
+        class="location standard-section"
+        id="location"
+    >
+
+        <div class="section-title">
+
+            <h2>
+                Find Us
+            </h2>
+
+            <p>
+                Come visit Dink & Drive Court.
+            </p>
+
+        </div>
+
+
+        <div class="location-box">
 
             <h3>
-                📘 Facebook
+                📍 Dink & Drive Court
             </h3>
 
+            <p>
+                Brgy. Sta. Cruz Breeding
+                Near Trinity Forest
+            </p>
+
+
             <a
-                href="https://www.facebook.com/profile.php?id=61593127221744"
+                href="https://www.google.com/maps/place/Dink+and+Drive+Pickleball+Court/@10.5065037,123.7198349,153m/data=!3m1!1e3!4m6!3m5!1s0x33a909000cd091b9:0x990601734fed1b0f!8m2!3d10.506758!4d123.720268!16s%2Fg%2F11nw59d3hf"
+                class="btn btn-primary"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Dink and Drive Court
+                OPEN GOOGLE MAPS
             </a>
 
         </div>
 
-
-        <!-- MOBILE -->
-
-        <div class="contact-card">
-
-            <h3>
-                📱 Mobile
-            </h3>
-
-            <a href="tel:+639055440712">
-                0905 544 0712
-            </a>
-
-        </div>
+    </section>
 
 
-        <!-- EMAIL -->
 
-        <div class="contact-card">
+    <!-- =========================
+         CONTACT
+    ========================== -->
 
-            <h3>
-                ✉️ Email
-            </h3>
+    <section
+        class="contact standard-section"
+        id="contact"
+    >
 
-            <a href="mailto:dinkanddrive2026@gmail.com">
-                dinkanddrive2026@gmail.com
-            </a>
+        <div class="section-title">
+
+            <h2>
+                Contact Us
+            </h2>
+
+            <p>
+                Have questions or want to book the court?
+                Get in touch with us.
+            </p>
 
         </div>
 
 
-        <!-- GOOGLE MAPS -->
+        <div class="contact-container">
 
-        <div class="contact-card">
 
-            <h3>
-                📍 Google Maps
-            </h3>
+            <!-- FACEBOOK -->
 
-            <a
-                href="https://www.google.com/maps/@10.5068133,123.7203574,3a,75y,241.55h,83.03t/data=!3m7!1e1!3m5!1sL39Vjvh8PvllTReXHMYWfg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D6.970634127398725%26panoid%3DL39Vjvh8PvllTReXHMYWfg%26yaw%3D241.55198284213384!7i16384!8i8192"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Get Directions
-            </a>
+            <div class="contact-card">
+
+                <h3>
+                    📘 Facebook
+                </h3>
+
+                <a
+                    href="https://www.facebook.com/profile.php?id=61593127221744"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Dink and Drive Court
+                </a>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="contact-card">
+
+                <h3>
+                    📱 Mobile
+                </h3>
+
+                <a href="tel:+639055440712">
+                    0905 544 0712
+                </a>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="contact-card">
+
+                <h3>
+                    ✉️ Email
+                </h3>
+
+                <a href="mailto:dinkanddrive2026@gmail.com">
+                    dinkanddrive2026@gmail.com
+                </a>
+
+            </div>
+
+
+            <!-- GOOGLE MAPS -->
+
+            <div class="contact-card">
+
+                <h3>
+                    📍 Google Maps
+                </h3>
+
+                <a
+                    href="https://www.google.com/maps/@10.5068133,123.7203574,3a,75y,241.55h,83.03t/data=!3m7!1e1!3m5!1sL39Vjvh8PvllTReXHMYWfg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D6.970634127398725%26panoid%3DL39Vjvh8PvllTReXHMYWfg%26yaw%3D241.55198284213384!7i16384!8i8192"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Get Directions
+                </a>
+
+            </div>
 
         </div>
 
+    </section>
 
-    </div>
 
-</section>
 
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+    <footer>
 
-<footer>
+        © 2026
 
-    © 2026
-    <strong>Dink & Drive Court</strong>.
-    All Rights Reserved.
+        <strong>
+            Dink & Drive Court
+        </strong>.
 
-</footer>
+        All Rights Reserved.
 
+    </footer>
 
-<!-- =========================================================
-     LIVE AVAILABILITY JAVASCRIPT
-========================================================= -->
 
-<script>
 
-    /*
-     * =========================================================
-     * DINK & DRIVE COURT
-     * HOMEPAGE LIVE AVAILABILITY
-     * =========================================================
-     */
+    <!-- =========================
+         LIVE AVAILABILITY SCRIPT
+    ========================== -->
 
-    const SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbzUKTLoXGyfyQVSeykhp92vQCB595o0jTY3DoFBPugJX9nKPQS9JEgJo9NSjYkNziND/exec";
+    <script>
 
+        /* =========================
+           GOOGLE APPS SCRIPT
+        ========================= */
 
-    /*
-     * Your current court schedule:
-     * 6:00 AM - 12:00 AM
-     */
+        const SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbzUKTLoXGyfyQVSeykhp92vQCB595o0jTY3DoFBPugJX9nKPQS9JEgJo9NSjYkNziND/exec";
 
-    const timeSlots = [
 
-        "6:00 AM - 7:00 AM",
+        /* =========================
+           TIME SLOTS
+           SAME AS BOOKING PAGE
+        ========================= */
 
-        "7:00 AM - 8:00 AM",
+        const timeSlots = [
 
-        "8:00 AM - 9:00 AM",
+            "6:00 AM - 7:00 AM",
+            "7:00 AM - 8:00 AM",
+            "8:00 AM - 9:00 AM",
+            "9:00 AM - 10:00 AM",
 
-        "9:00 AM - 10:00 AM",
+            "10:00 AM - 11:00 AM",
+            "11:00 AM - 12:00 PM",
+            "12:00 PM - 1:00 PM",
+            "1:00 PM - 2:00 PM",
 
-        "10:00 AM - 11:00 AM",
+            "2:00 PM - 3:00 PM",
+            "3:00 PM - 4:00 PM",
+            "4:00 PM - 5:00 PM",
+            "5:00 PM - 6:00 PM",
 
-        "11:00 AM - 12:00 PM",
+            "6:00 PM - 7:00 PM",
+            "7:00 PM - 8:00 PM",
+            "8:00 PM - 9:00 PM",
+            "9:00 PM - 10:00 PM",
 
-        "12:00 PM - 1:00 PM",
+            "10:00 PM - 11:00 PM",
+            "11:00 PM - 12:00 AM"
 
-        "1:00 PM - 2:00 PM",
+        ];
 
-        "2:00 PM - 3:00 PM",
 
-        "3:00 PM - 4:00 PM",
+        /* =========================
+           DATE HELPERS
+        ========================= */
 
-        "4:00 PM - 5:00 PM",
+        function formatDate(date) {
 
-        "5:00 PM - 6:00 PM",
+            const year =
+                date.getFullYear();
 
-        "6:00 PM - 7:00 PM",
+            const month =
+                String(date.getMonth() + 1)
+                    .padStart(2, "0");
 
-        "7:00 PM - 8:00 PM",
+            const day =
+                String(date.getDate())
+                    .padStart(2, "0");
 
-        "8:00 PM - 9:00 PM",
-
-        "9:00 PM - 10:00 PM",
-
-        "10:00 PM - 11:00 PM",
-
-        "11:00 PM - 12:00 AM"
-
-    ];
-
-
-    /*
-     * Store availability for each date.
-     */
-
-    const bookedByDate = {};
-
-
-    /*
-     * Current selected date/time.
-     */
-
-    let selectedDate = null;
-    let selectedTime = null;
-
-
-    /*
-     * Prevent selection while the schedule
-     * is still loading.
-     */
-
-    let availabilityReady = false;
-
-
-    /*
-     * =========================================================
-     * DATE HELPERS
-     * =========================================================
-     */
-
-    function formatDateForServer(date) {
-
-        const year =
-            date.getFullYear();
-
-        const month =
-            String(date.getMonth() + 1).padStart(2, "0");
-
-        const day =
-            String(date.getDate()).padStart(2, "0");
-
-        return `${year}-${month}-${day}`;
-    }
-
-
-    function formatDateDisplay(date) {
-
-        return date.toLocaleDateString(
-            "en-US",
-            {
-                month: "short",
-                day: "numeric"
-            }
-        );
-
-    }
-
-
-    function getDayName(date) {
-
-        return date.toLocaleDateString(
-            "en-US",
-            {
-                weekday: "short"
-            }
-        );
-
-    }
-
-
-    /*
-     * =========================================================
-     * CREATE THE 7 DATE BUTTONS
-     * =========================================================
-     */
-
-    function renderDates() {
-
-        const dateList =
-            document.getElementById("dateList");
-
-        dateList.innerHTML = "";
-
-
-        const today =
-            new Date();
-
-
-        for (let i = 0; i < 7; i++) {
-
-            const date =
-                new Date(today);
-
-            date.setDate(
-                today.getDate() + i
-            );
-
-
-            const dateString =
-                formatDateForServer(date);
-
-
-            const button =
-                document.createElement("button");
-
-
-            button.type = "button";
-
-            button.className =
-                "date-btn";
-
-
-            if (i === 0) {
-
-                button.classList.add("active");
-
-                selectedDate =
-                    dateString;
-
-            }
-
-
-            button.dataset.date =
-                dateString;
-
-
-            button.innerHTML = `
-
-                <span class="date-day">
-                    ${getDayName(date)}
-                </span>
-
-                <span class="date-number">
-                    ${formatDateDisplay(date)}
-                </span>
-
-                ${
-                    i === 0
-                    ? `<span class="date-today">Today</span>`
-                    : ""
-                }
-
-            `;
-
-
-            button.addEventListener(
-                "click",
-                function() {
-
-                    selectDate(
-                        dateString
-                    );
-
-                }
-            );
-
-
-            dateList.appendChild(button);
-
-        }
-
-    }
-
-
-    /*
-     * =========================================================
-     * CREATE TIME SLOTS
-     * =========================================================
-     */
-
-    function renderSlots(date) {
-
-        const slotGrid =
-            document.getElementById("slotGrid");
-
-
-        slotGrid.innerHTML = "";
-
-
-        timeSlots.forEach(
-            function(time) {
-
-                const button =
-                    document.createElement("button");
-
-
-                button.type = "button";
-
-                button.className =
-                    "slot-cell checking";
-
-
-                button.dataset.date =
-                    date;
-
-                button.dataset.time =
-                    time;
-
-
-                button.textContent =
-                    "CHECKING...";
-
-
-                button.addEventListener(
-                    "click",
-                    function() {
-
-                        selectSlot(
-                            button
-                        );
-
-                    }
-                );
-
-
-                slotGrid.appendChild(
-                    button
-                );
-
-            }
-        );
-
-    }
-
-
-    /*
-     * =========================================================
-     * SELECT DATE
-     * =========================================================
-     */
-
-    function selectDate(date) {
-
-        selectedDate =
-            date;
-
-        selectedTime =
-            null;
-
-
-        document
-            .querySelectorAll(".date-btn")
-            .forEach(
-                function(button) {
-
-                    button.classList.toggle(
-                        "active",
-                        button.dataset.date === date
-                    );
-
-                }
-            );
-
-
-        hideSelectedInfo();
-
-
-        renderSlots(date);
-
-
-        loadAvailability(date);
-
-    }
-
-
-    /*
-     * =========================================================
-     * SELECT SLOT
-     * =========================================================
-     */
-
-    function selectSlot(cell) {
-
-        if (!availabilityReady) {
-            return;
+            return `${year}-${month}-${day}`;
         }
 
 
-        if (
-            cell.classList.contains("booked") ||
-            cell.classList.contains("checking")
-        ) {
-            return;
-        }
+        function formatDisplayDate(date) {
 
-
-        if (
-            cell.classList.contains("error")
-        ) {
-
-            loadAvailability(
-                selectedDate
-            );
-
-            return;
-        }
-
-
-        document
-            .querySelectorAll(
-                ".slot-cell.selected"
-            )
-            .forEach(
-                function(previous) {
-
-                    previous.classList.remove(
-                        "selected"
-                    );
-
-                    previous.classList.add(
-                        "available"
-                    );
-
-                }
-            );
-
-
-        cell.classList.remove(
-            "available"
-        );
-
-        cell.classList.add(
-            "selected"
-        );
-
-
-        selectedDate =
-            cell.dataset.date;
-
-        selectedTime =
-            cell.dataset.time;
-
-
-        showSelectedInfo();
-
-    }
-
-
-    /*
-     * =========================================================
-     * SHOW SELECTED DATE/TIME
-     * =========================================================
-     */
-
-    function showSelectedInfo() {
-
-        const info =
-            document.getElementById(
-                "selectedInfo"
-            );
-
-        const text =
-            document.getElementById(
-                "selectedText"
-            );
-
-
-        if (
-            !selectedDate ||
-            !selectedTime
-        ) {
-            return;
-        }
-
-
-        const dateObject =
-            new Date(
-                selectedDate + "T00:00:00"
-            );
-
-
-        const displayDate =
-            dateObject.toLocaleDateString(
+            return date.toLocaleDateString(
                 "en-US",
                 {
-                    weekday: "short",
                     month: "short",
                     day: "numeric"
                 }
             );
 
-
-        text.textContent =
-            `${displayDate} • ${selectedTime}`;
+        }
 
 
-        info.classList.add(
-            "show"
-        );
+        function getDayName(date) {
 
-    }
-
-
-    /*
-     * =========================================================
-     * HIDE SELECTED INFO
-     * =========================================================
-     */
-
-    function hideSelectedInfo() {
-
-        document
-            .getElementById("selectedInfo")
-            .classList.remove(
-                "show"
+            return date.toLocaleDateString(
+                "en-US",
+                {
+                    weekday: "short"
+                }
             );
-
-    }
-
-
-    /*
-     * =========================================================
-     * LOAD LIVE AVAILABILITY
-     * =========================================================
-     */
-
-    async function loadAvailability(date) {
-
-        availabilityReady =
-            false;
-
-
-        const status =
-            document.getElementById(
-                "scheduleStatus"
-            );
-
-
-        status.textContent =
-            "Checking live availability...";
-
-
-        try {
-
-            const url =
-                `${SCRIPT_URL}?date=${encodeURIComponent(date)}&_=${Date.now()}`;
-
-
-            const response =
-                await fetch(
-                    url,
-                    {
-                        cache: "no-store"
-                    }
-                );
-
-
-            if (!response.ok) {
-                throw new Error(
-                    "Unable to load availability."
-                );
-            }
-
-
-            const data =
-                await response.json();
-
-
-            bookedByDate[date] =
-                Array.isArray(
-                    data.bookedSlots
-                )
-                ? data.bookedSlots
-                : [];
-
-
-            updateBookedSlots(
-                date
-            );
-
-
-            availabilityReady =
-                true;
-
-
-            status.textContent =
-                "Live availability updated.";
-
-
-        } catch (error) {
-
-            console.error(
-                "Availability error:",
-                error
-            );
-
-
-            availabilityReady =
-                false;
-
-
-            showAvailabilityError(
-                date
-            );
-
-
-            status.textContent =
-                "Unable to load availability. Click CHECK AGAIN.";
 
         }
 
-    }
+
+        /* =========================
+           CREATE DATE CARDS
+        ========================= */
+
+        function createDateCards() {
+
+            const dateRow =
+                document.getElementById("dateRow");
+
+            dateRow.innerHTML = "";
 
 
-    /*
-     * =========================================================
-     * UPDATE SLOT COLORS
-     * =========================================================
-     */
+            const today =
+                new Date();
 
-    function updateBookedSlots(date) {
-
-        const bookedSlots =
-            bookedByDate[date] || [];
-
-
-        const cells =
-            document.querySelectorAll(
-                `.slot-cell[data-date="${date}"]`
+            today.setHours(
+                0, 0, 0, 0
             );
 
 
-        cells.forEach(
-            function(cell) {
+            for (
+                let i = 0;
+                i < 7;
+                i++
+            ) {
 
-                const time =
-                    cell.dataset.time;
+                const date =
+                    new Date(today);
 
-
-                cell.classList.remove(
-                    "checking",
-                    "available",
-                    "booked",
-                    "error"
+                date.setDate(
+                    today.getDate() + i
                 );
 
 
-                if (
-                    bookedSlots.includes(time)
-                ) {
+                const card =
+                    document.createElement("div");
 
-                    cell.classList.add(
-                        "booked"
+                card.className =
+                    "date-card";
+
+
+                if (i === 0) {
+
+                    card.classList.add(
+                        "today"
                     );
-
-                    cell.textContent =
-                        "BOOKED";
-
-                } else {
-
-                    cell.classList.add(
-                        "available"
-                    );
-
-                    cell.textContent =
-                        time;
 
                 }
+
+
+                card.innerHTML = `
+
+                    <span class="date-day">
+                        ${i === 0
+                            ? "TODAY"
+                            : getDayName(date)
+                        }
+                    </span>
+
+                    <span class="date-number">
+                        ${formatDisplayDate(date)}
+                    </span>
+
+                `;
+
+
+                dateRow.appendChild(card);
 
             }
-        );
 
-    }
-
-
-    /*
-     * =========================================================
-     * AVAILABILITY ERROR
-     * =========================================================
-     */
-
-    function showAvailabilityError(date) {
-
-        const cells =
-            document.querySelectorAll(
-                `.slot-cell[data-date="${date}"]`
-            );
+        }
 
 
-        cells.forEach(
-            function(cell) {
+        /* =========================
+           CREATE SLOT GRID
+        ========================= */
 
-                cell.classList.remove(
-                    "checking",
-                    "available",
-                    "booked",
-                    "selected"
+        function createScheduleGrid() {
+
+            const grid =
+                document.getElementById(
+                    "scheduleGrid"
+                );
+
+            grid.innerHTML = "";
+
+
+            for (
+                let day = 0;
+                day < 7;
+                day++
+            ) {
+
+                const date =
+                    new Date();
+
+                date.setHours(
+                    0, 0, 0, 0
+                );
+
+                date.setDate(
+                    date.getDate() + day
                 );
 
 
-                cell.classList.add(
-                    "error"
-                );
+                const dateString =
+                    formatDate(date);
 
 
-                cell.textContent =
-                    "CHECK AGAIN";
+                timeSlots.forEach(
+                    time => {
 
-            }
-        );
+                        const cell =
+                            document.createElement(
+                                "div"
+                            );
 
-    }
-
-
-    /*
-     * =========================================================
-     * LOAD ALL 7 DATES
-     * =========================================================
-     */
-
-    async function loadSchedule() {
-
-        availabilityReady =
-            false;
+                        cell.className =
+                            "slot-cell checking";
 
 
-        const status =
-            document.getElementById(
-                "scheduleStatus"
-            );
+                        cell.dataset.date =
+                            dateString;
+
+                        cell.dataset.time =
+                            time;
 
 
-        status.textContent =
-            "Checking live availability for the next 7 days...";
+                        cell.innerHTML = `
+                            Checking...
+                        `;
 
 
-        /*
-         * Render the first date's slots immediately.
-         */
-
-        renderSlots(
-            selectedDate
-        );
-
-
-        /*
-         * Make every slot show CHECKING
-         * while the server is being contacted.
-         */
-
-        document
-            .querySelectorAll(".slot-cell")
-            .forEach(
-                function(cell) {
-
-                    cell.classList.remove(
-                        "available",
-                        "booked",
-                        "selected",
-                        "error"
-                    );
-
-                    cell.classList.add(
-                        "checking"
-                    );
-
-                    cell.textContent =
-                        "CHECKING...";
-
-                }
-            );
-
-
-        /*
-         * Get all 7 dates.
-         */
-
-        const dateButtons =
-            document.querySelectorAll(
-                ".date-btn"
-            );
-
-
-        const dates =
-            Array.from(
-                dateButtons
-            ).map(
-                function(button) {
-                    return button.dataset.date;
-                }
-            );
-
-
-        try {
-
-            await Promise.all(
-                dates.map(
-                    function(date) {
-
-                        return fetchAvailabilityForDate(
-                            date
+                        grid.appendChild(
+                            cell
                         );
 
                     }
-                )
-            );
-
-
-            availabilityReady =
-                true;
-
-
-            /*
-             * Show the selected date.
-             */
-
-            updateBookedSlots(
-                selectedDate
-            );
-
-
-            status.textContent =
-                "Live availability updated.";
-
-        } catch (error) {
-
-            console.error(
-                "Schedule loading error:",
-                error
-            );
-
-            status.textContent =
-                "Some availability could not be loaded. Please check again.";
-
-        }
-
-    }
-
-
-    /*
-     * =========================================================
-     * FETCH ONE DATE
-     * =========================================================
-     */
-
-    async function fetchAvailabilityForDate(
-        date
-    ) {
-
-        try {
-
-            const url =
-                `${SCRIPT_URL}?date=${encodeURIComponent(date)}&_=${Date.now()}`;
-
-
-            const response =
-                await fetch(
-                    url,
-                    {
-                        cache: "no-store"
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `Server error for ${date}`
                 );
 
             }
 
-
-            const data =
-                await response.json();
+        }
 
 
-            bookedByDate[date] =
-                Array.isArray(
-                    data.bookedSlots
-                )
-                ? data.bookedSlots
-                : [];
+        /* =========================
+           LOAD AVAILABILITY
+        ========================= */
+
+        async function loadAvailability(
+            date
+        ) {
+
+            try {
+
+                const url =
+                    `${SCRIPT_URL}?date=${encodeURIComponent(date)}&_=${Date.now()}`;
 
 
-            updateBookedSlots(
-                date
-            );
+                const response =
+                    await fetch(
+                        url,
+                        {
+                            cache: "no-store"
+                        }
+                    );
 
 
-        } catch (error) {
+                if (!response.ok) {
+                    throw new Error(
+                        "Network response failed"
+                    );
+                }
 
-            console.error(
-                error
-            );
 
+                const data =
+                    await response.json();
+
+
+                const bookedSlots =
+                    data.bookedSlots || [];
+
+
+                updateDateSlots(
+                    date,
+                    bookedSlots
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Availability error:",
+                    error
+                );
+
+
+                const cells =
+                    document.querySelectorAll(
+                        `.slot-cell[data-date="${date}"]`
+                    );
+
+
+                cells.forEach(
+                    cell => {
+
+                        cell.classList.remove(
+                            "checking"
+                        );
+
+                        cell.classList.add(
+                            "checking"
+                        );
+
+                        cell.innerHTML =
+                            "CHECK AGAIN";
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           UPDATE DATE SLOTS
+        ========================= */
+
+        function updateDateSlots(
+            date,
+            bookedSlots
+        ) {
 
             const cells =
                 document.querySelectorAll(
@@ -3259,54 +2414,126 @@
 
 
             cells.forEach(
-                function(cell) {
+                cell => {
+
+                    const time =
+                        cell.dataset.time;
+
+
+                    const isBooked =
+                        bookedSlots.includes(
+                            time
+                        );
+
 
                     cell.classList.remove(
                         "checking",
                         "available",
-                        "booked",
-                        "selected"
+                        "booked"
                     );
 
-                    cell.classList.add(
-                        "error"
-                    );
 
-                    cell.textContent =
-                        "CHECK AGAIN";
+                    if (isBooked) {
+
+                        cell.classList.add(
+                            "booked"
+                        );
+
+
+                        cell.innerHTML = `
+                            ${time}
+                            <span class="slot-status">
+                                BOOKED
+                            </span>
+                        `;
+
+                    } else {
+
+                        cell.classList.add(
+                            "available"
+                        );
+
+
+                        cell.innerHTML = `
+                            ${time}
+                            <span class="slot-status">
+                                OPEN
+                            </span>
+                        `;
+
+                    }
 
                 }
             );
 
         }
 
-    }
+
+        /* =========================
+           LOAD ALL 7 DAYS
+        ========================= */
+
+        async function loadSchedule() {
+
+            createDateCards();
+
+            createScheduleGrid();
 
 
-    /*
-     * =========================================================
-     * INITIALIZE
-     * =========================================================
-     */
+            const today =
+                new Date();
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-            renderDates();
-
-
-            renderSlots(
-                selectedDate
+            today.setHours(
+                0, 0, 0, 0
             );
 
 
-            loadSchedule();
+            const dates = [];
+
+
+            for (
+                let i = 0;
+                i < 7;
+                i++
+            ) {
+
+                const date =
+                    new Date(today);
+
+                date.setDate(
+                    today.getDate() + i
+                );
+
+
+                dates.push(
+                    formatDate(date)
+                );
+
+            }
+
+
+            await Promise.all(
+                dates.map(
+                    date =>
+                        loadAvailability(
+                            date
+                        )
+                )
+            );
 
         }
-    );
 
-</script>
+
+        /* =========================
+           START
+        ========================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            loadSchedule
+        );
+
+    </script>
 
 
 </body>
