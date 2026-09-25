@@ -46,13 +46,13 @@
     }
 
     .site-logo {
-  width: 350px;
-  height: 160px;
-  max-width: 90%;
-  object-fit: contain;
-  display: block;
-  margin: 10px auto;
-}
+      width: 350px;
+      height: 160px;
+      max-width: 90%;
+      object-fit: contain;
+      display: block;
+      margin: 10px auto;
+    }
 
     /* =========================
        HEADER
@@ -257,164 +257,215 @@
       background: var(--red);
     }
 
-   /* ==============================
-   COURT SCHEDULE
-============================== */
+    /* ==============================
+       DATE NAVIGATION
+    ============================== */
 
-.schedule-wrapper {
-  overflow-x: auto;
-  overflow-y: visible;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  background: white;
-  box-shadow: inset 0 0 20px rgba(22, 101, 52, 0.03);
-  -webkit-overflow-scrolling: touch;
-}
+    .date-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 0 0 18px;
+    }
 
-.schedule {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  min-width: 1450px;
-  table-layout: fixed;
-}
+    .date-nav-btn {
+      border: none;
+      background: var(--green);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
 
-/* ==============================
-   TABLE CELLS
-============================== */
+    .date-nav-btn:hover:not(:disabled) {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
 
-.schedule th,
-.schedule td {
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  text-align: center;
-  vertical-align: middle;
-}
+    .date-nav-btn:disabled {
+      background: #cbd5d1;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
 
-/* ==============================
-   HEADER
-============================== */
+    .date-range-label {
+      flex: 1;
+      text-align: center;
+      color: var(--green-deep);
+      font-size: 14px;
+      font-weight: 900;
+    }
 
-.schedule th {
-  background: var(--green-deep);
-  color: white;
-  height: 82px;
-  padding: 8px;
-  font-size: 12px;
-  white-space: nowrap;
-}
+    /* ==============================
+       COURT SCHEDULE
+    ============================== */
 
-/* First column */
-.schedule th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 10;
-  background: var(--green-deep);
-  width: 165px;
-  min-width: 165px;
-}
+    .schedule-wrapper {
+      overflow-x: auto;
+      overflow-y: visible;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: white;
+      box-shadow: inset 0 0 20px rgba(22, 101, 52, 0.03);
+      -webkit-overflow-scrolling: touch;
+    }
 
-/* Date columns */
-.schedule th:not(:first-child) {
-  min-width: 175px;
-}
+    .schedule {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      min-width: 1150px;
+      table-layout: fixed;
+    }
 
-/* ==============================
-   HOUR & RATE COLUMN
-============================== */
+    /* ==============================
+       TABLE CELLS
+    ============================== */
 
-.schedule td:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 5;
-  background: white;
-  width: 165px;
-  min-width: 165px;
-  padding: 8px;
-}
+    .schedule th,
+    .schedule td {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      vertical-align: middle;
+    }
 
-.date-cell {
-  font-weight: 900;
-  color: var(--green-deep);
-}
+    /* ==============================
+       HEADER
+    ============================== */
 
-.date-cell div:first-child {
-  font-size: 13px;
-  line-height: 1.3;
-}
+    .schedule th {
+      background: var(--green-deep);
+      color: white;
+      height: 82px;
+      padding: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
 
-.date-cell div:last-child {
-  font-size: 11px;
-  margin-top: 4px;
-  color: var(--gray);
-}
+    /* First column */
 
-/* ==============================
-   OPEN / BOOKED CELLS
-============================== */
+    .schedule th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background: var(--green-deep);
+      width: 165px;
+      min-width: 165px;
+    }
 
-.slot-cell {
-  min-width: 175px;
-  height: 62px;
-  padding: 5px;
-  background: #f0fdf4;
-  transition: 0.2s;
-}
-    
-.slot-cell.checking {
-  background: #f8fafc;
-  color: var(--gray);
-  cursor: wait;
-}
-    
-/* Available */
-.slot-cell.available {
-  cursor: pointer;
-}
+    /* Date columns */
 
-.slot-cell.available:hover {
-  background: #dcfce7;
-  transform: scale(0.98);
-}
+    .schedule th:not(:first-child) {
+      min-width: 195px;
+    }
 
-/* Selected */
-.slot-cell.selected {
-  background: var(--orange);
-  color: white;
-  box-shadow: inset 0 0 0 3px white;
-}
+    /* ==============================
+       HOUR & RATE COLUMN
+    ============================== */
 
-/* Booked */
-.slot-cell.booked {
-  background: var(--red);
-  color: white;
-  cursor: not-allowed;
-}
+    .schedule td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 5;
+      background: white;
+      width: 165px;
+      min-width: 165px;
+      padding: 8px;
+    }
 
-/* OPEN text */
-.slot-cell.available div {
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-}
+    .date-cell {
+      font-weight: 900;
+      color: var(--green-deep);
+    }
 
-/* BOOKED text */
-.booked-label {
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-}
+    .date-cell div:first-child {
+      font-size: 13px;
+      line-height: 1.3;
+    }
 
-/* ==============================
-   LOADING
-============================== */
+    .date-cell div:last-child {
+      font-size: 11px;
+      margin-top: 4px;
+      color: var(--gray);
+    }
 
-.loading {
-  text-align: center;
-  padding: 25px;
-  color: var(--gray);
-  font-weight: 700;
-}
+    /* ==============================
+       OPEN / BOOKED CELLS
+    ============================== */
+
+    .slot-cell {
+      min-width: 195px;
+      height: 62px;
+      padding: 5px;
+      background: #f0fdf4;
+      transition: 0.2s;
+    }
+
+    .slot-cell.checking {
+      background: #f8fafc;
+      color: var(--gray);
+      cursor: wait;
+    }
+
+    /* Available */
+
+    .slot-cell.available {
+      cursor: pointer;
+    }
+
+    .slot-cell.available:hover {
+      background: #dcfce7;
+      transform: scale(0.98);
+    }
+
+    /* Selected */
+
+    .slot-cell.selected {
+      background: var(--orange);
+      color: white;
+      box-shadow: inset 0 0 0 3px white;
+    }
+
+    /* Booked */
+
+    .slot-cell.booked {
+      background: var(--red);
+      color: white;
+      cursor: not-allowed;
+    }
+
+    /* OPEN text */
+
+    .slot-cell.available div {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    /* BOOKED text */
+
+    .booked-label {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    /* ==============================
+       LOADING
+    ============================== */
+
+    .loading {
+      text-align: center;
+      padding: 25px;
+      color: var(--gray);
+      font-weight: 700;
+    }
 
     /* =========================
        SELECTED SUMMARY
@@ -525,6 +576,105 @@
       border-color: var(--green);
       box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
       background: white;
+    }
+
+    /* =========================
+       PAYMENT
+    ========================= */
+
+    .payment-section {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid var(--border);
+    }
+
+    .payment-amount {
+      background: var(--green-bg);
+      border: 1px solid var(--green-light);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 18px;
+      color: var(--green-dark);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .payment-amount strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 27px;
+      color: var(--orange-dark);
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .payment-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .payment-card h4 {
+      margin: 0 0 8px;
+      color: var(--green-deep);
+      font-size: 17px;
+    }
+
+    .payment-card p {
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .payment-reference {
+      margin-top: 15px;
+    }
+
+    .payment-warning {
+      margin-top: 15px;
+      padding: 13px 15px;
+      background: var(--orange-light);
+      color: var(--orange-dark);
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .payment-qr {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .view-qr-btn {
+      display: block;
+      margin: 12px auto 5px;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #7b2cbf;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .view-qr-btn:hover {
+      background: #5a189a;
     }
 
     /* =========================
@@ -714,23 +864,23 @@
     }
 
     .home-button {
-display: block;
-width: fit-content;
-margin: 12px auto 0;
-padding: 12px 22px;
-border-radius: 11px;
-background: var(--orange);
-color: white;
-text-decoration: none;
-font-size: 15px;
-font-weight: 900;
-transition: 0.2s;
-}
+      display: block;
+      width: fit-content;
+      margin: 12px auto 0;
+      padding: 12px 22px;
+      border-radius: 11px;
+      background: var(--orange);
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 900;
+      transition: 0.2s;
+    }
 
-.home-button:hover {
-  background: var(--orange-dark);
-  transform: translateY(-1px);
-}
+    .home-button:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
 
     /* =========================
        MOBILE
@@ -775,6 +925,10 @@ transition: 0.2s;
         grid-column: auto;
       }
 
+      .payment-methods {
+        grid-template-columns: 1fr;
+      }
+
       .confirmation-card {
         margin: 20px auto;
         padding: 30px 18px;
@@ -793,78 +947,67 @@ transition: 0.2s;
         text-align: left;
       }
 
-   .payment-qr {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  display: block;
-  margin: 10px auto;
-}
-      .view-qr-btn {
-  display: block;
-  margin: 12px auto 5px;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 8px;
-  background: #7b2cbf;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.view-qr-btn:hover {
-  background: #5a189a;
-}
       .schedule-wrapper {
         margin-left: -5px;
         margin-right: -5px;
         border-radius: 12px;
       }
 
- .schedule {
-  width: 800px;
-  min-width: 800px;
-  table-layout: fixed;
-}
+      .schedule {
+        width: 800px;
+        min-width: 800px;
+        table-layout: fixed;
+      }
 
-.schedule th:first-child,
-.schedule td:first-child {
-  width: 25vw;
-  min-width: 25vw;
-}
+      .schedule th:first-child,
+      .schedule td:first-child {
+        width: 25vw;
+        min-width: 25vw;
+      }
 
-.schedule th:not(:first-child),
-.schedule td:not(:first-child),
-.slot-cell {
-  width: 25vw;
-  min-width: 25vw;
-}
+      .schedule th:not(:first-child),
+      .schedule td:not(:first-child),
+      .slot-cell {
+        width: 25vw;
+        min-width: 25vw;
+      }
 
-.schedule th {
-  height: 78px;
-  padding: 6px;
-}
+      .schedule th {
+        height: 78px;
+        padding: 6px;
+      }
 
-.slot-cell {
-  height: 58px;
-}
-  }
-    
+      .slot-cell {
+        height: 58px;
+      }
+
+      .date-navigation {
+        gap: 8px;
+      }
+
+      .date-nav-btn {
+        padding: 10px 11px;
+        font-size: 12px;
+      }
+
+      .date-range-label {
+        font-size: 12px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
- <img src="logo.png" alt="Dink & Drive Court Logo" class="site-logo"> 
+  <img src="logo.png" alt="Dink & Drive Court Logo" class="site-logo">
 
-  
-  
   <!-- =========================
        HEADER
   ========================= -->
 
   <header>
+
     <div class="header-inner">
 
       <div class="logo">
@@ -876,6 +1019,7 @@ transition: 0.2s;
       </a>
 
     </div>
+
   </header>
 
 
@@ -891,7 +1035,9 @@ transition: 0.2s;
         🏓 PICKLEBALL COURT BOOKING
       </div>
 
-      <h1>Book Your Court</h1>
+      <h1>
+        Book Your Court
+      </h1>
 
       <p>
         Choose your preferred date and time below.
@@ -940,9 +1086,9 @@ transition: 0.2s;
         📅 Court Schedule
       </h2>
 
-     <p class="section-subtitle">
-  Select one or more consecutive time slots. Booked slots cannot be selected.
-</p>
+      <p class="section-subtitle">
+        Select one or more consecutive time slots. Booked slots cannot be selected.
+      </p>
 
 
       <!-- LEGEND -->
@@ -967,23 +1113,59 @@ transition: 0.2s;
       </div>
 
 
+      <!-- ==============================
+           DATE NAVIGATION
+      ============================== -->
+
+      <div class="date-navigation">
+
+        <button
+          type="button"
+          class="date-nav-btn"
+          id="prevDatesBtn"
+          onclick="showPreviousDates()"
+        >
+          ← PREVIOUS
+        </button>
+
+        <div
+          class="date-range-label"
+          id="dateRangeLabel"
+        >
+          Loading dates...
+        </div>
+
+        <button
+          type="button"
+          class="date-nav-btn"
+          id="nextDatesBtn"
+          onclick="showNextDates()"
+        >
+          NEXT →
+        </button>
+
+      </div>
+
+
       <!-- SCHEDULE TABLE -->
 
       <div class="schedule-wrapper">
 
-  <table class="schedule">
+        <table class="schedule">
 
-    <thead>
-      <tr id="scheduleHeader">
-      </tr>
-    </thead>
+          <thead>
 
-    <tbody id="scheduleBody">
-    </tbody>
+            <tr id="scheduleHeader">
+            </tr>
 
-  </table>
+          </thead>
 
-</div>
+          <tbody id="scheduleBody">
+          </tbody>
+
+        </table>
+
+      </div>
 
 
       <!-- SELECTED SUMMARY -->
@@ -996,36 +1178,84 @@ transition: 0.2s;
 
         <div class="summary-grid">
 
-  <div class="summary-item">
-    <span class="summary-label">Date</span>
-    <span class="summary-value" id="summaryDate">-</span>
-  </div>
+          <div class="summary-item">
 
-  <div class="summary-item">
-    <span class="summary-label">Time</span>
-    <span class="summary-value" id="summaryTime">-</span>
-  </div>
+            <span class="summary-label">
+              Date
+            </span>
 
-  <div class="summary-item">
-    <span class="summary-label">Duration</span>
-    <span class="summary-value" id="summaryDuration">-</span>
-  </div>
+            <span
+              class="summary-value"
+              id="summaryDate"
+            >
+              -
+            </span>
 
-  <div class="summary-item">
-    <span class="summary-label">Court</span>
-    <span class="summary-value">Court 1</span>
-  </div>
+          </div>
 
-  <div class="summary-item">
-    <span class="summary-label">Total</span>
-    <span class="summary-value summary-rate" id="summaryTotal">
-      ₱0
-    </span>
-  </div>
 
-</div>
+          <div class="summary-item">
 
-          
+            <span class="summary-label">
+              Time
+            </span>
+
+            <span
+              class="summary-value"
+              id="summaryTime"
+            >
+              -
+            </span>
+
+          </div>
+
+
+          <div class="summary-item">
+
+            <span class="summary-label">
+              Duration
+            </span>
+
+            <span
+              class="summary-value"
+              id="summaryDuration"
+            >
+              -
+            </span>
+
+          </div>
+
+
+          <div class="summary-item">
+
+            <span class="summary-label">
+              Court
+            </span>
+
+            <span class="summary-value">
+              Court 1
+            </span>
+
+          </div>
+
+
+          <div class="summary-item">
+
+            <span class="summary-label">
+              Total
+            </span>
+
+            <span
+              class="summary-value summary-rate"
+              id="summaryTotal"
+            >
+              ₱0
+            </span>
+
+          </div>
+
+        </div>
+
 
         <!-- CUSTOMER FORM -->
 
@@ -1090,103 +1320,135 @@ transition: 0.2s;
             </div>
 
           </div>
-<!-- PAYMENT SECTION -->
-
-<div class="payment-section">
-
-  <h3 class="section-title">
-    💳 Payment Method
-  </h3>
-
-  <p class="section-subtitle">
-    Please pay the booking amount before submitting your booking.
-    Your booking will be confirmed after payment is verified.
-  </p>
-
-  <div class="payment-amount">
-    Amount to Pay:
-    <strong id="paymentAmount">₱0</strong>
-  </div>
-
-  <div class="payment-methods">
-
-    <!-- GCASH -->
-
-    <div class="payment-card">
-
-      <h4>🔵 GCash</h4>
-
-      <p>
-        Account Name: <strong>BRAYAN MONTERO</strong><br>
-        Scan the QR code to make your payment.
-      </p>
-
-      <button
-        type="button"
-        class="view-qr-btn"
-        onclick="window.open('gcash-qr.jpeg', '_blank')">
-        🔍 View GCash QR Code
-      </button>
-
-    </div>
 
 
-    <!-- MAYA -->
+          <!-- PAYMENT SECTION -->
 
-    <div class="payment-card">
+          <div class="payment-section">
 
-      <h4>🟢 Maya</h4>
+            <h3 class="section-title">
+              💳 Payment Method
+            </h3>
 
-      <p>
-        Account Name: <strong>BRAYAN MONTERO</strong><br>
-        Scan the QR code to make your payment.
-      </p>
+            <p class="section-subtitle">
+              Please pay the booking amount before submitting your booking.
+              Your booking will be confirmed after payment is verified.
+            </p>
 
-      <button
-        type="button"
-        class="view-qr-btn"
-        onclick="window.open('maya-qr.jpeg', '_blank')">
-        🔍 View Maya QR Code
-      </button>
+            <div class="payment-amount">
 
-    </div>
+              Amount to Pay:
 
-  </div>
+              <strong id="paymentAmount">
+                ₱0
+              </strong>
 
-
-  <div class="form-group payment-reference">
-
-    <label for="paymentReference">
-      🧾 Payment Reference Number
-    </label>
-
-    <input
-      type="text"
-      id="paymentReference"
-      placeholder="Enter your payment reference number"
-    >
-
-  </div>
-
-  <div class="payment-warning">
-    ⚠️ Please make sure your payment is completed before submitting.
-    Your booking will remain pending until payment is verified.
-  </div>
-
-</div>
+            </div>
 
 
-<div class="book-button-wrapper">
+            <div class="payment-methods">
 
-  <button id="bookBtn" onclick="submitBooking()" disabled>
-    BOOK NOW
-  </button>
+              <!-- GCASH -->
 
-  <div class="form-note">
-    Your booking will be submitted for confirmation.
-  </div>
+              <div class="payment-card">
 
-</div>
+                <h4>
+                  🔵 GCash
+                </h4>
+
+                <p>
+                  Account Name:
+                  <strong>
+                    BRAYAN MONTERO
+                  </strong>
+                  <br>
+                  Scan the QR code to make your payment.
+                </p>
+
+                <button
+                  type="button"
+                  class="view-qr-btn"
+                  onclick="window.open('gcash-qr.jpeg', '_blank')"
+                >
+                  🔍 View GCash QR Code
+                </button>
+
+              </div>
+
+
+              <!-- MAYA -->
+
+              <div class="payment-card">
+
+                <h4>
+                  🟢 Maya
+                </h4>
+
+                <p>
+                  Account Name:
+                  <strong>
+                    BRAYAN MONTERO
+                  </strong>
+                  <br>
+                  Scan the QR code to make your payment.
+                </p>
+
+                <button
+                  type="button"
+                  class="view-qr-btn"
+                  onclick="window.open('maya-qr.jpeg', '_blank')"
+                >
+                  🔍 View Maya QR Code
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-group payment-reference">
+
+              <label for="paymentReference">
+                🧾 Payment Reference Number
+              </label>
+
+              <input
+                type="text"
+                id="paymentReference"
+                placeholder="Enter your payment reference number"
+              >
+
+            </div>
+
+
+            <div class="payment-warning">
+              ⚠️ Please make sure your payment is completed before submitting.
+              Your booking will remain pending until payment is verified.
+            </div>
+
+          </div>
+
+
+          <div class="book-button-wrapper">
+
+            <button
+              id="bookBtn"
+              onclick="submitBooking()"
+              disabled
+            >
+              BOOK NOW
+            </button>
+
+            <div class="form-note">
+              Your booking will be submitted for confirmation.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
 
@@ -1211,86 +1473,177 @@ transition: 0.2s;
        CONFIRMATION
   ========================= -->
 
- <section class="container" id="confirmation">
+  <section
+    class="container"
+    id="confirmation"
+  >
 
-<div class="confirmation-card">
+    <div class="confirmation-card">
 
-<div class="success-icon">
-  ✓
-</div>
+      <div class="success-icon">
+        ✓
+      </div>
 
-<h2>Booking Submitted!</h2>
+      <h2>
+        Booking Submitted!
+      </h2>
 
-<p class="confirmation-subtitle">
-  Thank you for booking with Dink &amp; Drive Court.
-</p>
+      <p class="confirmation-subtitle">
+        Thank you for booking with Dink &amp; Drive Court.
+      </p>
 
-<div class="pending-badge">
-  ⏳ PENDING CONFIRMATION
-</div>
+      <div class="pending-badge">
+        ⏳ PENDING CONFIRMATION
+      </div>
 
-<div class="confirmation-details">
+      <div class="confirmation-details">
 
- <div class="confirmation-row">
-  <span class="confirmation-label">Booking ID</span>
-  <span class="confirmation-value" id="confirmBookingId">-</span>
-</div>
-  <div class="confirmation-row">
-    <span class="confirmation-label">Customer</span>
-    <span class="confirmation-value" id="confirmName">-</span>
-  </div>
+        <div class="confirmation-row">
 
-  <div class="confirmation-row">
-    <span class="confirmation-label">Date</span>
-    <span class="confirmation-value" id="confirmDate">-</span>
-  </div>
+          <span class="confirmation-label">
+            Booking ID
+          </span>
 
-  <div class="confirmation-row">
-    <span class="confirmation-label">Time</span>
-    <span class="confirmation-value" id="confirmTime">-</span>
-  </div>
+          <span
+            class="confirmation-value"
+            id="confirmBookingId"
+          >
+            -
+          </span>
 
-  <div class="confirmation-row">
-    <span class="confirmation-label">Court</span>
-    <span class="confirmation-value">Court 1</span>
-  </div>
+        </div>
 
-  <div class="confirmation-row">
-  <span class="confirmation-label">Duration</span>
-  <span class="confirmation-value" id="confirmDuration">-</span>
-</div>
 
-<div class="confirmation-row">
-  <span class="confirmation-label">Total</span>
-  <span class="confirmation-value" id="confirmTotal">-</span>
-</div>
+        <div class="confirmation-row">
 
-</div>
+          <span class="confirmation-label">
+            Customer
+          </span>
 
-<div class="confirmation-note">
-  <strong>Booking received successfully!</strong><br><br>
-  Your selected time slots have been reserved temporarily.
-  Please wait for confirmation from Dink &amp; Drive Court.
-</div>
+          <span
+            class="confirmation-value"
+            id="confirmName"
+          >
+            -
+          </span>
 
-<button
-  class="another-button"
-  onclick="bookAnother()"
->
-  BOOK ANOTHER SLOT
-</button>
+        </div>
 
-<a
-  href="index.html"
-  class="home-button"
->
-  BACK TO HOME
-</a>
 
-</div>
+        <div class="confirmation-row">
 
-</section>
-  
+          <span class="confirmation-label">
+            Date
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmDate"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            Time
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmTime"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            Court
+          </span>
+
+          <span class="confirmation-value">
+            Court 1
+          </span>
+
+        </div>
+
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            Duration
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmDuration"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            Total
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmTotal"
+          >
+            -
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="confirmation-note">
+
+        <strong>
+          Booking received successfully!
+        </strong>
+
+        <br>
+        <br>
+
+        Your selected time slots have been reserved temporarily.
+        Please wait for confirmation from Dink &amp; Drive Court.
+
+      </div>
+
+
+      <button
+        class="another-button"
+        onclick="bookAnother()"
+      >
+        BOOK ANOTHER SLOT
+      </button>
+
+
+      <a
+        href="index.html"
+        class="home-button"
+      >
+        BACK TO HOME
+      </a>
+
+    </div>
+
+  </section>
+
+
   <script>
 
     /* ==========================================
@@ -1300,7 +1653,9 @@ transition: 0.2s;
     const SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbzUKTLoXGyfyQVSeykhp92vQCB595o0jTY3DoFBPugJX9nKPQS9JEgJo9NSjYkNziND/exec";
 
-    const COURT = "Court 1";
+
+    const COURT =
+      "Court 1";
 
 
     /* ==========================================
@@ -1308,27 +1663,33 @@ transition: 0.2s;
     ========================================== */
 
     const times = [
-  "6:00 AM - 7:00 AM",
-  "7:00 AM - 8:00 AM",
-  "8:00 AM - 9:00 AM",
-  "9:00 AM - 10:00 AM",
-  "10:00 AM - 11:00 AM",
-  "11:00 AM - 12:00 PM",
-  "12:00 PM - 1:00 PM",
-  "1:00 PM - 2:00 PM",
-  "2:00 PM - 3:00 PM",
-  "3:00 PM - 4:00 PM",
-  "4:00 PM - 5:00 PM",
-  "5:00 PM - 6:00 PM",
-  "6:00 PM - 7:00 PM",
-  "7:00 PM - 8:00 PM",
-  "8:00 PM - 9:00 PM",
-  "9:00 PM - 10:00 PM",
-  "10:00 PM - 11:00 PM",
-  "11:00 PM - 12:00 AM"
-];
 
-      
+      "6:00 AM - 7:00 AM",
+      "7:00 AM - 8:00 AM",
+      "8:00 AM - 9:00 AM",
+      "9:00 AM - 10:00 AM",
+
+      "10:00 AM - 11:00 AM",
+      "11:00 AM - 12:00 PM",
+      "12:00 PM - 1:00 PM",
+      "1:00 PM - 2:00 PM",
+
+      "2:00 PM - 3:00 PM",
+      "3:00 PM - 4:00 PM",
+      "4:00 PM - 5:00 PM",
+      "5:00 PM - 6:00 PM",
+
+      "6:00 PM - 7:00 PM",
+      "7:00 PM - 8:00 PM",
+      "8:00 PM - 9:00 PM",
+      "9:00 PM - 10:00 PM",
+
+      "10:00 PM - 11:00 PM",
+      "11:00 PM - 12:00 AM"
+
+    ];
+
+
     /* ==========================================
        NIGHT RATE
     ========================================== */
@@ -1350,8 +1711,21 @@ transition: 0.2s;
     ========================================== */
 
     let selectedSlots = [];
+
     let bookedByDate = {};
+
     let availabilityReady = false;
+
+
+    /* ==========================================
+       DATE NAVIGATION
+    ========================================== */
+
+    let allDates = [];
+
+    let currentDatePage = 0;
+
+    const DATES_PER_PAGE = 5;
 
 
     /* ==========================================
@@ -1360,17 +1734,21 @@ transition: 0.2s;
 
     function formatDate(date) {
 
-      const year = date.getFullYear();
+      const year =
+        date.getFullYear();
 
-      const month = String(
-        date.getMonth() + 1
-      ).padStart(2, "0");
+      const month =
+        String(
+          date.getMonth() + 1
+        ).padStart(2, "0");
 
-      const day = String(
-        date.getDate()
-      ).padStart(2, "0");
+      const day =
+        String(
+          date.getDate()
+        ).padStart(2, "0");
 
       return `${year}-${month}-${day}`;
+
     }
 
 
@@ -1406,7 +1784,9 @@ transition: 0.2s;
 
     function getRate(time) {
 
-      if (nightTimes.includes(time)) {
+      if (
+        nightTimes.includes(time)
+      ) {
 
         return 300;
 
@@ -1418,698 +1798,1200 @@ transition: 0.2s;
 
 
     /* ==========================================
+       CREATE DATE RANGE
+       TODAY THROUGH 1 MONTH AHEAD
+    ========================================== */
+
+    function createDateRange() {
+
+      allDates = [];
+
+      const today =
+        new Date();
+
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      const endDate =
+        new Date(today);
+
+      endDate.setMonth(
+        endDate.getMonth() + 1
+      );
+
+
+      let currentDate =
+        new Date(today);
+
+
+      while (
+        currentDate <= endDate
+      ) {
+
+        allDates.push(
+          new Date(currentDate)
+        );
+
+        currentDate.setDate(
+          currentDate.getDate() + 1
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================
+       GET CURRENT 5-DAY PAGE
+    ========================================== */
+
+    function getCurrentPageDates() {
+
+      const start =
+        currentDatePage *
+        DATES_PER_PAGE;
+
+
+      return allDates.slice(
+        start,
+        start + DATES_PER_PAGE
+      );
+
+    }
+
+
+    /* ==========================================
+       UPDATE DATE NAVIGATION BUTTONS
+    ========================================== */
+
+    function updateDateNavigation() {
+
+      const previousButton =
+        document.getElementById(
+          "prevDatesBtn"
+        );
+
+      const nextButton =
+        document.getElementById(
+          "nextDatesBtn"
+        );
+
+      const rangeLabel =
+        document.getElementById(
+          "dateRangeLabel"
+        );
+
+
+      const pageDates =
+        getCurrentPageDates();
+
+
+      previousButton.disabled =
+        currentDatePage === 0;
+
+
+      const lastPage =
+        Math.ceil(
+          allDates.length /
+          DATES_PER_PAGE
+        ) - 1;
+
+
+      nextButton.disabled =
+        currentDatePage >= lastPage;
+
+
+      if (
+        pageDates.length > 0
+      ) {
+
+        const firstDate =
+          pageDates[0];
+
+        const lastDate =
+          pageDates[
+            pageDates.length - 1
+          ];
+
+
+        rangeLabel.textContent =
+          `${displayDate(firstDate)} – ${displayDate(lastDate)}`;
+
+      } else {
+
+        rangeLabel.textContent =
+          "No dates available";
+
+      }
+
+    }
+
+
+    /* ==========================================
+       SHOW PREVIOUS 5 DATES
+    ========================================== */
+
+    function showPreviousDates() {
+
+      if (
+        currentDatePage <= 0
+      ) {
+
+        return;
+
+      }
+
+
+      currentDatePage--;
+
+
+      clearSelection();
+
+
+      renderSchedulePage();
+
+    }
+
+
+    /* ==========================================
+       SHOW NEXT 5 DATES
+    ========================================== */
+
+    function showNextDates() {
+
+      const lastPage =
+        Math.ceil(
+          allDates.length /
+          DATES_PER_PAGE
+        ) - 1;
+
+
+      if (
+        currentDatePage >= lastPage
+      ) {
+
+        return;
+
+      }
+
+
+      currentDatePage++;
+
+
+      clearSelection();
+
+
+      renderSchedulePage();
+
+    }
+
+
+    /* ==========================================
        LOAD SCHEDULE
     ========================================== */
 
-  async function loadSchedule() {
+    function loadSchedule() {
 
-  const header =
-    document.getElementById("scheduleHeader");
-
-  const body =
-    document.getElementById("scheduleBody");
-
-  header.innerHTML = "";
-  body.innerHTML = "";
-
-  bookedByDate = {};
-
-  // Availability is not ready yet
-  availabilityReady = false;
-
-  const dates = [];
+      createDateRange();
 
 
-  /* ==============================
-     CREATE 7 DAYS
-     TODAY + NEXT 6 DAYS
-  ============================== */
-
-  for (let i = 0; i < 7; i++) {
-
-    const date = new Date();
-
-    date.setHours(0, 0, 0, 0);
-
-    date.setDate(
-      date.getDate() + i
-    );
-
-    dates.push(date);
-
-  }
+      currentDatePage =
+        0;
 
 
-  /* ==============================
-     FIRST HEADER
-     HOUR & RATE
-  ============================== */
+      renderSchedulePage();
 
-  const hourHeader =
-    document.createElement("th");
-
-  hourHeader.innerHTML = `
-    <div style="
-      font-size:14px;
-      font-weight:900;
-    ">
-      HOUR &amp; RATE
-    </div>
-  `;
-
-  header.appendChild(hourHeader);
+    }
 
 
-  /* ==============================
-     DATE HEADERS
-  ============================== */
+    /* ==========================================
+       RENDER CURRENT 5-DAY PAGE
+    ========================================== */
 
-  dates.forEach((date, index) => {
+    async function renderSchedulePage() {
 
-    const th =
-      document.createElement("th");
+      const header =
+        document.getElementById(
+          "scheduleHeader"
+        );
 
-    const dayLabel =
-      index === 0
-        ? "TODAY"
-        : date
-            .toLocaleDateString(
-              "en-US",
-              { weekday: "short" }
-            )
-            .toUpperCase();
-
-    const dateLabel =
-      date
-        .toLocaleDateString(
-          "en-US",
-          {
-            month: "short",
-            day: "numeric"
-          }
-        )
-        .toUpperCase();
-
-    th.innerHTML = `
-
-      <div style="
-        font-size:15px;
-        font-weight:900;
-      ">
-        ${dayLabel}
-      </div>
-
-      <div style="
-        font-size:13px;
-        margin-top:4px;
-      ">
-        ${dateLabel}
-      </div>
-
-      <div
-        class="available-count"
-        data-date="${formatDate(date)}"
-        style="
-          font-size:11px;
-          margin-top:4px;
-          opacity:0.9;
-        "
-      >
-        CHECKING...
-      </div>
-
-    `;
-
-    header.appendChild(th);
-
-  });
+      const body =
+        document.getElementById(
+          "scheduleBody"
+        );
 
 
-  /* ==============================
-     CREATE 18 HOURLY ROWS
-  ============================== */
+      header.innerHTML = "";
 
-  times.forEach(time => {
-
-    const tr =
-      document.createElement("tr");
+      body.innerHTML = "";
 
 
-    /* HOUR & RATE */
-
-    const hourCell =
-      document.createElement("td");
-
-    hourCell.className =
-      "date-cell";
-
-    const rate =
-      getRate(time);
-
-    hourCell.innerHTML = `
-
-      <div style="
-        font-size:13px;
-        font-weight:900;
-      ">
-        ${time}
-      </div>
-
-      <div style="
-        font-size:11px;
-        font-weight:700;
-        color:var(--gray);
-        margin-top:4px;
-      ">
-        (PHP${rate})
-      </div>
-
-    `;
-
-    tr.appendChild(hourCell);
+      bookedByDate = {};
 
 
-    /* ==============================
-       CREATE 7 DATE CELLS
-       START AS CHECKING
-    ============================== */
-
-    dates.forEach(date => {
-
-      const dateString =
-        formatDate(date);
-
-      const td =
-        document.createElement("td");
-
-      td.className =
-        "slot-cell checking";
-
-      td.dataset.date =
-        dateString;
-
-      td.dataset.time =
-        time;
+      availabilityReady =
+        false;
 
 
-      /* CHECKING LABEL */
+      updateDateNavigation();
 
-      td.innerHTML = `
+
+      const dates =
+        getCurrentPageDates();
+
+
+      /* ==============================
+         FIRST HEADER
+      ============================== */
+
+      const hourHeader =
+        document.createElement(
+          "th"
+        );
+
+
+      hourHeader.innerHTML = `
 
         <div style="
-          font-size:11px;
+          font-size:14px;
           font-weight:900;
-          letter-spacing:0.5px;
         ">
-          CHECKING...
+          HOUR &amp; RATE
         </div>
 
       `;
 
 
-      /* CLICK CELL TO SELECT */
+      header.appendChild(
+        hourHeader
+      );
 
-      td.addEventListener(
-        "click",
-        function() {
 
-          selectSlot(
-            dateString,
-            time,
-            td
+      /* ==============================
+         DATE HEADERS
+      ============================== */
+
+      dates.forEach(
+        (date, index) => {
+
+          const th =
+            document.createElement(
+              "th"
+            );
+
+
+          const dateString =
+            formatDate(date);
+
+
+          const dayLabel =
+            dateString ===
+            formatDate(
+              new Date()
+            )
+              ? "TODAY"
+              : displayDay(date)
+                  .toUpperCase();
+
+
+          const dateLabel =
+            date
+              .toLocaleDateString(
+                "en-US",
+                {
+                  month: "short",
+                  day: "numeric"
+                }
+              )
+              .toUpperCase();
+
+
+          th.innerHTML = `
+
+            <div style="
+              font-size:15px;
+              font-weight:900;
+            ">
+              ${dayLabel}
+            </div>
+
+            <div style="
+              font-size:13px;
+              margin-top:4px;
+            ">
+              ${dateLabel}
+            </div>
+
+            <div
+              class="available-count"
+              data-date="${dateString}"
+              style="
+                font-size:11px;
+                margin-top:4px;
+                opacity:0.9;
+              "
+            >
+              CHECKING...
+            </div>
+
+          `;
+
+
+          header.appendChild(
+            th
           );
 
         }
       );
 
 
-      tr.appendChild(td);
+      /* ==============================
+         CREATE 18 HOURLY ROWS
+      ============================== */
 
-    });
+      times.forEach(
+        time => {
 
-
-    body.appendChild(tr);
-
-  });
-
-
-  /* ==============================
-     LOAD BOOKED SLOTS
-     FOR ALL 7 DAYS AT THE SAME TIME
-  ============================== */
-
-  await Promise.all(
-
-    dates.map(date =>
-      loadAvailability(
-        formatDate(date)
-      )
-    )
-
-  );
+          const tr =
+            document.createElement(
+              "tr"
+            );
 
 
-  /* ==============================
-     AVAILABILITY IS NOW READY
-  ============================== */
+          /* HOUR & RATE */
 
-  availabilityReady = true;
+          const hourCell =
+            document.createElement(
+              "td"
+            );
 
-}
+
+          hourCell.className =
+            "date-cell";
+
+
+          const rate =
+            getRate(time);
+
+
+          hourCell.innerHTML = `
+
+            <div style="
+              font-size:13px;
+              font-weight:900;
+            ">
+              ${time}
+            </div>
+
+            <div style="
+              font-size:11px;
+              font-weight:700;
+              color:var(--gray);
+              margin-top:4px;
+            ">
+              (PHP${rate})
+            </div>
+
+          `;
+
+
+          tr.appendChild(
+            hourCell
+          );
+
+
+          /* ==============================
+             CREATE DATE CELLS
+          ============================== */
+
+          dates.forEach(
+            date => {
+
+              const dateString =
+                formatDate(date);
+
+
+              const td =
+                document.createElement(
+                  "td"
+                );
+
+
+              td.className =
+                "slot-cell checking";
+
+
+              td.dataset.date =
+                dateString;
+
+
+              td.dataset.time =
+                time;
+
+
+              td.innerHTML = `
+
+                <div style="
+                  font-size:11px;
+                  font-weight:900;
+                  letter-spacing:0.5px;
+                ">
+                  CHECKING...
+                </div>
+
+              `;
+
+
+              td.addEventListener(
+                "click",
+                function() {
+
+                  selectSlot(
+                    dateString,
+                    time,
+                    td
+                  );
+
+                }
+              );
+
+
+              tr.appendChild(
+                td
+              );
+
+            }
+          );
+
+
+          body.appendChild(
+            tr
+          );
+
+        }
+      );
+
+
+      /* ==============================
+         LOAD AVAILABILITY
+         FOR CURRENT 5 DAYS
+      ============================== */
+
+      await Promise.all(
+
+        dates.map(
+          date =>
+            loadAvailability(
+              formatDate(date)
+            )
+        )
+
+      );
+
+
+      /* ==============================
+         AVAILABILITY READY
+      ============================== */
+
+      availabilityReady =
+        true;
+
+
+      /*
+         Restore any selection that
+         belongs to the currently
+         displayed dates.
+      */
+
+      renderSelectedSlots();
+
+      updateSummary();
+
+    }
+
 
     /* ==========================================
        LOAD AVAILABILITY
     ========================================== */
 
-    async function loadAvailability(date) {
+    async function loadAvailability(
+      date
+    ) {
 
-  try {
+      try {
 
-    const url =
-      SCRIPT_URL +
-      "?date=" +
-      encodeURIComponent(date) +
-      "&court=" +
-      encodeURIComponent(COURT) +
-      "&_=" +
-      Date.now();
+        const url =
+          SCRIPT_URL +
+          "?date=" +
+          encodeURIComponent(date) +
+          "&court=" +
+          encodeURIComponent(COURT) +
+          "&_=" +
+          Date.now();
 
 
-    const response =
-      await fetch(
-        url,
-        {
-          cache: "no-store"
+        const response =
+          await fetch(
+            url,
+            {
+              cache: "no-store"
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "HTTP error: " +
+            response.status
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          data.success &&
+          Array.isArray(
+            data.bookedSlots
+          )
+        ) {
+
+          bookedByDate[date] =
+            data.bookedSlots;
+
+
+          updateBookedSlots(
+            date
+          );
+
+        } else {
+
+          throw new Error(
+            "Invalid availability response"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Availability error:",
+          date,
+          error
+        );
+
+
+        const cells =
+          document.querySelectorAll(
+            `.slot-cell[data-date="${date}"]`
+          );
+
+
+        cells.forEach(
+          cell => {
+
+            cell.classList.remove(
+              "available",
+              "booked"
+            );
+
+
+            cell.classList.add(
+              "checking"
+            );
+
+
+            cell.innerHTML = `
+
+              <div style="
+                font-size:11px;
+                font-weight:900;
+                letter-spacing:0.5px;
+              ">
+                CHECK AGAIN
+              </div>
+
+            `;
+
+          }
+        );
+
+
+        const countLabel =
+          document.querySelector(
+            `.available-count[data-date="${date}"]`
+          );
+
+
+        if (countLabel) {
+
+          countLabel.textContent =
+            "CHECK AGAIN";
+
+        }
+
+      }
+
+    }
+
+
+    /* ==========================================
+       UPDATE BOOKED SLOTS
+    ========================================== */
+
+    function updateBookedSlots(
+      date
+    ) {
+
+      const bookedSlots =
+        bookedByDate[date] || [];
+
+
+      const cells =
+        document.querySelectorAll(
+          `.slot-cell[data-date="${date}"]`
+        );
+
+
+      cells.forEach(
+        cell => {
+
+          const time =
+            cell.dataset.time;
+
+
+          /* BOOKED */
+
+          if (
+            bookedSlots.includes(time)
+          ) {
+
+            cell.classList.remove(
+              "available",
+              "checking",
+              "selected"
+            );
+
+
+            cell.classList.add(
+              "booked"
+            );
+
+
+            cell.innerHTML = `
+
+              <div class="booked-label">
+                BOOKED
+              </div>
+
+            `;
+
+
+            cell.onclick =
+              null;
+
+          }
+
+
+          /* AVAILABLE */
+
+          else {
+
+            cell.classList.remove(
+              "booked",
+              "checking"
+            );
+
+
+            cell.classList.add(
+              "available"
+            );
+
+
+            cell.innerHTML = `
+
+              <div style="
+                font-size:13px;
+                font-weight:900;
+                letter-spacing:0.5px;
+              ">
+                OPEN
+              </div>
+
+            `;
+
+          }
+
         }
       );
 
 
-    if (!response.ok) {
-      throw new Error(
-        "HTTP error: " + response.status
-      );
-    }
+      /* ==============================
+         UPDATE AVAILABLE SLOT COUNT
+      ============================== */
+
+      const availableCount =
+        times.length -
+        bookedSlots.length;
 
 
-    const data =
-      await response.json();
+      const countLabel =
+        document.querySelector(
+          `.available-count[data-date="${date}"]`
+        );
 
 
-    if (
-      data.success &&
-      Array.isArray(data.bookedSlots)
-    ) {
+      if (countLabel) {
 
-      bookedByDate[date] =
-        data.bookedSlots;
+        countLabel.textContent =
+          `${availableCount} AVAILABLE`;
 
-      updateBookedSlots(date);
-
-    } else {
-
-      throw new Error(
-        "Invalid availability response"
-      );
+      }
 
     }
-
-  } catch (error) {
-
-    console.error(
-      "Availability error:",
-      date,
-      error
-    );
-
-    // Keep the cells in CHECKING state
-    // instead of incorrectly showing them as OPEN.
-    const cells =
-      document.querySelectorAll(
-        `.slot-cell[data-date="${date}"]`
-      );
-
-    cells.forEach(cell => {
-
-      cell.classList.remove(
-        "available",
-        "booked"
-      );
-
-      cell.classList.add(
-        "checking"
-      );
-
-      cell.innerHTML = `
-        <div style="
-          font-size:11px;
-          font-weight:900;
-          letter-spacing:0.5px;
-        ">
-          CHECK AGAIN
-        </div>
-      `;
-
-    });
-
-
-    const countLabel =
-      document.querySelector(
-        `.available-count[data-date="${date}"]`
-      );
-
-    if (countLabel) {
-
-      countLabel.textContent =
-        "CHECK AGAIN";
-
-    }
-
-  }
-
-}
-
-   /* ==========================================
-   UPDATE BOOKED SLOTS
-========================================== */
-
-function updateBookedSlots(date) {
-
-  const bookedSlots =
-    bookedByDate[date] || [];
-
-
-  const cells =
-    document.querySelectorAll(
-      `.slot-cell[data-date="${date}"]`
-    );
-
-
-  cells.forEach(cell => {
-
-    const time =
-      cell.dataset.time;
-
-
-    // BOOKED
-    if (bookedSlots.includes(time)) {
-
-      cell.classList.remove(
-        "available",
-        "checking",
-        "selected"
-      );
-
-      cell.classList.add(
-        "booked"
-      );
-
-      cell.innerHTML = `
-        <div class="booked-label">
-          BOOKED
-        </div>
-      `;
-
-      cell.onclick = null;
-
-    }
-
-    // AVAILABLE
-    else {
-
-      cell.classList.remove(
-        "booked",
-        "checking"
-      );
-
-      cell.classList.add(
-        "available"
-      );
-
-      cell.innerHTML = `
-        <div style="
-          font-size:13px;
-          font-weight:900;
-          letter-spacing:0.5px;
-        ">
-          OPEN
-        </div>
-      `;
-
-    }
-
-  });
-
-
-  /* ==============================
-     UPDATE AVAILABLE SLOT COUNT
-  ============================== */
-
-  const availableCount =
-    times.length - bookedSlots.length;
-
-
-  const countLabel =
-    document.querySelector(
-      `.available-count[data-date="${date}"]`
-    );
-
-
-  if (countLabel) {
-
-    countLabel.textContent =
-      `${availableCount} AVAILABLE`;
-
-  }
-
-}
 
 
     /* ==========================================
        SELECT SLOT
     ========================================== */
 
-   function selectSlot(date, time, cell) {
+    function selectSlot(
+      date,
+      time,
+      cell
+    ) {
 
-  // Do not allow booking while availability is still being checked
-  if (!availabilityReady) {
-    alert("Please wait while we check the latest court availability.");
-    return;
-  }
+      /*
+         Do not allow booking while
+         availability is being checked.
+      */
 
-  // Do not allow booked slots
-  if (cell.classList.contains("booked")) {
-    return;
-  }
-
-  const slotIndex = times.indexOf(time);
-
-  if (slotIndex === -1) {
-    return;
-  }
-
-  // If customer selects another date,
-  // start a new booking on that date.
-  if (
-    selectedSlots.length > 0 &&
-    selectedSlots[0].date !== date
-  ) {
-    clearSelection();
-  }
-
-  // First selection
-  if (selectedSlots.length === 0) {
-
-    selectedSlots = [{
-      date: date,
-      time: time,
-      rate: getRate(time),
-      index: slotIndex
-    }];
-
-  } else {
-
-    const existingIndex =
-      selectedSlots.findIndex(
-        slot => slot.index === slotIndex
-      );
-
-    // Clicking an already-selected slot
-    if (existingIndex !== -1) {
-
-      // Don't allow a gap in the middle
-      if (
-        selectedSlots.length > 1 &&
-        existingIndex !== 0 &&
-        existingIndex !== selectedSlots.length - 1
-      ) {
+      if (!availabilityReady) {
 
         alert(
-          "Please remove the first or last selected hour to keep the booking consecutive."
+          "Please wait while we check the latest court availability."
         );
 
         return;
+
       }
 
-      selectedSlots.splice(existingIndex, 1);
 
-    } else {
+      /*
+         Do not allow booked slots.
+      */
 
-      // Find the complete range
-      const indexes = selectedSlots.map(
-        slot => slot.index
-      );
-
-      const minIndex =
-        Math.min(slotIndex, ...indexes);
-
-      const maxIndex =
-        Math.max(slotIndex, ...indexes);
-
-      // Make sure every hour in the range is available
-      for (
-        let i = minIndex;
-        i <= maxIndex;
-        i++
+      if (
+        cell.classList.contains(
+          "booked"
+        )
       ) {
 
-        const candidateTime = times[i];
+        return;
 
-        const candidateCell =
-          document.querySelector(
-            `.slot-cell[data-date="${date}"][data-time="${candidateTime}"]`
+      }
+
+
+      const slotIndex =
+        times.indexOf(time);
+
+
+      if (
+        slotIndex === -1
+      ) {
+
+        return;
+
+      }
+
+
+      /*
+         If customer selects another date,
+         start a new booking on that date.
+      */
+
+      if (
+        selectedSlots.length > 0 &&
+        selectedSlots[0].date !== date
+      ) {
+
+        clearSelection();
+
+      }
+
+
+      /* FIRST SELECTION */
+
+      if (
+        selectedSlots.length === 0
+      ) {
+
+        selectedSlots = [
+
+          {
+            date: date,
+            time: time,
+            rate: getRate(time),
+            index: slotIndex
+          }
+
+        ];
+
+      }
+
+
+      /* ADDITIONAL SELECTION */
+
+      else {
+
+        const existingIndex =
+          selectedSlots.findIndex(
+            slot =>
+              slot.index ===
+              slotIndex
           );
+
+
+        /* ALREADY SELECTED */
 
         if (
-          !candidateCell ||
-          candidateCell.classList.contains("booked")
+          existingIndex !== -1
         ) {
 
-          alert(
-            "You can only select consecutive available time slots."
+          /*
+             Don't allow a gap
+             in the middle.
+          */
+
+          if (
+            selectedSlots.length > 1 &&
+            existingIndex !== 0 &&
+            existingIndex !==
+              selectedSlots.length - 1
+          ) {
+
+            alert(
+              "Please remove the first or last selected hour to keep the booking consecutive."
+            );
+
+            return;
+
+          }
+
+
+          selectedSlots.splice(
+            existingIndex,
+            1
           );
 
-          return;
         }
+
+
+        /* NEW SLOT */
+
+        else {
+
+          const indexes =
+            selectedSlots.map(
+              slot =>
+                slot.index
+            );
+
+
+          const minIndex =
+            Math.min(
+              slotIndex,
+              ...indexes
+            );
+
+
+          const maxIndex =
+            Math.max(
+              slotIndex,
+              ...indexes
+            );
+
+
+          /*
+             Make sure every hour
+             in the range is available.
+          */
+
+          for (
+            let i = minIndex;
+            i <= maxIndex;
+            i++
+          ) {
+
+            const candidateTime =
+              times[i];
+
+
+            const candidateCell =
+              document.querySelector(
+                `.slot-cell[data-date="${date}"][data-time="${candidateTime}"]`
+              );
+
+
+            if (
+              !candidateCell ||
+              candidateCell.classList.contains(
+                "booked"
+              )
+            ) {
+
+              alert(
+                "You can only select consecutive available time slots."
+              );
+
+              return;
+
+            }
+
+          }
+
+
+          /*
+             Select complete
+             consecutive range.
+          */
+
+          selectedSlots = [];
+
+
+          for (
+            let i = minIndex;
+            i <= maxIndex;
+            i++
+          ) {
+
+            selectedSlots.push({
+
+              date: date,
+
+              time:
+                times[i],
+
+              rate:
+                getRate(
+                  times[i]
+                ),
+
+              index: i
+
+            });
+
+          }
+
+        }
+
       }
 
-      // Select the complete consecutive range
+
+      renderSelectedSlots();
+
+      updateSummary();
+
+    }
+
+
+    /* ==========================================
+       CLEAR SELECTION
+    ========================================== */
+
+    function clearSelection() {
+
+      document
+        .querySelectorAll(
+          ".slot-cell.selected"
+        )
+        .forEach(
+          cell => {
+
+            cell.classList.remove(
+              "selected"
+            );
+
+
+            const checkbox =
+              cell.querySelector(
+                ".slot-check"
+              );
+
+
+            if (checkbox) {
+
+              checkbox.checked =
+                false;
+
+            }
+
+          }
+        );
+
+
       selectedSlots = [];
 
-      for (
-        let i = minIndex;
-        i <= maxIndex;
-        i++
-      ) {
-
-        selectedSlots.push({
-          date: date,
-          time: times[i],
-          rate: getRate(times[i]),
-          index: i
-        });
-
-      }
     }
-  }
-
-  renderSelectedSlots();
-  updateSummary();
-}
 
 
-function clearSelection() {
+    /* ==========================================
+       RENDER SELECTED SLOTS
+    ========================================== */
 
-  document
-    .querySelectorAll(".slot-cell.selected")
-    .forEach(cell => {
+    function renderSelectedSlots() {
 
-      cell.classList.remove("selected");
+      document
+        .querySelectorAll(
+          ".slot-cell.selected"
+        )
+        .forEach(
+          cell => {
 
-      const checkbox =
-        cell.querySelector(".slot-check");
-
-      if (checkbox) {
-        checkbox.checked = false;
-      }
-
-    });
-
-  selectedSlots = [];
-}
+            cell.classList.remove(
+              "selected"
+            );
 
 
-function renderSelectedSlots() {
+            const checkbox =
+              cell.querySelector(
+                ".slot-check"
+              );
 
-  document
-    .querySelectorAll(".slot-cell.selected")
-    .forEach(cell => {
 
-      cell.classList.remove("selected");
+            if (checkbox) {
 
-      const checkbox =
-        cell.querySelector(".slot-check");
+              checkbox.checked =
+                false;
 
-      if (checkbox) {
-        checkbox.checked = false;
-      }
+            }
 
-    });
+          }
+        );
 
-  selectedSlots.forEach(slot => {
 
-    const cell =
-      document.querySelector(
-        `.slot-cell[data-date="${slot.date}"][data-time="${slot.time}"]`
+      selectedSlots.forEach(
+        slot => {
+
+          const cell =
+            document.querySelector(
+              `.slot-cell[data-date="${slot.date}"][data-time="${slot.time}"]`
+            );
+
+
+          if (!cell) {
+
+            return;
+
+          }
+
+
+          cell.classList.add(
+            "selected"
+          );
+
+
+          const checkbox =
+            cell.querySelector(
+              ".slot-check"
+            );
+
+
+          if (checkbox) {
+
+            checkbox.checked =
+              true;
+
+          }
+
+        }
       );
 
-    if (!cell) {
-      return;
     }
 
-    cell.classList.add("selected");
 
-    const checkbox =
-      cell.querySelector(".slot-check");
+    /* ==========================================
+       GET SELECTED TOTAL
+    ========================================== */
 
-    if (checkbox) {
-      checkbox.checked = true;
+    function getSelectedTotal() {
+
+      return selectedSlots.reduce(
+        (
+          total,
+          slot
+        ) =>
+          total +
+          slot.rate,
+        0
+      );
+
     }
 
-  });
-}
+
+    /* ==========================================
+       GET SELECTED TIME RANGE
+    ========================================== */
+
+    function getSelectedTimeRange() {
+
+      if (
+        selectedSlots.length === 0
+      ) {
+
+        return "";
+
+      }
 
 
-function getSelectedTotal() {
+      const sortedSlots =
+        [
+          ...selectedSlots
+        ].sort(
+          (
+            a,
+            b
+          ) =>
+            a.index -
+            b.index
+        );
 
-  return selectedSlots.reduce(
-    (total, slot) => total + slot.rate,
-    0
-  );
 
-}
+      const firstTime =
+        sortedSlots[0]
+          .time
+          .split(
+            " - "
+          )[0];
 
 
-function getSelectedTimeRange() {
+      const lastTime =
+        sortedSlots[
+          sortedSlots.length - 1
+        ]
+          .time
+          .split(
+            " - "
+          )[1];
 
-  if (selectedSlots.length === 0) {
-    return "";
-  }
 
-  const sortedSlots =
-    [...selectedSlots].sort(
-      (a, b) => a.index - b.index
-    );
+      return (
+        firstTime +
+        " - " +
+        lastTime
+      );
 
-  const firstTime =
-    sortedSlots[0].time.split(" - ")[0];
+    }
 
-  const lastTime =
-    sortedSlots[
-      sortedSlots.length - 1
-    ].time.split(" - ")[1];
-
-  return firstTime + " - " + lastTime;
-}
 
     /* ==========================================
        UPDATE SUMMARY
@@ -2117,111 +2999,161 @@ function getSelectedTimeRange() {
 
     function updateSummary() {
 
-  const summary =
-    document.getElementById("summary");
+      const summary =
+        document.getElementById(
+          "summary"
+        );
 
-  if (selectedSlots.length === 0) {
 
-    summary.classList.remove("show");
+      if (
+        selectedSlots.length === 0
+      ) {
 
-    updateBookButton();
+        summary.classList.remove(
+          "show"
+        );
 
-    return;
-  }
 
-  summary.classList.add("show");
+        updateBookButton();
 
-  const sortedSlots =
-    [...selectedSlots].sort(
-      (a, b) => a.index - b.index
-    );
+        return;
 
-  const total =
-    getSelectedTotal();
+      }
 
-  const timeRange =
-    getSelectedTimeRange();
 
-  document.getElementById(
-    "summaryDate"
-  ).textContent =
-    sortedSlots[0].date;
+      summary.classList.add(
+        "show"
+      );
 
-  document.getElementById(
-    "summaryTime"
-  ).textContent =
-    timeRange;
 
-  document.getElementById(
-    "summaryDuration"
-  ).textContent =
-    selectedSlots.length +
-    (
-      selectedSlots.length === 1
-        ? " hour"
-        : " hours"
-    );
+      const sortedSlots =
+        [
+          ...selectedSlots
+        ].sort(
+          (
+            a,
+            b
+          ) =>
+            a.index -
+            b.index
+        );
 
-  document.getElementById(
-    "summaryTotal"
-  ).textContent =
-    "₱" +
-    total.toLocaleString();
 
-  updateBookButton();
-}
+      const total =
+        getSelectedTotal();
+
+
+      const timeRange =
+        getSelectedTimeRange();
+
+
+      document.getElementById(
+        "summaryDate"
+      ).textContent =
+        sortedSlots[0].date;
+
+
+      document.getElementById(
+        "summaryTime"
+      ).textContent =
+        timeRange;
+
+
+      document.getElementById(
+        "summaryDuration"
+      ).textContent =
+        selectedSlots.length +
+        (
+          selectedSlots.length === 1
+            ? " hour"
+            : " hours"
+        );
+
+
+      document.getElementById(
+        "summaryTotal"
+      ).textContent =
+        "₱" +
+        total.toLocaleString();
+
+
+      updateBookButton();
+
+    }
 
 
     /* ==========================================
        BOOK BUTTON STATE
     ========================================== */
 
- function updateBookButton() {
+    function updateBookButton() {
 
-  const name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
+      const name =
+        document
+          .getElementById(
+            "customerName"
+          )
+          .value
+          .trim();
 
-  const mobile =
-    document
-      .getElementById("customerMobile")
-      .value
-      .trim();
 
-  const email =
-    document
-      .getElementById("customerEmail")
-      .value
-      .trim();
+      const mobile =
+        document
+          .getElementById(
+            "customerMobile"
+          )
+          .value
+          .trim();
 
-  const paymentReference =
-    document
-      .getElementById("paymentReference")
-      .value
-      .trim();
 
-  const bookBtn =
-    document.getElementById("bookBtn");
+      const email =
+        document
+          .getElementById(
+            "customerEmail"
+          )
+          .value
+          .trim();
 
-  const paymentAmount =
-    document.getElementById("paymentAmount");
 
-  const total =
-    getSelectedTotal();
+      const paymentReference =
+        document
+          .getElementById(
+            "paymentReference"
+          )
+          .value
+          .trim();
 
-  paymentAmount.textContent =
-    "₱" + total.toLocaleString();
 
-  bookBtn.disabled = !(
-    selectedSlots.length > 0 &&
-    name &&
-    mobile &&
-    email &&
-    paymentReference
-  );
-}
+      const bookBtn =
+        document.getElementById(
+          "bookBtn"
+        );
+
+
+      const paymentAmount =
+        document.getElementById(
+          "paymentAmount"
+        );
+
+
+      const total =
+        getSelectedTotal();
+
+
+      paymentAmount.textContent =
+        "₱" +
+        total.toLocaleString();
+
+
+      bookBtn.disabled = !(
+        selectedSlots.length > 0 &&
+        name &&
+        mobile &&
+        email &&
+        paymentReference
+      );
+
+    }
 
 
     /* ==========================================
@@ -2229,7 +3161,9 @@ function getSelectedTimeRange() {
     ========================================== */
 
     document
-      .getElementById("customerName")
+      .getElementById(
+        "customerName"
+      )
       .addEventListener(
         "input",
         updateBookButton
@@ -2237,7 +3171,9 @@ function getSelectedTimeRange() {
 
 
     document
-      .getElementById("customerMobile")
+      .getElementById(
+        "customerMobile"
+      )
       .addEventListener(
         "input",
         updateBookButton
@@ -2245,12 +3181,23 @@ function getSelectedTimeRange() {
 
 
     document
-      .getElementById("customerEmail")
+      .getElementById(
+        "customerEmail"
+      )
       .addEventListener(
         "input",
         updateBookButton
       );
-    document.getElementById("paymentReference").addEventListener("input", updateBookButton);
+
+
+    document
+      .getElementById(
+        "paymentReference"
+      )
+      .addEventListener(
+        "input",
+        updateBookButton
+      );
 
 
     /* ==========================================
@@ -2259,168 +3206,243 @@ function getSelectedTimeRange() {
 
     async function submitBooking() {
 
-  if (selectedSlots.length === 0) {
+      if (
+        selectedSlots.length === 0
+      ) {
 
-    alert(
-      "Please select at least one available time slot."
-    );
+        alert(
+          "Please select at least one available time slot."
+        );
 
-    return;
-  }
+        return;
 
-  const name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
+      }
 
-  const mobile =
-    document
-      .getElementById("customerMobile")
-      .value
-      .trim();
 
-  const email =
-    document
-      .getElementById("customerEmail")
-      .value
-      .trim();
+      const name =
+        document
+          .getElementById(
+            "customerName"
+          )
+          .value
+          .trim();
 
-  const paymentReference =
-    document
-      .getElementById("paymentReference")
-      .value
-      .trim();
 
-  if (!name || !mobile || !email) {
+      const mobile =
+        document
+          .getElementById(
+            "customerMobile"
+          )
+          .value
+          .trim();
 
-    alert(
-      "Please complete all customer information."
-    );
 
-    return;
-  }
+      const email =
+        document
+          .getElementById(
+            "customerEmail"
+          )
+          .value
+          .trim();
 
-  if (!paymentReference) {
 
-    alert(
-      "Please enter your payment reference number."
-    );
+      const paymentReference =
+        document
+          .getElementById(
+            "paymentReference"
+          )
+          .value
+          .trim();
 
-    return;
-  }
 
-  const button =
-    document.getElementById("bookBtn");
+      if (
+        !name ||
+        !mobile ||
+        !email
+      ) {
 
-  button.disabled = true;
-  button.textContent =
-    "SUBMITTING...";
+        alert(
+          "Please complete all customer information."
+        );
 
-  const sortedSlots =
-    [...selectedSlots].sort(
-      (a, b) => a.index - b.index
-    );
+        return;
 
-  const totalAmount =
-    getSelectedTotal();
+      }
 
-  const timeRange =
-    getSelectedTimeRange();
 
-  const bookingData = {
+      if (
+        !paymentReference
+      ) {
 
-    date:
-      sortedSlots[0].date,
+        alert(
+          "Please enter your payment reference number."
+        );
 
-    time:
-      timeRange,
+        return;
 
-    timeSlots:
-      sortedSlots.map(
-        slot => slot.time
-      ),
+      }
 
-    duration:
-      sortedSlots.length,
 
-    court:
-      COURT,
+      const button =
+        document.getElementById(
+          "bookBtn"
+        );
 
-    name:
-      name,
 
-    mobile:
-      mobile,
+      button.disabled =
+        true;
 
-    email:
-      email,
 
-    rate:
-      "₱" + totalAmount.toLocaleString(),
-
-    totalAmount:
-      totalAmount,
-
-    paymentReference:
-      paymentReference
-  };
-
-  try {
-
-    const response =
-      await fetch(
-        SCRIPT_URL,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify(
-              bookingData
-            )
-        }
-      );
-
-    const result =
-      await response.json();
-
-    if (!result.success) {
-
-      alert(
-        result.message ||
-        "Unable to process booking."
-      );
-
-      button.disabled = false;
       button.textContent =
-        "BOOK NOW";
+        "SUBMITTING...";
 
-      return;
+
+      const sortedSlots =
+        [
+          ...selectedSlots
+        ].sort(
+          (
+            a,
+            b
+          ) =>
+            a.index -
+            b.index
+        );
+
+
+      const totalAmount =
+        getSelectedTotal();
+
+
+      const timeRange =
+        getSelectedTimeRange();
+
+
+      const bookingData = {
+
+        date:
+          sortedSlots[0].date,
+
+        time:
+          timeRange,
+
+        timeSlots:
+          sortedSlots.map(
+            slot =>
+              slot.time
+          ),
+
+        duration:
+          sortedSlots.length,
+
+        court:
+          COURT,
+
+        name:
+          name,
+
+        mobile:
+          mobile,
+
+        email:
+          email,
+
+        rate:
+          "₱" +
+          totalAmount.toLocaleString(),
+
+        totalAmount:
+          totalAmount,
+
+        paymentReference:
+          paymentReference
+
+      };
+
+
+      try {
+
+        const response =
+          await fetch(
+            SCRIPT_URL,
+            {
+              method:
+                "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "text/plain;charset=utf-8"
+
+              },
+
+              body:
+                JSON.stringify(
+                  bookingData
+                )
+
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (
+          !result.success
+        ) {
+
+          alert(
+            result.message ||
+            "Unable to process booking."
+          );
+
+
+          button.disabled =
+            false;
+
+
+          button.textContent =
+            "BOOK NOW";
+
+
+          return;
+
+        }
+
+
+        bookingData.bookingId =
+          result.bookingId;
+
+
+        showConfirmation(
+          bookingData
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        alert(
+          "Unable to connect to the booking system. Please try again."
+        );
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "BOOK NOW";
+
+      }
+
     }
-
-    bookingData.bookingId =
-      result.bookingId;
-
-    showConfirmation(
-      bookingData
-    );
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Unable to connect to the booking system. Please try again."
-    );
-
-    button.disabled = false;
-    button.textContent =
-      "BOOK NOW";
-  }
-}
 
 
     /* ==========================================
@@ -2444,10 +3466,11 @@ function getSelectedTimeRange() {
 
 
       document.getElementById(
-  "confirmBookingId"
-).textContent =
-  booking.bookingId;
-      
+        "confirmBookingId"
+      ).textContent =
+        booking.bookingId;
+
+
       document.getElementById(
         "confirmName"
       ).textContent =
@@ -2467,19 +3490,20 @@ function getSelectedTimeRange() {
 
 
       document.getElementById(
-  "confirmDuration"
-).textContent =
-  booking.duration +
-  (
-    booking.duration === 1
-      ? " hour"
-      : " hours"
-  );
+        "confirmDuration"
+      ).textContent =
+        booking.duration +
+        (
+          booking.duration === 1
+            ? " hour"
+            : " hours"
+        );
 
-document.getElementById(
-  "confirmTotal"
-).textContent =
-  booking.rate;
+
+      document.getElementById(
+        "confirmTotal"
+      ).textContent =
+        booking.rate;
 
 
       window.scrollTo({
@@ -2511,4 +3535,3 @@ document.getElementById(
 
 </body>
 </html>
-```
