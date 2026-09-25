@@ -78,7 +78,6 @@
         .nav-logo {
             display: block;
 
-            /* LARGER HOMEPAGE LOGO */
             width: 500px;
             max-width: 48vw;
             height: 85px;
@@ -106,8 +105,6 @@
         .nav-links a:hover {
             color: var(--orange);
         }
-
-        /* HOMEPAGE ACTIVE LINK */
 
         .nav-links a.active {
             color: var(--orange);
@@ -352,8 +349,6 @@
             animation: bookNowPulse 2s infinite;
         }
 
-        /* MOBILE BOOK NOW */
-
         .mobile-book-now {
             display: none;
             width: 100%;
@@ -466,6 +461,61 @@
 
 
         /* =========================
+           DATE NAVIGATION
+        ========================= */
+
+        .date-navigation {
+            display: grid;
+
+            grid-template-columns: 45px 1fr 45px;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .date-nav-btn {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: var(--green);
+            color: white;
+
+            font-size: 25px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            box-shadow:
+                0 5px 14px rgba(23,107,103,0.18);
+        }
+
+        .date-nav-btn:hover:not(:disabled) {
+            background: var(--dark-green);
+            transform: translateY(-1px);
+        }
+
+        .date-nav-btn:disabled {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+
+        /* =========================
            DATE DISPLAY
         ========================= */
 
@@ -477,7 +527,7 @@
 
             gap: 8px;
 
-            margin-bottom: 20px;
+            min-width: 0;
         }
 
         .date-card {
@@ -1053,8 +1103,6 @@
                 display: none;
             }
 
-            /* SHOW MOBILE BOOK NOW */
-
             .mobile-book-now {
                 display: inline-flex;
             }
@@ -1184,6 +1232,24 @@
                 gap: 12px;
             }
 
+            /* MOBILE DATE NAVIGATION */
+
+            .date-navigation {
+                grid-template-columns:
+                    36px 1fr 36px;
+
+                gap: 5px;
+            }
+
+            .date-nav-btn {
+                width: 36px;
+                height: 42px;
+
+                border-radius: 9px;
+
+                font-size: 21px;
+            }
+
             .date-row {
                 grid-template-columns:
                     repeat(7, 1fr);
@@ -1203,8 +1269,6 @@
             .date-number {
                 font-size: 12px;
             }
-
-            /* KEEP 18 TIME SLOTS IN 2 COLUMNS */
 
             .schedule-grid {
                 grid-template-columns:
@@ -1301,12 +1365,15 @@
     <nav>
 
         <a href="#home">
+
             <img
                 src="logo.png"
                 alt="Dink & Drive Court Logo"
                 class="nav-logo"
             >
+
         </a>
+
 
         <ul class="nav-links">
 
@@ -1484,13 +1551,39 @@
 
 
 
-            <!-- DATES -->
+            <!-- =========================
+                 DATE NAVIGATION
+            ========================== -->
 
-            <div
-                class="date-row"
-                id="dateRow"
-            >
-                <!-- JavaScript inserts dates -->
+            <div class="date-navigation">
+
+                <button
+                    type="button"
+                    class="date-nav-btn"
+                    id="prevDateBtn"
+                    aria-label="Previous dates"
+                >
+                    ‹
+                </button>
+
+
+                <div
+                    class="date-row"
+                    id="dateRow"
+                >
+                    <!-- JavaScript inserts 7 dates -->
+                </div>
+
+
+                <button
+                    type="button"
+                    class="date-nav-btn"
+                    id="nextDateBtn"
+                    aria-label="Next dates"
+                >
+                    ›
+                </button>
+
             </div>
 
 
@@ -2147,6 +2240,7 @@
     </footer>
 
 
+
     <!-- =========================
          LIVE AVAILABILITY SCRIPT
     ========================== -->
@@ -2195,10 +2289,29 @@
 
 
         /* =========================
-           SELECTED DATE
+           DATE SETTINGS
         ========================= */
 
+        /*
+           The homepage allows booking from TODAY
+           up to ONE CALENDAR MONTH ahead.
+
+           Example:
+           September 25 -> October 25
+
+           This is a rolling window based on today's date.
+        */
+
+        const DAYS_TO_DISPLAY = 7;
+
+
         let selectedDate = null;
+
+        /*
+           This controls which 7-day group is currently visible.
+        */
+
+        let dateWindowStart = null;
 
 
         /* =========================
@@ -2217,6 +2330,51 @@
             );
 
             return today;
+
+        }
+
+
+        /*
+           Get the maximum selectable date.
+
+           This uses one CALENDAR MONTH from today.
+
+           Example:
+           September 25 -> October 25
+           January 31 -> February 28/29
+        */
+
+        function getMaxBookingDate() {
+
+            const maxDate =
+                getToday();
+
+            const originalDay =
+                maxDate.getDate();
+
+            maxDate.setMonth(
+                maxDate.getMonth() + 1
+            );
+
+
+            /*
+               Handle months that do not have
+               the same day number.
+
+               Example:
+               January 31 -> February 28/29
+            */
+
+            if (
+                maxDate.getDate() !== originalDay
+            ) {
+
+                maxDate.setDate(0);
+
+            }
+
+
+            return maxDate;
 
         }
 
@@ -2266,8 +2424,57 @@
         }
 
 
+        /*
+           Compare dates without time.
+        */
+
+        function isSameDate(
+            date1,
+            date2
+        ) {
+
+            return (
+                date1.getFullYear() ===
+                    date2.getFullYear()
+
+                &&
+
+                date1.getMonth() ===
+                    date2.getMonth()
+
+                &&
+
+                date1.getDate() ===
+                    date2.getDate()
+            );
+
+        }
+
+
+        /*
+           Return a new date shifted by
+           a number of days.
+        */
+
+        function addDays(
+            date,
+            days
+        ) {
+
+            const result =
+                new Date(date);
+
+            result.setDate(
+                result.getDate() + days
+            );
+
+            return result;
+
+        }
+
+
         /* =========================
-           CREATE 7 DATE CARDS
+           DATE WINDOW
         ========================= */
 
         function createDateCards() {
@@ -2277,6 +2484,7 @@
                     "dateRow"
                 );
 
+
             dateRow.innerHTML = "";
 
 
@@ -2284,18 +2492,86 @@
                 getToday();
 
 
+            const maxDate =
+                getMaxBookingDate();
+
+
+            /*
+               Make sure the window starts
+               inside the allowed range.
+            */
+
+            if (
+                dateWindowStart < today
+            ) {
+
+                dateWindowStart =
+                    new Date(today);
+
+            }
+
+
+            /*
+               The last possible 7-date window
+               must end at the maximum booking date.
+
+               Example:
+
+               Maximum = October 25
+
+               Last window:
+               October 19 - October 25
+            */
+
+            const latestWindowStart =
+                addDays(
+                    maxDate,
+                    -(DAYS_TO_DISPLAY - 1)
+                );
+
+
+            if (
+                dateWindowStart >
+                latestWindowStart
+            ) {
+
+                dateWindowStart =
+                    new Date(
+                        latestWindowStart
+                    );
+
+            }
+
+
+            /*
+               Create exactly 7 visible dates.
+            */
+
             for (
                 let i = 0;
-                i < 7;
+                i < DAYS_TO_DISPLAY;
                 i++
             ) {
 
                 const date =
-                    new Date(today);
+                    addDays(
+                        dateWindowStart,
+                        i
+                    );
 
-                date.setDate(
-                    today.getDate() + i
-                );
+
+                /*
+                   Do not display a date beyond
+                   the maximum allowed date.
+                */
+
+                if (
+                    date > maxDate
+                ) {
+
+                    break;
+
+                }
 
 
                 const dateString =
@@ -2319,11 +2595,15 @@
 
 
                 /*
-                   Mark today's date separately.
-                   This does NOT mean it is selected.
+                   Mark today's date.
                 */
 
-                if (i === 0) {
+                if (
+                    isSameDate(
+                        date,
+                        today
+                    )
+                ) {
 
                     card.classList.add(
                         "is-today"
@@ -2332,10 +2612,31 @@
                 }
 
 
+                /*
+                   Keep selected date highlighted
+                   if it belongs to the current window.
+                */
+
+                if (
+                    selectedDate ===
+                    dateString
+                ) {
+
+                    card.classList.add(
+                        "selected"
+                    );
+
+                }
+
+
                 card.innerHTML = `
 
                     <span class="date-day">
-                        ${i === 0
+                        ${
+                            isSameDate(
+                                date,
+                                today
+                            )
                             ? "TODAY"
                             : getDayName(date)
                         }
@@ -2362,6 +2663,175 @@
 
                 dateRow.appendChild(
                     card
+                );
+
+            }
+
+
+            updateDateNavigation();
+
+        }
+
+
+        /* =========================
+           DATE NAVIGATION BUTTONS
+        ========================= */
+
+        function updateDateNavigation() {
+
+            const previousButton =
+                document.getElementById(
+                    "prevDateBtn"
+                );
+
+
+            const nextButton =
+                document.getElementById(
+                    "nextDateBtn"
+                );
+
+
+            const today =
+                getToday();
+
+
+            const maxDate =
+                getMaxBookingDate();
+
+
+            const latestWindowStart =
+                addDays(
+                    maxDate,
+                    -(DAYS_TO_DISPLAY - 1)
+                );
+
+
+            /*
+               Disable PREVIOUS when the visible
+               window is already at today's date.
+            */
+
+            previousButton.disabled =
+                dateWindowStart <= today;
+
+
+            /*
+               Disable NEXT when the visible
+               window reaches the final possible window.
+            */
+
+            nextButton.disabled =
+                dateWindowStart >=
+                latestWindowStart;
+
+        }
+
+
+        /* =========================
+           MOVE DATE WINDOW
+        ========================= */
+
+        function moveDateWindow(
+            direction
+        ) {
+
+            const today =
+                getToday();
+
+
+            const maxDate =
+                getMaxBookingDate();
+
+
+            const latestWindowStart =
+                addDays(
+                    maxDate,
+                    -(DAYS_TO_DISPLAY - 1)
+                );
+
+
+            /*
+               Move by 7 days.
+
+               This keeps the same 7-date
+               layout while allowing the user
+               to browse the entire month.
+            */
+
+            let newStart =
+                addDays(
+                    dateWindowStart,
+                    direction * DAYS_TO_DISPLAY
+                );
+
+
+            /*
+               Do not move before today.
+            */
+
+            if (
+                newStart < today
+            ) {
+
+                newStart =
+                    new Date(today);
+
+            }
+
+
+            /*
+               Do not move beyond the final window.
+            */
+
+            if (
+                newStart >
+                latestWindowStart
+            ) {
+
+                newStart =
+                    new Date(
+                        latestWindowStart
+                    );
+
+            }
+
+
+            dateWindowStart =
+                newStart;
+
+
+            /*
+               Rebuild the visible dates.
+            */
+
+            createDateCards();
+
+
+            /*
+               If the currently selected date
+               is no longer visible, select the
+               first date in the new window.
+
+               Otherwise keep the current
+               selected date.
+            */
+
+            const selectedCard =
+                document.querySelector(
+                    `.date-card[data-date="${selectedDate}"]`
+                );
+
+
+            if (!selectedCard) {
+
+                const firstDate =
+                    formatDate(
+                        dateWindowStart
+                    );
+
+
+                selectDate(
+                    firstDate
                 );
 
             }
@@ -2423,6 +2893,122 @@
 
             selectedDate =
                 date;
+
+
+            /*
+               Make sure the selected date
+               is within the allowed range.
+            */
+
+            const selectedDateObject =
+                new Date(
+                    date + "T00:00:00"
+                );
+
+
+            const today =
+                getToday();
+
+
+            const maxDate =
+                getMaxBookingDate();
+
+
+            if (
+                selectedDateObject < today
+                ||
+                selectedDateObject > maxDate
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+               If selected date is outside
+               the current visible 7-day window,
+               move the window so it becomes visible.
+            */
+
+            const windowEnd =
+                addDays(
+                    dateWindowStart,
+                    DAYS_TO_DISPLAY - 1
+                );
+
+
+            if (
+                selectedDateObject <
+                dateWindowStart
+                ||
+                selectedDateObject >
+                windowEnd
+            ) {
+
+                /*
+                   Try to place selected date
+                   around the middle of the
+                   visible 7-day window.
+                */
+
+                let newStart =
+                    addDays(
+                        selectedDateObject,
+                        -3
+                    );
+
+
+                /*
+                   Do not start before today.
+                */
+
+                if (
+                    newStart < today
+                ) {
+
+                    newStart =
+                        new Date(today);
+
+                }
+
+
+                /*
+                   Do not go beyond the final window.
+                */
+
+                const latestWindowStart =
+                    addDays(
+                        maxDate,
+                        -(DAYS_TO_DISPLAY - 1)
+                    );
+
+
+                if (
+                    newStart >
+                    latestWindowStart
+                ) {
+
+                    newStart =
+                        new Date(
+                            latestWindowStart
+                        );
+
+                }
+
+
+                dateWindowStart =
+                    newStart;
+
+            }
+
+
+            /*
+               Rebuild date cards so the
+               selected state is correct.
+            */
+
+            createDateCards();
 
 
             /*
@@ -2673,6 +3259,7 @@
 
                         cell.innerHTML = `
                             ${time}
+
                             <span class="slot-status">
                                 BOOKED
                             </span>
@@ -2687,6 +3274,7 @@
 
                         cell.innerHTML = `
                             ${time}
+
                             <span class="slot-status">
                                 OPEN
                             </span>
@@ -2707,7 +3295,15 @@
         function loadSchedule() {
 
             /*
-               Create the 7 dates.
+               Start the date window at TODAY.
+            */
+
+            dateWindowStart =
+                getToday();
+
+
+            /*
+               Create the 7 visible dates.
             */
 
             createDateCards();
@@ -2725,11 +3321,13 @@
             */
 
             const today =
-                getToday();
+                formatDate(
+                    getToday()
+                );
 
 
             selectedDate =
-                formatDate(today);
+                today;
 
 
             /*
@@ -2745,12 +3343,48 @@
 
 
         /* =========================
-           START
+           DATE BUTTON EVENTS
         ========================= */
 
         document.addEventListener(
             "DOMContentLoaded",
-            loadSchedule
+            function () {
+
+                const previousButton =
+                    document.getElementById(
+                        "prevDateBtn"
+                    );
+
+
+                const nextButton =
+                    document.getElementById(
+                        "nextDateBtn"
+                    );
+
+
+                previousButton.addEventListener(
+                    "click",
+                    function () {
+
+                        moveDateWindow(-1);
+
+                    }
+                );
+
+
+                nextButton.addEventListener(
+                    "click",
+                    function () {
+
+                        moveDateWindow(1);
+
+                    }
+                );
+
+
+                loadSchedule();
+
+            }
         );
 
     </script>
