@@ -43,10 +43,17 @@
             --cream: #fff8ea;
             --white: #ffffff;
             --light-green: #eaf5f2;
+
             --available: #16a34a;
             --available-light: #dcfce7;
+
             --booked: #dc2626;
             --booked-light: #fee2e2;
+
+            /* BLOCKED */
+            --blocked: #9ca3af;
+            --blocked-light: #f3f4f6;
+
             --gray: #6b7280;
             --light-gray: #f3f4f6;
         }
@@ -459,6 +466,10 @@
             background: var(--booked);
         }
 
+        .legend-blocked {
+            background: var(--blocked);
+        }
+
 
         /* =========================
            DATE NAVIGATION
@@ -651,6 +662,12 @@
         .slot-cell.booked {
             background: var(--booked-light);
             color: #991b1b;
+        }
+
+        /* BLOCKED */
+        .slot-cell.blocked {
+            background: var(--blocked-light);
+            color: #6b7280;
         }
 
         .slot-cell.checking {
@@ -1545,6 +1562,14 @@
 
                     </div>
 
+                    <div class="legend-item">
+
+                        <span class="legend-dot legend-blocked"></span>
+
+                        Blocked
+
+                    </div>
+
                 </div>
 
             </div>
@@ -2292,24 +2317,10 @@
            DATE SETTINGS
         ========================= */
 
-        /*
-           The homepage allows booking from TODAY
-           up to ONE CALENDAR MONTH ahead.
-
-           Example:
-           September 25 -> October 25
-
-           This is a rolling window based on today's date.
-        */
-
         const DAYS_TO_DISPLAY = 7;
 
 
         let selectedDate = null;
-
-        /*
-           This controls which 7-day group is currently visible.
-        */
 
         let dateWindowStart = null;
 
@@ -2334,16 +2345,6 @@
         }
 
 
-        /*
-           Get the maximum selectable date.
-
-           This uses one CALENDAR MONTH from today.
-
-           Example:
-           September 25 -> October 25
-           January 31 -> February 28/29
-        */
-
         function getMaxBookingDate() {
 
             const maxDate =
@@ -2356,14 +2357,6 @@
                 maxDate.getMonth() + 1
             );
 
-
-            /*
-               Handle months that do not have
-               the same day number.
-
-               Example:
-               January 31 -> February 28/29
-            */
 
             if (
                 maxDate.getDate() !== originalDay
@@ -2424,10 +2417,6 @@
         }
 
 
-        /*
-           Compare dates without time.
-        */
-
         function isSameDate(
             date1,
             date2
@@ -2450,11 +2439,6 @@
 
         }
 
-
-        /*
-           Return a new date shifted by
-           a number of days.
-        */
 
         function addDays(
             date,
@@ -2496,11 +2480,6 @@
                 getMaxBookingDate();
 
 
-            /*
-               Make sure the window starts
-               inside the allowed range.
-            */
-
             if (
                 dateWindowStart < today
             ) {
@@ -2510,18 +2489,6 @@
 
             }
 
-
-            /*
-               The last possible 7-date window
-               must end at the maximum booking date.
-
-               Example:
-
-               Maximum = October 25
-
-               Last window:
-               October 19 - October 25
-            */
 
             const latestWindowStart =
                 addDays(
@@ -2543,10 +2510,6 @@
             }
 
 
-            /*
-               Create exactly 7 visible dates.
-            */
-
             for (
                 let i = 0;
                 i < DAYS_TO_DISPLAY;
@@ -2559,11 +2522,6 @@
                         i
                     );
 
-
-                /*
-                   Do not display a date beyond
-                   the maximum allowed date.
-                */
 
                 if (
                     date > maxDate
@@ -2594,10 +2552,6 @@
                     dateString;
 
 
-                /*
-                   Mark today's date.
-                */
-
                 if (
                     isSameDate(
                         date,
@@ -2611,11 +2565,6 @@
 
                 }
 
-
-                /*
-                   Keep selected date highlighted
-                   if it belongs to the current window.
-                */
 
                 if (
                     selectedDate ===
@@ -2706,19 +2655,9 @@
                 );
 
 
-            /*
-               Disable PREVIOUS when the visible
-               window is already at today's date.
-            */
-
             previousButton.disabled =
                 dateWindowStart <= today;
 
-
-            /*
-               Disable NEXT when the visible
-               window reaches the final possible window.
-            */
 
             nextButton.disabled =
                 dateWindowStart >=
@@ -2750,24 +2689,12 @@
                 );
 
 
-            /*
-               Move by 7 days.
-
-               This keeps the same 7-date
-               layout while allowing the user
-               to browse the entire month.
-            */
-
             let newStart =
                 addDays(
                     dateWindowStart,
                     direction * DAYS_TO_DISPLAY
                 );
 
-
-            /*
-               Do not move before today.
-            */
 
             if (
                 newStart < today
@@ -2778,10 +2705,6 @@
 
             }
 
-
-            /*
-               Do not move beyond the final window.
-            */
 
             if (
                 newStart >
@@ -2800,21 +2723,8 @@
                 newStart;
 
 
-            /*
-               Rebuild the visible dates.
-            */
-
             createDateCards();
 
-
-            /*
-               If the currently selected date
-               is no longer visible, select the
-               first date in the new window.
-
-               Otherwise keep the current
-               selected date.
-            */
 
             const selectedCard =
                 document.querySelector(
@@ -2895,11 +2805,6 @@
                 date;
 
 
-            /*
-               Make sure the selected date
-               is within the allowed range.
-            */
-
             const selectedDateObject =
                 new Date(
                     date + "T00:00:00"
@@ -2925,12 +2830,6 @@
             }
 
 
-            /*
-               If selected date is outside
-               the current visible 7-day window,
-               move the window so it becomes visible.
-            */
-
             const windowEnd =
                 addDays(
                     dateWindowStart,
@@ -2946,22 +2845,12 @@
                 windowEnd
             ) {
 
-                /*
-                   Try to place selected date
-                   around the middle of the
-                   visible 7-day window.
-                */
-
                 let newStart =
                     addDays(
                         selectedDateObject,
                         -3
                     );
 
-
-                /*
-                   Do not start before today.
-                */
 
                 if (
                     newStart < today
@@ -2972,10 +2861,6 @@
 
                 }
 
-
-                /*
-                   Do not go beyond the final window.
-                */
 
                 const latestWindowStart =
                     addDays(
@@ -3003,18 +2888,8 @@
             }
 
 
-            /*
-               Rebuild date cards so the
-               selected state is correct.
-            */
-
             createDateCards();
 
-
-            /*
-               Remove selected state
-               from all dates.
-            */
 
             const dateCards =
                 document.querySelectorAll(
@@ -3033,11 +2908,6 @@
             );
 
 
-            /*
-               Add selected state
-               to clicked date.
-            */
-
             const selectedCard =
                 document.querySelector(
                     `.date-card[data-date="${date}"]`
@@ -3053,17 +2923,8 @@
             }
 
 
-            /*
-               Show checking state
-               while loading.
-            */
-
             showCheckingState();
 
-
-            /*
-               Load only the selected date.
-            */
 
             loadAvailability(
                 date
@@ -3089,7 +2950,8 @@
 
                     cell.classList.remove(
                         "available",
-                        "booked"
+                        "booked",
+                        "blocked"
                     );
 
                     cell.classList.add(
@@ -3142,8 +3004,27 @@
                     await response.json();
 
 
+                /*
+                   NEW BACKEND RESPONSE:
+
+                   bookedSlots
+                   blockedSlots
+                */
+
                 const bookedSlots =
-                    data.bookedSlots || [];
+                    Array.isArray(
+                        data.bookedSlots
+                    )
+                    ? data.bookedSlots
+                    : [];
+
+
+                const blockedSlots =
+                    Array.isArray(
+                        data.blockedSlots
+                    )
+                    ? data.blockedSlots
+                    : [];
 
 
                 /*
@@ -3161,7 +3042,8 @@
 
 
                 updateScheduleSlots(
-                    bookedSlots
+                    bookedSlots,
+                    blockedSlots
                 );
 
 
@@ -3172,11 +3054,6 @@
                     error
                 );
 
-
-                /*
-                   Only show error if this is
-                   still the selected date.
-                */
 
                 if (
                     date !== selectedDate
@@ -3198,7 +3075,8 @@
 
                         cell.classList.remove(
                             "available",
-                            "booked"
+                            "booked",
+                            "blocked"
                         );
 
                         cell.classList.add(
@@ -3218,10 +3096,12 @@
 
         /* =========================
            UPDATE 18 SLOTS
+           BLOCKED HAS PRIORITY
         ========================= */
 
         function updateScheduleSlots(
-            bookedSlots
+            bookedSlots,
+            blockedSlots
         ) {
 
             const cells =
@@ -3237,6 +3117,12 @@
                         cell.dataset.time;
 
 
+                    const isBlocked =
+                        blockedSlots.includes(
+                            time
+                        );
+
+
                     const isBooked =
                         bookedSlots.includes(
                             time
@@ -3246,11 +3132,32 @@
                     cell.classList.remove(
                         "checking",
                         "available",
-                        "booked"
+                        "booked",
+                        "blocked"
                     );
 
 
-                    if (isBooked) {
+                    /*
+                       BLOCKED takes priority
+                       over BOOKED.
+                    */
+
+                    if (isBlocked) {
+
+                        cell.classList.add(
+                            "blocked"
+                        );
+
+
+                        cell.innerHTML = `
+                            ${time}
+
+                            <span class="slot-status">
+                                BLOCKED
+                            </span>
+                        `;
+
+                    } else if (isBooked) {
 
                         cell.classList.add(
                             "booked"
@@ -3294,31 +3201,15 @@
 
         function loadSchedule() {
 
-            /*
-               Start the date window at TODAY.
-            */
-
             dateWindowStart =
                 getToday();
 
 
-            /*
-               Create the 7 visible dates.
-            */
-
             createDateCards();
 
 
-            /*
-               Create only 18 time slots.
-            */
-
             createScheduleGrid();
 
-
-            /*
-               Automatically select TODAY.
-            */
 
             const today =
                 formatDate(
@@ -3329,11 +3220,6 @@
             selectedDate =
                 today;
 
-
-            /*
-               Apply selected state
-               and load today's availability.
-            */
 
             selectDate(
                 selectedDate
