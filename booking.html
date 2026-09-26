@@ -21,6 +21,10 @@
       --red: #dc2626;
       --red-light: #fee2e2;
 
+      /* BLOCKED */
+      --blocked: #9ca3af;
+      --blocked-light: #f3f4f6;
+
       --dark: #172018;
       --gray: #64748b;
       --light-gray: #f8faf9;
@@ -257,6 +261,10 @@
       background: var(--red);
     }
 
+    .legend-blocked {
+      background: var(--blocked);
+    }
+
     /* ==============================
        DATE NAVIGATION
     ============================== */
@@ -323,10 +331,6 @@
       table-layout: fixed;
     }
 
-    /* ==============================
-       TABLE CELLS
-    ============================== */
-
     .schedule th,
     .schedule td {
       border-right: 1px solid var(--border);
@@ -334,10 +338,6 @@
       text-align: center;
       vertical-align: middle;
     }
-
-    /* ==============================
-       HEADER
-    ============================== */
 
     .schedule th {
       background: var(--green-deep);
@@ -348,8 +348,6 @@
       white-space: nowrap;
     }
 
-    /* First column */
-
     .schedule th:first-child {
       position: sticky;
       left: 0;
@@ -359,15 +357,9 @@
       min-width: 165px;
     }
 
-    /* Date columns */
-
     .schedule th:not(:first-child) {
       min-width: 195px;
     }
-
-    /* ==============================
-       HOUR & RATE COLUMN
-    ============================== */
 
     .schedule td:first-child {
       position: sticky;
@@ -396,7 +388,7 @@
     }
 
     /* ==============================
-       OPEN / BOOKED CELLS
+       SLOT CELLS
     ============================== */
 
     .slot-cell {
@@ -413,8 +405,6 @@
       cursor: wait;
     }
 
-    /* Available */
-
     .slot-cell.available {
       cursor: pointer;
     }
@@ -424,15 +414,11 @@
       transform: scale(0.98);
     }
 
-    /* Selected */
-
     .slot-cell.selected {
       background: var(--orange);
       color: white;
       box-shadow: inset 0 0 0 3px white;
     }
-
-    /* Booked */
 
     .slot-cell.booked {
       background: var(--red);
@@ -440,7 +426,15 @@
       cursor: not-allowed;
     }
 
-    /* OPEN text */
+    /* ==============================
+       BLOCKED
+    ============================== */
+
+    .slot-cell.blocked {
+      background: var(--blocked-light);
+      color: #6b7280;
+      cursor: not-allowed;
+    }
 
     .slot-cell.available div {
       font-size: 13px;
@@ -448,9 +442,8 @@
       letter-spacing: 0.5px;
     }
 
-    /* BOOKED text */
-
-    .booked-label {
+    .booked-label,
+    .blocked-label {
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.5px;
@@ -1002,10 +995,6 @@
 
   <img src="logo.png" alt="Dink & Drive Court Logo" class="site-logo">
 
-  <!-- =========================
-       HEADER
-  ========================= -->
-
   <header>
 
     <div class="header-inner">
@@ -1022,10 +1011,6 @@
 
   </header>
 
-
-  <!-- =========================
-       BOOKING PAGE
-  ========================= -->
 
   <main class="container" id="bookingArea">
 
@@ -1045,8 +1030,6 @@
 
     </section>
 
-
-    <!-- RATE CARDS -->
 
     <section class="rate-cards">
 
@@ -1078,8 +1061,6 @@
     </section>
 
 
-    <!-- SCHEDULE -->
-
     <section class="booking-card">
 
       <h2 class="section-title">
@@ -1087,11 +1068,9 @@
       </h2>
 
       <p class="section-subtitle">
-        Select one or more consecutive time slots. Booked slots cannot be selected.
+        Select one or more consecutive time slots. Booked and blocked slots cannot be selected.
       </p>
 
-
-      <!-- LEGEND -->
 
       <div class="legend">
 
@@ -1110,12 +1089,13 @@
           Booked
         </div>
 
+        <div class="legend-item">
+          <span class="legend-dot legend-blocked"></span>
+          Blocked
+        </div>
+
       </div>
 
-
-      <!-- ==============================
-           DATE NAVIGATION
-      ============================== -->
 
       <div class="date-navigation">
 
@@ -1147,8 +1127,6 @@
       </div>
 
 
-      <!-- SCHEDULE TABLE -->
-
       <div class="schedule-wrapper">
 
         <table class="schedule">
@@ -1167,8 +1145,6 @@
 
       </div>
 
-
-      <!-- SELECTED SUMMARY -->
 
       <div class="summary" id="summary">
 
@@ -1257,8 +1233,6 @@
         </div>
 
 
-        <!-- CUSTOMER FORM -->
-
         <div class="customer-form">
 
           <h3 class="section-title">
@@ -1322,8 +1296,6 @@
           </div>
 
 
-          <!-- PAYMENT SECTION -->
-
           <div class="payment-section">
 
             <h3 class="section-title">
@@ -1347,8 +1319,6 @@
 
 
             <div class="payment-methods">
-
-              <!-- GCASH -->
 
               <div class="payment-card">
 
@@ -1375,8 +1345,6 @@
 
               </div>
 
-
-              <!-- MAYA -->
 
               <div class="payment-card">
 
@@ -1452,8 +1420,6 @@
     </section>
 
 
-    <!-- LOCATION -->
-
     <section class="location-card">
 
       <div class="location-title">
@@ -1468,10 +1434,6 @@
 
   </main>
 
-
-  <!-- =========================
-       CONFIRMATION
-  ========================= -->
 
   <section
     class="container"
@@ -1707,12 +1669,14 @@
 
 
     /* ==========================================
-       SELECTED SLOT
+       SELECTED / AVAILABILITY
     ========================================== */
 
     let selectedSlots = [];
 
     let bookedByDate = {};
+
+    let blockedByDate = {};
 
     let availabilityReady = false;
 
@@ -1866,7 +1830,7 @@
 
 
     /* ==========================================
-       UPDATE DATE NAVIGATION BUTTONS
+       UPDATE DATE NAVIGATION
     ========================================== */
 
     function updateDateNavigation() {
@@ -1933,7 +1897,7 @@
 
 
     /* ==========================================
-       SHOW PREVIOUS 5 DATES
+       PREVIOUS
     ========================================== */
 
     function showPreviousDates() {
@@ -1949,9 +1913,7 @@
 
       currentDatePage--;
 
-
       clearSelection();
-
 
       renderSchedulePage();
 
@@ -1959,7 +1921,7 @@
 
 
     /* ==========================================
-       SHOW NEXT 5 DATES
+       NEXT
     ========================================== */
 
     function showNextDates() {
@@ -1982,9 +1944,7 @@
 
       currentDatePage++;
 
-
       clearSelection();
-
 
       renderSchedulePage();
 
@@ -1999,10 +1959,7 @@
 
       createDateRange();
 
-
-      currentDatePage =
-        0;
-
+      currentDatePage = 0;
 
       renderSchedulePage();
 
@@ -2010,7 +1967,7 @@
 
 
     /* ==========================================
-       RENDER CURRENT 5-DAY PAGE
+       RENDER 5-DAY PAGE
     ========================================== */
 
     async function renderSchedulePage() {
@@ -2033,9 +1990,9 @@
 
       bookedByDate = {};
 
+      blockedByDate = {};
 
-      availabilityReady =
-        false;
+      availabilityReady = false;
 
 
       updateDateNavigation();
@@ -2077,7 +2034,7 @@
       ============================== */
 
       dates.forEach(
-        (date, index) => {
+        date => {
 
           const th =
             document.createElement(
@@ -2089,11 +2046,13 @@
             formatDate(date);
 
 
+          const today =
+            new Date();
+
+
           const dayLabel =
             dateString ===
-            formatDate(
-              new Date()
-            )
+            formatDate(today)
               ? "TODAY"
               : displayDay(date)
                   .toUpperCase();
@@ -2163,8 +2122,6 @@
             );
 
 
-          /* HOUR & RATE */
-
           const hourCell =
             document.createElement(
               "td"
@@ -2206,7 +2163,7 @@
 
 
           /* ==============================
-             CREATE DATE CELLS
+             DATE CELLS
           ============================== */
 
           dates.forEach(
@@ -2279,7 +2236,6 @@
 
       /* ==============================
          LOAD AVAILABILITY
-         FOR CURRENT 5 DAYS
       ============================== */
 
       await Promise.all(
@@ -2294,19 +2250,8 @@
       );
 
 
-      /* ==============================
-         AVAILABILITY READY
-      ============================== */
+      availabilityReady = true;
 
-      availabilityReady =
-        true;
-
-
-      /*
-         Restore any selection that
-         belongs to the currently
-         displayed dates.
-      */
 
       renderSelectedSlots();
 
@@ -2359,14 +2304,23 @@
 
 
         if (
-          data.success &&
-          Array.isArray(
-            data.bookedSlots
-          )
+          data.success
         ) {
 
           bookedByDate[date] =
-            data.bookedSlots;
+            Array.isArray(
+              data.bookedSlots
+            )
+              ? data.bookedSlots
+              : [];
+
+
+          blockedByDate[date] =
+            Array.isArray(
+              data.blockedSlots
+            )
+              ? data.blockedSlots
+              : [];
 
 
           updateBookedSlots(
@@ -2401,7 +2355,9 @@
 
             cell.classList.remove(
               "available",
-              "booked"
+              "booked",
+              "blocked",
+              "selected"
             );
 
 
@@ -2445,7 +2401,7 @@
 
 
     /* ==========================================
-       UPDATE BOOKED SLOTS
+       UPDATE BOOKED / BLOCKED SLOTS
     ========================================== */
 
     function updateBookedSlots(
@@ -2454,6 +2410,10 @@
 
       const bookedSlots =
         bookedByDate[date] || [];
+
+
+      const blockedSlots =
+        blockedByDate[date] || [];
 
 
       const cells =
@@ -2469,16 +2429,64 @@
             cell.dataset.time;
 
 
-          /* BOOKED */
+          const isBlocked =
+            blockedSlots.includes(
+              time
+            );
 
-          if (
-            bookedSlots.includes(time)
-          ) {
+
+          const isBooked =
+            bookedSlots.includes(
+              time
+            );
+
+
+          /*
+           * BLOCKED gets priority.
+           */
+
+          if (isBlocked) {
 
             cell.classList.remove(
               "available",
               "checking",
-              "selected"
+              "selected",
+              "booked"
+            );
+
+
+            cell.classList.add(
+              "blocked"
+            );
+
+
+            cell.innerHTML = `
+
+              <div class="blocked-label">
+                BLOCKED
+              </div>
+
+            `;
+
+
+            cell.onclick =
+              null;
+
+
+            return;
+
+          }
+
+
+          /* BOOKED */
+
+          if (isBooked) {
+
+            cell.classList.remove(
+              "available",
+              "checking",
+              "selected",
+              "blocked"
             );
 
 
@@ -2499,49 +2507,52 @@
             cell.onclick =
               null;
 
+
+            return;
+
           }
 
 
           /* AVAILABLE */
 
-          else {
-
-            cell.classList.remove(
-              "booked",
-              "checking"
-            );
-
-
-            cell.classList.add(
-              "available"
-            );
+          cell.classList.remove(
+            "booked",
+            "blocked",
+            "checking"
+          );
 
 
-            cell.innerHTML = `
+          cell.classList.add(
+            "available"
+          );
 
-              <div style="
-                font-size:13px;
-                font-weight:900;
-                letter-spacing:0.5px;
-              ">
-                OPEN
-              </div>
 
-            `;
+          cell.innerHTML = `
 
-          }
+            <div style="
+              font-size:13px;
+              font-weight:900;
+              letter-spacing:0.5px;
+            ">
+              OPEN
+            </div>
+
+          `;
 
         }
       );
 
 
       /* ==============================
-         UPDATE AVAILABLE SLOT COUNT
+         AVAILABLE COUNT
       ============================== */
 
       const availableCount =
-        times.length -
-        bookedSlots.length;
+        times.filter(
+          time =>
+            !bookedSlots.includes(time) &&
+            !blockedSlots.includes(time)
+        ).length;
 
 
       const countLabel =
@@ -2570,11 +2581,6 @@
       cell
     ) {
 
-      /*
-         Do not allow booking while
-         availability is being checked.
-      */
-
       if (!availabilityReady) {
 
         alert(
@@ -2587,13 +2593,12 @@
 
 
       /*
-         Do not allow booked slots.
-      */
+       * BLOCKED and BOOKED cannot be selected.
+       */
 
       if (
-        cell.classList.contains(
-          "booked"
-        )
+        cell.classList.contains("booked") ||
+        cell.classList.contains("blocked")
       ) {
 
         return;
@@ -2615,9 +2620,9 @@
 
 
       /*
-         If customer selects another date,
-         start a new booking on that date.
-      */
+       * Another date starts a new
+       * selection.
+       */
 
       if (
         selectedSlots.length > 0 &&
@@ -2656,8 +2661,7 @@
         const existingIndex =
           selectedSlots.findIndex(
             slot =>
-              slot.index ===
-              slotIndex
+              slot.index === slotIndex
           );
 
 
@@ -2668,9 +2672,9 @@
         ) {
 
           /*
-             Don't allow a gap
-             in the middle.
-          */
+           * Don't allow a gap
+           * in the middle.
+           */
 
           if (
             selectedSlots.length > 1 &&
@@ -2722,9 +2726,9 @@
 
 
           /*
-             Make sure every hour
-             in the range is available.
-          */
+           * Check every slot in the
+           * requested range.
+           */
 
           for (
             let i = minIndex;
@@ -2746,6 +2750,9 @@
               !candidateCell ||
               candidateCell.classList.contains(
                 "booked"
+              ) ||
+              candidateCell.classList.contains(
+                "blocked"
               )
             ) {
 
@@ -2761,9 +2768,9 @@
 
 
           /*
-             Select complete
-             consecutive range.
-          */
+           * Select complete consecutive
+           * range.
+           */
 
           selectedSlots = [];
 
@@ -2821,25 +2828,13 @@
               "selected"
             );
 
-
-            const checkbox =
-              cell.querySelector(
-                ".slot-check"
-              );
-
-
-            if (checkbox) {
-
-              checkbox.checked =
-                false;
-
-            }
-
           }
         );
 
 
       selectedSlots = [];
+
+      updateSummary();
 
     }
 
@@ -2861,20 +2856,6 @@
               "selected"
             );
 
-
-            const checkbox =
-              cell.querySelector(
-                ".slot-check"
-              );
-
-
-            if (checkbox) {
-
-              checkbox.checked =
-                false;
-
-            }
-
           }
         );
 
@@ -2895,23 +2876,25 @@
           }
 
 
+          /*
+           * Safety check:
+           * never visually select a
+           * booked or blocked slot.
+           */
+
+          if (
+            cell.classList.contains("booked") ||
+            cell.classList.contains("blocked")
+          ) {
+
+            return;
+
+          }
+
+
           cell.classList.add(
             "selected"
           );
-
-
-          const checkbox =
-            cell.querySelector(
-              ".slot-check"
-            );
-
-
-          if (checkbox) {
-
-            checkbox.checked =
-              true;
-
-          }
 
         }
       );
@@ -3515,7 +3498,7 @@
 
 
     /* ==========================================
-       BOOK ANOTHER COURT
+       BOOK ANOTHER
     ========================================== */
 
     function bookAnother() {
