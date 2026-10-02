@@ -25,6 +25,10 @@
       --blocked: #9ca3af;
       --blocked-light: #f3f4f6;
 
+      /* OPEN PLAY */
+      --open-play: #7c3aed;
+      --open-play-light: #ede9fe;
+
       --dark: #172018;
       --gray: #64748b;
       --light-gray: #f8faf9;
@@ -265,6 +269,10 @@
       background: var(--blocked);
     }
 
+    .legend-open-play {
+      background: var(--open-play);
+    }
+
     /* ==============================
        DATE NAVIGATION
     ============================== */
@@ -436,6 +444,12 @@
       cursor: not-allowed;
     }
 
+    .slot-cell.open-play {
+      background: var(--open-play-light);
+      color: var(--open-play);
+      cursor: not-allowed;
+    }
+
     .slot-cell.available div {
       font-size: 13px;
       font-weight: 900;
@@ -443,10 +457,15 @@
     }
 
     .booked-label,
-    .blocked-label {
+    .blocked-label,
+    .open-play-label {
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.5px;
+    }
+
+    .open-play-label {
+      color: var(--open-play);
     }
 
     /* ==============================
@@ -1068,7 +1087,7 @@
       </h2>
 
       <p class="section-subtitle">
-        Select one or more consecutive time slots. Booked and blocked slots cannot be selected.
+        Select one or more consecutive time slots. Booked, blocked, and Open Play slots cannot be selected.
       </p>
 
 
@@ -1677,6 +1696,7 @@
     let bookedByDate = {};
 
     let blockedByDate = {};
+    let openPlayByDate = {};
 
     let availabilityReady = false;
 
@@ -1991,6 +2011,8 @@
       bookedByDate = {};
 
       blockedByDate = {};
+
+      openPlayByDate = {};
 
       availabilityReady = false;
 
@@ -2322,6 +2344,13 @@
               ? data.blockedSlots
               : [];
 
+          openPlayByDate[date] =
+            Array.isArray(
+              data.openPlaySlots
+            )
+              ? data.openPlaySlots
+              : [];
+
 
           updateBookedSlots(
             date
@@ -2357,6 +2386,7 @@
               "available",
               "booked",
               "blocked",
+              "open-play",
               "selected"
             );
 
@@ -2411,16 +2441,16 @@
       const bookedSlots =
         bookedByDate[date] || [];
 
-
       const blockedSlots =
         blockedByDate[date] || [];
 
+      const openPlaySlots =
+        openPlayByDate[date] || [];
 
       const cells =
         document.querySelectorAll(
           `.slot-cell[data-date="${date}"]`
         );
-
 
       cells.forEach(
         cell => {
@@ -2428,107 +2458,103 @@
           const time =
             cell.dataset.time;
 
+          const isOpenPlay =
+            openPlaySlots.includes(time);
 
           const isBlocked =
-            blockedSlots.includes(
-              time
-            );
-
+            blockedSlots.includes(time);
 
           const isBooked =
-            bookedSlots.includes(
-              time
+            bookedSlots.includes(time);
+
+          /* OPEN PLAY */
+          if (isOpenPlay) {
+
+            cell.classList.remove(
+              "available",
+              "checking",
+              "selected",
+              "booked",
+              "blocked"
             );
 
+            cell.classList.add(
+              "open-play"
+            );
 
-          /*
-           * BLOCKED gets priority.
-           */
+            cell.innerHTML = `
+              <div class="open-play-label">
+                OPEN PLAY
+              </div>
+            `;
 
+            cell.onclick = null;
+            return;
+          }
+
+          /* BLOCKED */
           if (isBlocked) {
 
             cell.classList.remove(
               "available",
               "checking",
               "selected",
-              "booked"
+              "booked",
+              "open-play"
             );
-
 
             cell.classList.add(
               "blocked"
             );
 
-
             cell.innerHTML = `
-
               <div class="blocked-label">
                 BLOCKED
               </div>
-
             `;
 
-
-            cell.onclick =
-              null;
-
-
+            cell.onclick = null;
             return;
-
           }
 
-
           /* BOOKED */
-
           if (isBooked) {
 
             cell.classList.remove(
               "available",
               "checking",
               "selected",
-              "blocked"
+              "blocked",
+              "open-play"
             );
-
 
             cell.classList.add(
               "booked"
             );
 
-
             cell.innerHTML = `
-
               <div class="booked-label">
                 BOOKED
               </div>
-
             `;
 
-
-            cell.onclick =
-              null;
-
-
+            cell.onclick = null;
             return;
-
           }
 
-
           /* AVAILABLE */
-
           cell.classList.remove(
             "booked",
             "blocked",
+            "open-play",
             "checking"
           );
-
 
           cell.classList.add(
             "available"
           );
 
-
           cell.innerHTML = `
-
             <div style="
               font-size:13px;
               font-weight:900;
@@ -2536,36 +2562,27 @@
             ">
               OPEN
             </div>
-
           `;
 
         }
       );
 
-
-      /* ==============================
-         AVAILABLE COUNT
-      ============================== */
-
       const availableCount =
         times.filter(
           time =>
             !bookedSlots.includes(time) &&
-            !blockedSlots.includes(time)
+            !blockedSlots.includes(time) &&
+            !openPlaySlots.includes(time)
         ).length;
-
 
       const countLabel =
         document.querySelector(
           `.available-count[data-date="${date}"]`
         );
 
-
       if (countLabel) {
-
         countLabel.textContent =
           `${availableCount} AVAILABLE`;
-
       }
 
     }
@@ -2598,7 +2615,8 @@
 
       if (
         cell.classList.contains("booked") ||
-        cell.classList.contains("blocked")
+        cell.classList.contains("blocked") ||
+        cell.classList.contains("open-play")
       ) {
 
         return;
@@ -2753,6 +2771,9 @@
               ) ||
               candidateCell.classList.contains(
                 "blocked"
+              ) ||
+              candidateCell.classList.contains(
+                "open-play"
               )
             ) {
 
@@ -2884,7 +2905,8 @@
 
           if (
             cell.classList.contains("booked") ||
-            cell.classList.contains("blocked")
+            cell.classList.contains("blocked") ||
+            cell.classList.contains("open-play")
           ) {
 
             return;
