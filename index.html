@@ -54,6 +54,10 @@
             --blocked: #9ca3af;
             --blocked-light: #f3f4f6;
 
+            /* OPEN PLAY */
+            --open-play: #7c3aed;
+            --open-play-light: #ede9fe;
+
             --gray: #6b7280;
             --light-gray: #f3f4f6;
         }
@@ -470,6 +474,10 @@
             background: var(--blocked);
         }
 
+        .legend-open-play {
+            background: var(--open-play);
+        }
+
 
         /* =========================
            DATE NAVIGATION
@@ -668,6 +676,13 @@
         .slot-cell.blocked {
             background: var(--blocked-light);
             color: #6b7280;
+        }
+
+        /* OPEN PLAY */
+        .slot-cell.open-play {
+            background: var(--open-play-light);
+            color: var(--open-play);
+            cursor: default;
         }
 
         .slot-cell.checking {
@@ -1567,6 +1582,14 @@
                         <span class="legend-dot legend-blocked"></span>
 
                         Blocked
+
+                    </div>
+
+                    <div class="legend-item">
+
+                        <span class="legend-dot legend-open-play"></span>
+
+                        Open Play
 
                     </div>
 
@@ -3009,6 +3032,7 @@
 
                    bookedSlots
                    blockedSlots
+                   openPlaySlots
                 */
 
                 const bookedSlots =
@@ -3024,6 +3048,13 @@
                         data.blockedSlots
                     )
                     ? data.blockedSlots
+                    : [];
+
+                const openPlaySlots =
+                    Array.isArray(
+                        data.openPlaySlots
+                    )
+                    ? data.openPlaySlots
                     : [];
 
 
@@ -3043,7 +3074,8 @@
 
                 updateScheduleSlots(
                     bookedSlots,
-                    blockedSlots
+                    blockedSlots,
+                    openPlaySlots
                 );
 
 
@@ -3096,12 +3128,13 @@
 
         /* =========================
            UPDATE 18 SLOTS
-           BLOCKED HAS PRIORITY
+           OPEN PLAY HAS PRIORITY
         ========================= */
 
         function updateScheduleSlots(
             bookedSlots,
-            blockedSlots
+            blockedSlots,
+            openPlaySlots
         ) {
 
             const cells =
@@ -3128,21 +3161,42 @@
                             time
                         );
 
+                    const isOpenPlay =
+                        openPlaySlots.includes(
+                            time
+                        );
+
 
                     cell.classList.remove(
                         "checking",
                         "available",
                         "booked",
-                        "blocked"
+                        "blocked",
+                        "open-play"
                     );
 
 
                     /*
-                       BLOCKED takes priority
-                       over BOOKED.
+                       OPEN PLAY takes priority
+                       over BLOCKED and BOOKED.
                     */
 
-                    if (isBlocked) {
+                    if (isOpenPlay) {
+
+                        cell.classList.add(
+                            "open-play"
+                        );
+
+
+                        cell.innerHTML = `
+                            ${time}
+
+                            <span class="slot-status">
+                                OPEN PLAY
+                            </span>
+                        `;
+
+                    } else if (isBlocked) {
 
                         cell.classList.add(
                             "blocked"
